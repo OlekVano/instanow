@@ -1,0 +1,11 @@
+// Header
+
+@import '../../consts.scss';
+
+.main {
+  display: flex;
+  align-items: center;
+  padding: $padding-primary;
+  background: $content-background;
+  border-bottom: 1px solid $border-color-primary;
+}
