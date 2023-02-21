@@ -1,8 +1,9 @@
 import Button from '../Button'
 import LogoWithBrand from '../LogoWithBrand'
+import ProfilePicture from '../ProfilePicture'
 import SearchBar from '../SearchBar'
 import styles from './index.module.scss'
-import profilePicture from '../../assets/laura.png'
+
 
 export default function Header() {
   return (
@@ -11,7 +12,7 @@ export default function Header() {
       <div style={{flexGrow: 1}}></div>
       <SearchBar />
       <Button type={1} text='Create' />
-      <img className={styles.profilePicture} src={profilePicture} />
+      <ProfilePicture />
     </header>
   )
 }
