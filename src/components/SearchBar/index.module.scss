@@ -1,0 +1,10 @@
+@import '../../consts.scss';
+
+.main {
+  width: 300px;
+  background-color: $background-primary;
+  padding: $padding-lg;
+  color: $text-color-secondary;
+  border-radius: $border-radius-s;
+  font-weight: $weight-md;
+}

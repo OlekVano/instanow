@@ -1,5 +1,3 @@
-// Logo
-
 import styles from './index.module.scss'
 import logo from '../../assets/logo.svg'
 

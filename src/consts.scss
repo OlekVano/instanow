@@ -1,25 +1,40 @@
-$surface-background: #F7F8FA;
-$content-background: white;
-$primary-background: #f5f5f5;
-$secondary-background: #E8E8FF;
+$background-surface: #F7F8FA;
+$background-content: white;
+$background-primary: #f5f5f5;
+$background-secondary-: #E8E8FF;
 
-$primary-color: #1877F2;
+$color-primary: #1877F2;
 
 
-$primary-text: black;
-$secondary-text: #A3AEBE;
+$text-color-primary: black;
+$text-color-secondary: #A3AEBE;
+$text-color-tertiary: white;
 
 $border-color-primary: #D5DCE4;
 
 $text-2xl: 32px;
-$text-1xl: 24px;
+$text-xl: 24px;
 $text-lg: 20px;
 $text-md: 16px;
 
 $padding-primary: 15px;
 
-$border-radius-primary: 10px;
+$border-radius-s: 7.5px;
+$border-radius-md: 10px;
+$border-radius-lg: 15px;
+$border-radius-xl: 20px;
+$border-radius-2xl: 25px;
 
 $filter-to-primary-color: invert(44%) sepia(50%) saturate(5385%) hue-rotate(201deg) brightness(95%) contrast(100%);
 
-$font: 'Raleway', sans-serif;
+$font-primary: 'Raleway', sans-serif;
+
+$padding-md: 5px;
+$padding-lg: 10px;
+$padding-xl: 15px;
+$padding-2xl: 20px;
+
+$gap-md: 20px;
+
+$weight-lg: 700;
+$weight-md: 500;

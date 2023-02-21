@@ -1,0 +1,14 @@
+@import '../../consts.scss';
+
+.main {
+  padding: $padding-lg;
+  min-width: 75px;
+  border-radius: $border-radius-s;
+  text-align: center;
+  font-weight: $weight-md;
+}
+
+.typeOne {
+  background-color: $color-primary;
+  color: $text-color-tertiary;
+}

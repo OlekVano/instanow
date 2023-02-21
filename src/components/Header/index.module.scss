@@ -1,11 +1,15 @@
-// Header
-
 @import '../../consts.scss';
 
 .main {
   display: flex;
   align-items: center;
   padding: $padding-primary;
-  background: $content-background;
+  background: $background-content;
   border-bottom: 1px solid $border-color-primary;
+  gap: $gap-md;
+}
+
+.profilePicture {
+  height: 50px;
+  border-radius: $border-radius-s;
 }

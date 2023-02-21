@@ -1,14 +1,12 @@
-// Logo With Brand
-
 @import '../../consts.scss';
 
 .main {
   display: flex;
-  gap: 20px;
+  gap: $gap-md;
 }
 
 .brand {
-  font-size: 30px;
-  font-weight: 700;
+  font-size: $text-xl;
   line-height: 50px;
+  font-weight: $weight-lg;
 }
