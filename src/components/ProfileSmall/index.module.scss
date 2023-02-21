@@ -1,0 +1,26 @@
+@import '../../consts.scss';
+
+.main {
+  background-color: $background-content;
+  padding: $padding-2xl;
+  border-radius: $border-radius-lg;
+  display: flex;
+  gap: $gap-xs
+}
+
+.nameAndTagContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.name {
+  font-size: $text-lg;
+  font-weight: $weight-lg;
+}
+
+.tag {
+  font-size: $text-md;
+  font-weight: $weight-md;
+  color: $text-color-secondary;
+}

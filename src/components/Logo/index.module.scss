@@ -10,7 +10,7 @@
 }
 
 .image {
-  width: 40px;
-  height: 40px;
-  filter: $filter-to-primary-color;
+  width: $icon-size-md;
+  height: $icon-size-md;
+  filter: $filter-image-primary;
 }

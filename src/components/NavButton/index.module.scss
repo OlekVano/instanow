@@ -1,0 +1,30 @@
+@import '../../consts.scss';
+
+.main {
+  display: flex;
+  align-items: center;
+  gap: $gap-md;
+  padding: $padding-5xl;
+  cursor: pointer;
+}
+
+.main.selected {
+  background-color: $background-secondary;
+  border-left: 7.5px solid $color-primary;
+}
+
+.main.selected.roundedTop {
+  border-top-left-radius: $border-radius-lg;
+  border-top-right-radius: $border-radius-lg;
+}
+  
+.image {
+  width: $icon-size-s;
+  filter: $filter-image-secondary;
+}
+  
+.text {
+  color: $text-color-secondary;
+  font-size: $text-xl;
+  font-weight: $weight-lg;
+}

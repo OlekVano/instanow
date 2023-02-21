@@ -1,7 +1,7 @@
 $background-surface: #F7F8FA;
 $background-content: white;
 $background-primary: #f5f5f5;
-$background-secondary-: #E8E8FF;
+$background-secondary: #E8E8FF;
 
 $color-primary: #1877F2;
 
@@ -17,15 +17,15 @@ $text-xl: 24px;
 $text-lg: 20px;
 $text-md: 16px;
 
-$padding-primary: 15px;
-
 $border-radius-s: 7.5px;
 $border-radius-md: 10px;
 $border-radius-lg: 15px;
 $border-radius-xl: 20px;
 $border-radius-2xl: 25px;
 
-$filter-to-primary-color: invert(44%) sepia(50%) saturate(5385%) hue-rotate(201deg) brightness(95%) contrast(100%);
+// https://codepen.io/sosuke/pen/Pjoqqp
+$filter-image-primary: invert(44%) sepia(50%) saturate(5385%) hue-rotate(201deg) brightness(95%) contrast(100%);
+$filter-image-secondary: invert(68%) sepia(13%) saturate(334%) hue-rotate(176deg) brightness(101%) contrast(87%);
 
 $font-primary: 'Raleway', sans-serif;
 
@@ -33,8 +33,16 @@ $padding-md: 5px;
 $padding-lg: 10px;
 $padding-xl: 15px;
 $padding-2xl: 20px;
+$padding-3xl: 25px;
+$padding-4xl: 30px;
+$padding-5xl: 35px;
 
 $gap-md: 20px;
+$gap-s: 15px;
+$gap-xs: 10px;
 
 $weight-lg: 700;
 $weight-md: 500;
+
+$icon-size-md: 42px;
+$icon-size-s: 34px;
