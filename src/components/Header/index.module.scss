@@ -1,10 +1,13 @@
 @import '../../consts.scss';
 
 .main {
-  display: flex;
-  align-items: center;
   padding: $padding-2xl;
   background: $background-content;
   border-bottom: 1px solid $border-color-primary;
+}
+
+.wrapper {
   gap: $gap-md;
+  display: flex;
+  align-items: center;
 }
