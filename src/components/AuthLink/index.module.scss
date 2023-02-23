@@ -1,0 +1,18 @@
+@import '../../consts.scss';
+
+.main {
+  text-decoration: none;
+  width: 100%;
+  user-select: none;
+}
+
+.text {
+  text-align: center;
+  padding-bottom: $gap-s;
+  border-bottom: 4px solid;
+  color: $text-color-secondary;
+}
+
+.highlighted {
+  color: $color-primary;
+}

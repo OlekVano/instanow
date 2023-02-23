@@ -1,7 +1,8 @@
 import Header from './components/Header'
-import LeftColumn from './components/LeftColumn'
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom'
-import LoginSignUpPage from './pages/LoginSignUpPage'
+import LoginSignUpWrapper from './pages/LoginSignUpWrapper'
+import LoginMenu from './components/LoginMenu'
+import SignUpMenu from './components/SignUpMenu'
 
 function App() {
   return (
@@ -12,8 +13,19 @@ function App() {
         }
         <Route path='*' element={<Header />} />
       </Routes>
-      <Routes>
+      <div style={{paddingTop: '100px', height: '100%'}}>
+        <Routes>
+          <Route index element={<div>IndexPage</div>} />
+          <Route path='/' element={<LoginSignUpWrapper />}>
+            <Route path='/login' element={<LoginMenu />} />
+            <Route path='/sign-up' element={<SignUpMenu />} />
+          </Route>
+        </Routes>
+      </div>
+
+      {/* <Routes>
         <Route index element={<div>Index</div>} />
+        //
         <Route path='/' element={<div>Background<Outlet /></div>}>
           <Route path='/login' element={<div>Login</div>} />
           <Route path='/sign-up' element={<div>Sign UP</div>} />
@@ -22,7 +34,7 @@ function App() {
           <Route path='/messages' element={<div>Messages</div>} />
           <Route path='/profile' element={<div>Profile</div>} />
         </Route>
-      </Routes>
+      </Routes> */}
     </BrowserRouter>
   )
 }

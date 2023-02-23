@@ -9,6 +9,6 @@ type Props = {
 
 export default function Button({type=1, text='', func=function(){}}: Props) {
   return (
-    <div role='button' className={`${styles.main} ${type === 1 ? styles.typeOne : ''}`} onClick={func as MouseEventHandler}>{text}</div>
+    <div role='button' className={`${styles.main} ${type === 1 ? styles.typeOne : type === 2 ? styles.typeTwo : ''}`} onClick={func as MouseEventHandler}>{text}</div>
   )
 }

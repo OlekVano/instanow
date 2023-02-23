@@ -2,13 +2,18 @@
 
 .main {
   padding: $padding-lg;
-  min-width: 75px;
+  min-width: 100px;
   border-radius: $border-radius-s;
   text-align: center;
   font-weight: $weight-md;
+  user-select: none;
 }
 
 .typeOne {
   background-color: $color-primary;
   color: $text-color-tertiary;
+}
+
+.typeTwo {
+  border: solid 1px $text-color-secondary;
 }
