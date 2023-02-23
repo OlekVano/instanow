@@ -1,12 +1,22 @@
 import Header from './components/Header'
-import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Outlet, Route, Routes, useNavigate } from 'react-router-dom'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import LoginSignUpWrapper from './pages/LoginSignUpWrapper'
 import LoginMenu from './components/LoginMenu'
 import SignUpMenu from './components/SignUpMenu'
+import { auth } from '../firebase-setup'
+import { useEffect } from 'react'
 
 function App() {
+  const [currUser] = useAuthState(auth)
+  const navigate = useNavigate()
+
+  useEffect(manageCreateAccount, [currUser])
+
+  useEffect(() => {console.log(currUser)}, [currUser])
+
   return (
-    <BrowserRouter>
+    <>
       <Routes>
         {
           ['/login', '/sign-up'].map((path: string, i: number) => <Route path={path} key={i} element={<Header rightSideEmpty={true} />} />)
@@ -35,8 +45,16 @@ function App() {
           <Route path='/profile' element={<div>Profile</div>} />
         </Route>
       </Routes> */}
-    </BrowserRouter>
+    </>
   )
+
+  // **********************************
+
+  function manageCreateAccount() {
+    if (!currUser?.uid) return
+    
+  }
+
 }
 
 export default App
