@@ -19,7 +19,7 @@ export default function Header({ rightSideEmpty=false }: Props) {
             <div style={{flexGrow: 1}}></div>
             <SearchBar />
             <Button type={1} text='Create' />
-            <ProfilePicture />
+            <ProfilePicture size='md' />
           </>
         }
         

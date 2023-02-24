@@ -1,3 +1,11 @@
+@import '../../consts.scss';
+
 .main {
   width: 100%;
+}
+
+.profileWrapper {
+  background-color: $background-content;
+  padding: $padding-2xl;
+  border-radius: $border-radius-lg;
 }

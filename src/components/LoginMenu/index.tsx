@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { signInWithGoogle } from '../../utils'
-import AuthInput from '../AuthInput'
+import Input from '../Input'
 import Button from '../Button'
 import styles from './index.module.scss'
 
@@ -9,8 +9,8 @@ export default function LoginMenu() {
 
   return (
     <div className={styles.main}>
-      <AuthInput placeholder='Email Address' />
-      <AuthInput placeholder='Password' />
+      <Input placeholder='Email Address' />
+      <Input placeholder='Password' />
       <div className={styles.buttonsContainer}>
         <Button text='Login' />
         <div>or</div>

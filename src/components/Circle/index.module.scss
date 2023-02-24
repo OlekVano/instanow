@@ -1,0 +1,23 @@
+@import '../../consts.scss';
+
+$size: 28px;
+
+.main {
+  padding: $padding-md;
+  border-radius: 100%;
+  line-height: $size;
+  height: $size;
+  width: $size;
+  color: $text-color-tertiary;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.typeOne {
+  background-color: $color-primary;
+}
+
+.typeTwo {
+  background-color: $text-color-secondary;
+}

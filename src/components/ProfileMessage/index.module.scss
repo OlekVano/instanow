@@ -1,6 +1,7 @@
 @import '../../consts.scss';
 
 .main {
+  border-radius: $border-radius-lg;
   display: flex;
   gap: $gap-xs;
   align-items: center;

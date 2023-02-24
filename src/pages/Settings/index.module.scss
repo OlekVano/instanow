@@ -1,0 +1,29 @@
+@import '../../consts.scss';
+
+.main {
+  padding: $padding-2xl;
+  background-color: $background-content;
+  border-radius: $border-radius-lg;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $gap-7xl
+}
+
+.buttonsContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.inputContainer {
+  width: 80%;
+  gap: 10px;
+}
+
+.inputLabel {
+  width: 100%;
+  text-align: center;
+  font-weight: $weight-lg;
+  font-size: $text-lg;
+}

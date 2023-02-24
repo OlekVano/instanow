@@ -6,14 +6,14 @@ import LoginMenu from './components/LoginMenu'
 import SignUpMenu from './components/SignUpMenu'
 import { auth } from '../firebase-setup'
 import { useEffect } from 'react'
+import PageWrapper from './pages/PageWrapper'
+import Settings from './pages/Settings'
 
 function App() {
   const [currUser] = useAuthState(auth)
   const navigate = useNavigate()
 
   useEffect(manageCreateAccount, [currUser])
-
-  useEffect(() => {console.log(currUser)}, [currUser])
 
   return (
     <>
@@ -23,12 +23,15 @@ function App() {
         }
         <Route path='*' element={<Header />} />
       </Routes>
-      <div style={{paddingTop: '100px', height: '100%'}}>
+      <div style={{paddingTop: '120px', height: '100%'}}>
         <Routes>
           <Route index element={<div>IndexPage</div>} />
           <Route path='/' element={<LoginSignUpWrapper />}>
             <Route path='/login' element={<LoginMenu />} />
             <Route path='/sign-up' element={<SignUpMenu />} />
+          </Route>
+          <Route path='/' element={<PageWrapper />}>
+            <Route path='/settings' element={<Settings />} />
           </Route>
         </Routes>
       </div>

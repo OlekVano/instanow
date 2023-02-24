@@ -1,10 +1,10 @@
 import ProfilePicture from '../ProfilePicture'
 import styles from './index.module.scss'
 
-export default function ProfileSmall() {
+export default function ProfileMedium() {
   return (
     <div className={styles.main}>
-      <ProfilePicture size='s' />
+      <ProfilePicture size='md' />
       <div className={styles.nameAndTagContainer}>
         <div className={styles.name}>Laura Fitscher</div>
         <div className={styles.tag}>@laurafitscher</div>

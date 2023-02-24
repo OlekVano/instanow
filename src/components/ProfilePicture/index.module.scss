@@ -1,6 +1,25 @@
 @import '../../consts.scss';
 
-.main {
-  height: 50px;
+// .main {
+  
+// }
+
+.s {
+  width: 45px;
   border-radius: $border-radius-s;
+}
+
+.md {
+  width: 64px;
+  border-radius: $border-radius-md;
+}
+
+.lg {
+  width: 130px;
+  border-radius: $border-radius-lg;
+}
+
+.xl {
+  width: 280px;
+  border-radius: $border-radius-xl;
 }
