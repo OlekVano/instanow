@@ -1,5 +1,6 @@
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 import { auth } from '../firebase-setup'
+import { v4 } from 'uuid'
 
 export function signInWithGoogle(callback?: Function) {
   const provider = new GoogleAuthProvider()
@@ -19,6 +20,6 @@ export function signInWithGoogle(callback?: Function) {
     })
 }
 
-export function getUserById(id: string) {
-
+export function generateUniqueId() {
+  return `a${v4()}`
 }
