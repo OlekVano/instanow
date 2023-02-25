@@ -23,7 +23,7 @@ function App() {
         }
         <Route path='*' element={<Header />} />
       </Routes>
-      <div style={{paddingTop: '120px', height: '100%'}}>
+      <div style={{paddingTop: '140px', height: '100%'}}>
         <Routes>
           <Route index element={<div>IndexPage</div>} />
           <Route path='/' element={<LoginSignUpWrapper />}>

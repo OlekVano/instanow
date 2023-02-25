@@ -1,7 +1,10 @@
 @import '../../consts.scss';
 
 .main {
-  width: 100%;
+  width: 22.5%;
+  display: flex;
+  flex-direction: column;
+  gap: $gap-xl
 }
 
 .profileWrapper {
