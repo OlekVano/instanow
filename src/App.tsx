@@ -5,25 +5,30 @@ import LoginSignUpWrapper from './pages/LoginSignUpWrapper'
 import LoginMenu from './components/LoginMenu'
 import SignUpMenu from './components/SignUpMenu'
 import { auth } from '../firebase-setup'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import PageWrapper from './pages/PageWrapper'
 import Settings from './pages/Settings'
+import { getProfileById } from './utils'
+import { Profile } from './types'
+import styles from './App.module.scss'
+import { ConfigProvider } from './UserContext'
 
 function App() {
+  const [currProfile, setCurrProfile] = useState<Profile | undefined>(undefined)
   const [currUser] = useAuthState(auth)
   const navigate = useNavigate()
 
-  useEffect(manageCreateAccount, [currUser])
+  useEffect(manageAccountChange, [currUser])
 
   return (
-    <>
+    <ConfigProvider>
       <Routes>
         {
           ['/login', '/sign-up'].map((path: string, i: number) => <Route path={path} key={i} element={<Header rightSideEmpty={true} />} />)
         }
         <Route path='*' element={<Header />} />
       </Routes>
-      <div style={{paddingTop: '140px', height: '100%'}}>
+      <div className={styles.contentContainer}>
         <Routes>
           <Route index element={<div>IndexPage</div>} />
           <Route path='/' element={<LoginSignUpWrapper />}>
@@ -35,29 +40,18 @@ function App() {
           </Route>
         </Routes>
       </div>
-
-      {/* <Routes>
-        <Route index element={<div>Index</div>} />
-        //
-        <Route path='/' element={<div>Background<Outlet /></div>}>
-          <Route path='/login' element={<div>Login</div>} />
-          <Route path='/sign-up' element={<div>Sign UP</div>} />
-        </Route>
-        <Route path='/' element={<div>Columns<Outlet /></div>}>
-          <Route path='/messages' element={<div>Messages</div>} />
-          <Route path='/profile' element={<div>Profile</div>} />
-        </Route>
-      </Routes> */}
-    </>
+    </ConfigProvider>
   )
 
   // **********************************
 
-  function manageCreateAccount() {
-    if (!currUser?.uid) return
-    
+  function manageAccountChange() {
+    if (!currUser) return
+    getProfileById(currUser.uid, currUser).then(function afterGotProfile(profile) {
+      if (!profile) navigate('/settings')
+      else setCurrProfile(profile)
+    })
   }
-
 }
 
 export default App

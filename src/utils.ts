@@ -1,6 +1,7 @@
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
+import { getAuth, signInWithPopup, GoogleAuthProvider, User } from 'firebase/auth'
 import { auth } from '../firebase-setup'
 import { v4 } from 'uuid'
+import { Profile } from './types'
 
 export function signInWithGoogle(callback?: Function) {
   const provider = new GoogleAuthProvider()
@@ -22,4 +23,11 @@ export function signInWithGoogle(callback?: Function) {
 
 export function generateUniqueId() {
   return `a${v4()}`
+}
+
+export async function getProfileById(id: string, currUser: User): Promise<Profile | undefined> {
+  const token = await currUser.getIdToken()
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/profiles/${id}`, {headers: new Headers({'Authorization': `Bearer ${token}`})})
+  if (res.status !== 200) return undefined
+  return await res.json()
 }
