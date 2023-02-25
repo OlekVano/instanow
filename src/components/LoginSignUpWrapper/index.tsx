@@ -1,7 +1,7 @@
 import styles from './index.module.scss'
 import { Outlet, useLocation } from 'react-router-dom'
 import background from '../../assets/login-sign-up-background.jpg'
-import LoginSignUpLink from '../../components/AuthLink'
+import LoginSignUpLink from '../AuthLink'
 
 export default function LoginSignUpWrapper() {
   const location = useLocation()

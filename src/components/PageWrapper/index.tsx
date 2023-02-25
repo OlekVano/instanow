@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
-import LeftColumn from '../../components/LeftColumn'
-import RightColumn from '../../components/RightColumn'
+import LeftColumn from '../LeftColumn'
+import RightColumn from '../RightColumn'
 import styles from './index.module.scss'
 
 export default function PageWrapper() {

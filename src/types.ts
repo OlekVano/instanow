@@ -1,6 +1,7 @@
 import { User } from "firebase/auth"
 
 export type Profile = {
+  profilePicture: string,
   username: string,
   tag: string,
   bio: string,

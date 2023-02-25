@@ -1,8 +1,9 @@
 @import '../../consts.scss';
 
-// .main {
-  
-// }
+.main {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
 
 .s {
   width: 45px;
