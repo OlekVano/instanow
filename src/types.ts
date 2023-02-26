@@ -5,9 +5,9 @@ export type Profile = {
   username: string,
   tag: string,
   bio: string,
-  nFollowers: number,
-  nFollowed: number,
-  nPosts: number
+  followers: string[],
+  following: string[],
+  posts: string[]
 }
 
 export type UserContextType = {

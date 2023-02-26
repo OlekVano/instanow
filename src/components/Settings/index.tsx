@@ -3,21 +3,35 @@ import Button from '../Button'
 import ProfilePicture from '../ProfilePicture'
 import styles from './index.module.scss'
 import Textarea from '../Textarea'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { generateUniqueId } from '../../utils'
 import { Profile } from '../../types'
+import { UserContext } from '../../user-context'
+import { useNavigate } from 'react-router-dom'
 
 export default function Settings() {
   const [profilePictureInputId] = useState(generateUniqueId())
-  const [profile, setProfile] = useState<Profile>({
+
+  const defaultProfile: Profile = {
     username: '',
-    nFollowed: 0,
-    nFollowers: 0,
-    nPosts: 0,
     profilePicture: '',
     tag: '',
     bio: '',
-  })
+    followers: [],
+    following: [],
+    posts: []
+  }
+
+  const context = useContext(UserContext)
+
+  // console.log('context', context)
+  // console.log('cotnext or default', context.currProfile || defaultProfile)
+
+  const [profile, setProfile] = useState<Profile>(context.currProfile || defaultProfile)
+
+  useEffect(manageContextChange, [context])
+
+  const navigate = useNavigate()
 
   return (
     <div className={styles.main}>
@@ -40,13 +54,59 @@ export default function Settings() {
         <Textarea value={profile.bio} func={manageBioInputChange} />
       </div>
       <div className={styles.buttonsContainer}>
-        <Button text='Undo' type={2} />
-        <Button text='Save' />
+        <Button text='Undo' type={2} func={undoChanges} />
+        <Button text='Save' func={saveChanges} />
       </div>
     </div>
   )
 
   // *********************************
+
+  function clearProfilePictureInput() {
+    const input = document.getElementById(profilePictureInputId) as HTMLInputElement
+    if (input) input.value = ''
+  }
+
+  function undoChanges() {
+    if (context.currProfile) setProfile(context.currProfile)
+    else setProfile(defaultProfile)
+  }
+
+  function manageContextChange() {
+    if (context.currProfile) setProfile(context.currProfile)
+  }
+
+  async function saveChanges() {
+    const requiredProfileKeys = [
+      'username',
+      'tag',
+      'bio',
+      'profilePicture'
+    ]
+
+    if (profile.username.trim().length === 0) {
+      alert('Username cannot be empty')
+      return
+    }
+
+    if (profile.tag.trim().length === 0) {
+      alert('Tag cannot be empty')
+      return
+    }
+
+    const json = JSON.stringify(Object.fromEntries(Object.entries(profile).filter(entry => requiredProfileKeys.includes(entry[0]))))
+
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/profiles/${context.currUser?.uid}`, {
+      method: 'POST',
+      headers: new Headers({'Authorization': `Bearer ${await context.currUser?.getIdToken()}`, 'Content-Type': 'application/json'}),
+      body: json,
+    })
+
+    // if (res.status === 200) navigate(`/profile/${context.currUser?.uid}`)
+    // else alert(`Error: ${res.statusText}`)
+
+    if (res.status !== 200) alert(`Error: ${res.statusText}`)
+  }
 
   function triggerImageUpload() {
     document.getElementById(profilePictureInputId)?.click()
