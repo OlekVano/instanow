@@ -13,10 +13,9 @@ export default function LeftColumn() {
             {
               !ctx?.currProfile ? null :
               <div className={styles.profileWrapper}>
-                <ProfileMedium />
+                <ProfileMedium src={ctx.currProfile.profilePicture} />
               </div>
             }
-
             <NavBar />
           </div>
         )

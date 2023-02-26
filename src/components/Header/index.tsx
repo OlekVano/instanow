@@ -1,3 +1,4 @@
+import { UserContext } from '../../user-context'
 import Button from '../Button'
 import LogoWithBrand from '../LogoWithBrand'
 import ProfilePicture from '../ProfilePicture'
@@ -10,20 +11,26 @@ type Props = {
 
 export default function Header({ rightSideEmpty=false }: Props) {
   return (
-    <header className={styles.main}>
-      <div className={`container-xl ${styles.wrapper}`}>
-        <LogoWithBrand />
-        {
-          rightSideEmpty ? null
-          : <>
-            <div style={{flexGrow: 1}}></div>
-            <SearchBar />
-            <Button type={1} text='Create' />
-            <ProfilePicture size='md' />
-          </>
-        }
-        
-      </div>
-    </header>
+    <UserContext.Consumer>
+      {function renderFromContext(ctx) {
+        return (
+          <header className={styles.main}>
+            <div className={`container-xl ${styles.wrapper}`}>
+              <LogoWithBrand />
+              {
+                rightSideEmpty || !ctx.currProfile ? null
+                : <>
+                  <div style={{flexGrow: 1}}></div>
+                  <SearchBar />
+                  <Button type={1} text='Create' />
+                  <ProfilePicture size='md' src={ctx.currProfile?.profilePicture} />
+                </>
+              }
+              
+            </div>
+          </header>
+        )
+      }}
+    </UserContext.Consumer>
   )
 }
