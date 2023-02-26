@@ -1,27 +1,32 @@
 import Header from './components/Header'
-import { BrowserRouter, Outlet, Route, Routes, useNavigate } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import LoginSignUpWrapper from './components/LoginSignUpWrapper'
 import LoginMenu from './components/LoginMenu'
 import SignUpMenu from './components/SignUpMenu'
 import { auth } from '../firebase-setup'
-import { useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import PageWrapper from './components/PageWrapper'
 import Settings from './components/Settings'
 import { getProfileById } from './utils'
 import { Profile } from './types'
 import styles from './App.module.scss'
-import { ConfigProvider } from './UserContext'
+import { UserContext } from './user-context'
 
 function App() {
-  const [currProfile, setCurrProfile] = useState<Profile | undefined>(undefined)
+  const [currProfile, setCurrProfile] = useState<Profile | undefined>()
   const [currUser] = useAuthState(auth)
+
   const navigate = useNavigate()
 
   useEffect(manageAccountChange, [currUser])
 
   return (
-    <ConfigProvider>
+    <UserContext.Provider value={{
+      currProfile: currProfile,
+      currUser: currUser,
+      setCurrProfile: setCurrProfile
+    }}>
       <Routes>
         {
           ['/login', '/sign-up'].map((path: string, i: number) => <Route path={path} key={i} element={<Header rightSideEmpty={true} />} />)
@@ -40,7 +45,7 @@ function App() {
           </Route>
         </Routes>
       </div>
-    </ConfigProvider>
+    </UserContext.Provider>
   )
 
   // **********************************

@@ -1,13 +1,13 @@
-import { UserContextState } from '../../types'
-import Consumer from '../../UserContext'
+import { UserContextType } from '../../types'
+import { UserContext } from '../../user-context'
 import NavBar from '../NavBar'
 import ProfileMedium from '../ProfileMedium'
 import styles from './index.module.scss'
 
 export default function LeftColumn() {
   return (
-    <Consumer>
-      {function renderFromContext(ctx: UserContextState | undefined) {
+    <UserContext.Consumer>
+      {function renderFromContext(ctx: UserContextType) {
         return (
           <div className={styles.main}>
             {
@@ -21,6 +21,6 @@ export default function LeftColumn() {
           </div>
         )
       }}
-    </Consumer>
+    </UserContext.Consumer>
   )
 }

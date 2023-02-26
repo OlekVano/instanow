@@ -1,13 +1,13 @@
-import { UserContextState } from '../../types'
-import Consumer from '../../UserContext'
+import { UserContextType } from '../../types'
+import { UserContext } from '../../user-context'
 import Following from '../Following'
 import NewMessages from '../NewMessages'
 import styles from './index.module.scss'
 
 export default function RightColumn() {
   return (
-    <Consumer>
-      {function renderFromContext(ctx: UserContextState | undefined) {
+    <UserContext.Consumer>
+      {function renderFromContext(ctx: UserContextType) {
         return (
           <div className={styles.main}>
             {
@@ -20,6 +20,6 @@ export default function RightColumn() {
           </div>
         )
       }}
-    </Consumer>
+    </UserContext.Consumer>
   )
 }

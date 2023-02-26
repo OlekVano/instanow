@@ -10,9 +10,8 @@ export type Profile = {
   nPosts: number
 }
 
-export type UserContextState = {
-  currUser?: User,
-  currProfile?: Profile
-  setCurrUser: Function,
+export type UserContextType = {
+  currProfile: Profile | undefined,
+  currUser: User | undefined | null,
   setCurrProfile: Function
 }
