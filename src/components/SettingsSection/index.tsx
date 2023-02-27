@@ -23,11 +23,11 @@ export default function SettingsSection() {
     posts: []
   }
 
-  const context = useContext(UserContext)
+  const ctx = useContext(UserContext)
 
-  const [profile, setProfile] = useState<Profile>(context.currProfile || defaultProfile)
+  const [profile, setProfile] = useState<Profile>(ctx.currProfile || defaultProfile)
 
-  useEffect(manageContextChange, [context])
+  useEffect(manageContextChange, [ctx])
 
   return (
     <div className={styles.main}>
@@ -68,12 +68,12 @@ export default function SettingsSection() {
   }
 
   function undoChanges() {
-    if (context.currProfile) setProfile(context.currProfile)
+    if (ctx.currProfile) setProfile(ctx.currProfile)
     else setProfile(defaultProfile)
   }
 
   function manageContextChange() {
-    if (context.currProfile) setProfile(context.currProfile)
+    if (ctx.currProfile) setProfile(ctx.currProfile)
   }
 
   async function saveChanges() {
@@ -96,16 +96,17 @@ export default function SettingsSection() {
 
     const json = JSON.stringify(Object.fromEntries(Object.entries(profile).filter(entry => requiredProfileKeys.includes(entry[0]))))
 
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/profiles/${context.currUser?.uid}`, {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/profiles/${ctx.currUser?.uid}`, {
       method: 'POST',
-      headers: new Headers({'Authorization': `Bearer ${await context.currUser?.getIdToken()}`, 'Content-Type': 'application/json'}),
+      headers: new Headers({'Authorization': `Bearer ${await ctx.currUser?.getIdToken()}`, 'Content-Type': 'application/json'}),
       body: json,
     })
 
-    // if (res.status === 200) navigate(`/profile/${context.currUser?.uid}`)
+    // if (res.status === 200) navigate(`/profile/${ctx.currUser?.uid}`)
     // else alert(`Error: ${res.statusText}`)
 
     if (res.status !== 200) alert(`Error: ${res.statusText}`)
+    else ctx.setCurrProfile(profile)
   }
 
   function triggerImageUpload() {
