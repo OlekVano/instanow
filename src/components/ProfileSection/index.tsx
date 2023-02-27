@@ -5,6 +5,8 @@ import ProfileBig from '../ProfileBig'
 import styles from './index.module.scss'
 import { getProfileById } from '../../utils'
 import { Profile } from '../../types'
+import CardWrapper from '../CardWrapper'
+import Share from '../Share'
 
 export default function ProfileSection() {
   const { profileId } = useParams()
@@ -22,7 +24,15 @@ export default function ProfileSection() {
   if (!profile) return null
   return (
     <div className={styles.main}>
-      <ProfileBig profile={profile} />
+      <CardWrapper>
+        <ProfileBig profile={profile} buttons={ctx.currUser?.uid === profileId} />
+      </CardWrapper>
+      {
+        ctx.currUser?.uid !== profileId ? null :
+        <CardWrapper>
+          <Share />
+        </CardWrapper>
+      }
     </div>
   )
 }

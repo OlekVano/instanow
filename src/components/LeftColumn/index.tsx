@@ -18,7 +18,6 @@ export default function LeftColumn() {
           <ProfileMedium src={ctx.currProfile.profilePicture} />
         </CardWrapper>
         </>
-
       }
       <NavBar />
     </div>

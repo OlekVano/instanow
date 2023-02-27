@@ -1,0 +1,14 @@
+@import '../../consts.scss';
+
+.main {
+  display: flex;
+  align-items: center;
+  gap: $gap-lg
+}
+
+.text {
+  flex: 1;
+  font-size: $text-lg;
+  font-weight: $weight-lg;
+  color: $text-color-secondary;
+}

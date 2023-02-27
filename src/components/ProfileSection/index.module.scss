@@ -2,7 +2,7 @@
 
 .main {
   width: 50%;
-  padding: $padding-2xl;
-  background-color: $background-content;
-  border-radius: $border-radius-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $gap-xl;
 }

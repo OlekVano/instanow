@@ -1,13 +1,18 @@
+import { useContext } from 'react'
 import { Profile } from '../../types'
+import { UserContext } from '../../user-context'
 import Button from '../Button'
 import ProfilePicture from '../ProfilePicture'
 import styles from './index.module.scss'
 
 type Props = {
-  profile: Profile
+  profile: Profile,
+  buttons: boolean
 }
 
-export default function ProfileBig({ profile }: Props) {
+export default function ProfileBig({ profile, buttons }: Props) {
+  const ctx = useContext(UserContext)
+
   return (
     <div className={styles.main}>
       <div className={styles.container}>
@@ -17,10 +22,13 @@ export default function ProfileBig({ profile }: Props) {
             <div className={styles.username}>{profile.username}</div>
             <div className={styles.tag}>{profile.tag}</div>
           </div>
-          <div className={styles.buttonsContainer}>
-            <Button text='Unfollow' width='150px' type={2}  />
-            <Button text='Message' width='150px'  />
-          </div>
+          {
+            !buttons ? null :
+            <div className={styles.buttonsContainer}>
+              <Button text='Unfollow' width='150px' type={2}  />
+              <Button text='Message' width='150px'  />
+            </div>
+          }
         </div>
       </div>
       <div className={styles.stats}>
