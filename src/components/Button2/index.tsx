@@ -8,7 +8,7 @@ type Props = {
   func: Function
 }
 
-export default function AuthButton({ highlighted=false, text, func } : Props) {
+export default function Button2({ highlighted=false, text, func } : Props) {
   return (
     <div onClick={func as MouseEventHandler} className={styles.main}><div className={`${styles.text} ${highlighted ? styles.highlighted : ''}`}>{text}</div></div>
   )
