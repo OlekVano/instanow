@@ -2,7 +2,7 @@ import styles from './index.module.scss'
 import defaultProfile from '../../assets/profile.png'
 
 type Props = {
-  size: 's' | 'md' | 'lg' | 'xl',
+  size: 's' | 'md' | 'lg' | 'xl' | 'xxl',
   src?: string
 }
 

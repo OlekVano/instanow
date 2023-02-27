@@ -9,7 +9,7 @@ import { Profile } from '../../types'
 import { UserContext } from '../../user-context'
 import { useNavigate } from 'react-router-dom'
 
-export default function Settings() {
+export default function SettingsSection() {
   const [profilePictureInputId] = useState(generateUniqueId())
 
   const defaultProfile: Profile = {
@@ -35,7 +35,7 @@ export default function Settings() {
 
   return (
     <div className={styles.main}>
-      <ProfilePicture size='xl' src={profile.profilePicture} />
+      <ProfilePicture size='xxl' src={profile.profilePicture} />
       <div className={styles.buttonsContainer}>
         <Button width='150px' text='Upload picture' func={triggerImageUpload} />
         <input id={profilePictureInputId} onChange={manageImageUpload} type='file' accept='image/*' style={{display: 'none'}} /> 

@@ -1,26 +1,35 @@
 @import '../../consts.scss';
 
 .main {
-  aspect-ratio: 1 / 1;
   object-fit: cover;
 }
 
 .s {
   width: 45px;
+  height: 45px;
   border-radius: $border-radius-s;
 }
 
 .md {
   width: 64px;
+  height: 64px;
   border-radius: $border-radius-md;
 }
 
 .lg {
   width: 130px;
+  height: 130px;
   border-radius: $border-radius-lg;
 }
 
 .xl {
+  width: 180px;
+  height: 180px;
+  border-radius: $border-radius-lg;
+}
+
+.xxl {
   width: 280px;
+  height: 280px;
   border-radius: $border-radius-xl;
 }

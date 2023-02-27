@@ -1,0 +1,57 @@
+@import '../../consts.scss';
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-2xl;
+}
+
+.container {
+  display: flex;
+  gap: $gap-lg;
+}
+
+.container2 {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.username {
+  font-size: $text-2xl;
+  font-weight: $weight-lg;
+}
+
+.tag {
+  font-size: $text-lg;
+  font-weight: $weight-lg;
+  color: $text-color-secondary
+}
+
+.bio {
+  font-size: $text-lg;
+  word-wrap: break-word;
+  padding: 0 $padding-2xl;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.statTitle {
+  font-size: $text-lg;
+  font-weight: $weight-lg;
+  color: $text-color-secondary
+}
+
+.statValue {
+  font-size: $text-lg;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: space-between;
+}

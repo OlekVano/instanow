@@ -5,13 +5,14 @@ import LoginSignUpWrapper from './components/LoginSignUpWrapper'
 import LoginMenu from './components/LoginMenu'
 import SignUpMenu from './components/SignUpMenu'
 import { auth } from '../firebase-setup'
-import { createContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import PageWrapper from './components/PageWrapper'
-import Settings from './components/Settings'
+import SettingsSection from './components/SettingsSection'
 import { getProfileById } from './utils'
 import { Profile } from './types'
 import styles from './App.module.scss'
 import { UserContext } from './user-context'
+import ProfileSection from './components/ProfileSection'
 
 function App() {
   const [currProfile, setCurrProfile] = useState<Profile | undefined>()
@@ -41,7 +42,8 @@ function App() {
             <Route path='/sign-up' element={<SignUpMenu />} />
           </Route>
           <Route path='/' element={<PageWrapper />}>
-            <Route path='/settings' element={<Settings />} />
+            <Route path='/settings' element={<SettingsSection />} />
+            <Route path='/profile/:profileId' element={<ProfileSection />} />
           </Route>
         </Routes>
       </div>
