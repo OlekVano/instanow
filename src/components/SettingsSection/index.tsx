@@ -8,6 +8,7 @@ import { generateUniqueId } from '../../utils'
 import { Profile } from '../../types'
 import { UserContext } from '../../user-context'
 import { useNavigate } from 'react-router-dom'
+import CardWrapper from '../CardWrapper'
 
 export default function SettingsSection() {
   const [profilePictureInputId] = useState(generateUniqueId())
@@ -24,39 +25,38 @@ export default function SettingsSection() {
 
   const context = useContext(UserContext)
 
-  // console.log('context', context)
-  // console.log('cotnext or default', context.currProfile || defaultProfile)
-
   const [profile, setProfile] = useState<Profile>(context.currProfile || defaultProfile)
 
   useEffect(manageContextChange, [context])
 
-  const navigate = useNavigate()
-
   return (
     <div className={styles.main}>
-      <ProfilePicture size='xxl' src={profile.profilePicture} />
-      <div className={styles.buttonsContainer}>
-        <Button width='150px' text='Upload picture' func={triggerImageUpload} />
-        <input id={profilePictureInputId} onChange={manageImageUpload} type='file' accept='image/*' style={{display: 'none'}} /> 
-        <Button width='150px' text='Take picture' />
+    <CardWrapper>
+      <div className={styles.container}>
+        <ProfilePicture size='xxl' src={profile.profilePicture} />
+        <div className={styles.buttonsContainer}>
+          <Button width='150px' text='Upload picture' func={triggerImageUpload} />
+          <input id={profilePictureInputId} onChange={manageImageUpload} type='file' accept='image/*' style={{display: 'none'}} /> 
+          <Button width='150px' text='Take picture' />
+        </div>
+        <div className={styles.inputContainer}>
+          <div className={styles.inputLabel}>Username</div>
+          <Input value={profile.username} func={manageUsernameInputChange} />
+        </div>
+        <div className={styles.inputContainer}>
+          <div className={styles.inputLabel}>Tag</div>
+          <Input value={profile.tag} func={manageTagInputChange} />
+        </div>
+        <div className={styles.inputContainer}>
+          <div className={styles.inputLabel}>Bio</div>
+          <Textarea value={profile.bio} func={manageBioInputChange} />
+        </div>
+        <div className={styles.buttonsContainer}>
+          <Button text='Undo' type={2} func={undoChanges} />
+          <Button text='Save' func={saveChanges} />
+        </div>
       </div>
-      <div className={styles.inputContainer}>
-        <div className={styles.inputLabel}>Username</div>
-        <Input value={profile.username} func={manageUsernameInputChange} />
-      </div>
-      <div className={styles.inputContainer}>
-        <div className={styles.inputLabel}>Tag</div>
-        <Input value={profile.tag} func={manageTagInputChange} />
-      </div>
-      <div className={styles.inputContainer}>
-        <div className={styles.inputLabel}>Bio</div>
-        <Textarea value={profile.bio} func={manageBioInputChange} />
-      </div>
-      <div className={styles.buttonsContainer}>
-        <Button text='Undo' type={2} func={undoChanges} />
-        <Button text='Save' func={saveChanges} />
-      </div>
+    </CardWrapper>
     </div>
   )
 

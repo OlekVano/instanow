@@ -11,29 +11,25 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { signOut } from 'firebase/auth'
 import { auth } from '../../../firebase-setup'
 import { UserContext } from '../../user-context'
+import { useContext } from 'react'
 
 export default function NavBar() {
   const navigate = useNavigate()
   const location = useLocation()
+  const ctx = useContext(UserContext)
 
   return (
-    <UserContext.Consumer>
-      {function renderFromContext(ctx) {
-        return (
-          <div className={styles.main}>
-            <NavButton func={() => {navigate('/')}} text={'Home'} image={house} selected={location.pathname === '/'} roundedTop={true} />
-            <NavButton func={() => {navigate(`/profile/${ctx.currUser?.uid}`)}} text={'Profile'} image={profile} selected={location.pathname === `/profile/${ctx.currUser?.uid}`} />
-            <NavButton func={() => {navigate('/messages')}} text={'Messages'} image={messages} selected={location.pathname === '/messages'} />
-            <NavButton func={() => {navigate('/people')}} text={'People'} image={people} selected={location.pathname === '/people'} />
-            <div style={{width: '80%', margin: '0 auto'}}>
-              <Line />
-            </div>
-            <NavButton func={() => {navigate('/settings')}} text={'Settings'} image={settings} selected={location.pathname === '/settings'} />
-            <NavButton func={handleSignOut} text={'Logout'} image={logout} selected={false} />
-          </div>
-        )
-      }}
-    </UserContext.Consumer>
+    <div className={styles.main}>
+      <NavButton func={() => {navigate('/')}} text={'Home'} image={house} selected={location.pathname === '/'} roundedTop={true} />
+      <NavButton func={() => {navigate(`/profile/${ctx.currUser?.uid}`)}} text={'Profile'} image={profile} selected={location.pathname === `/profile/${ctx.currUser?.uid}`} />
+      <NavButton func={() => {navigate('/messages')}} text={'Messages'} image={messages} selected={location.pathname === '/messages'} />
+      <NavButton func={() => {navigate('/people')}} text={'People'} image={people} selected={location.pathname === '/people'} />
+      <div style={{width: '80%', margin: '0 auto'}}>
+        <Line />
+      </div>
+      <NavButton func={() => {navigate('/settings')}} text={'Settings'} image={settings} selected={location.pathname === '/settings'} />
+      <NavButton func={handleSignOut} text={'Logout'} image={logout} selected={false} />
+    </div>
   )
 
   // *************************

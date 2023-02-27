@@ -6,6 +6,9 @@
   gap: $gap-md;
   padding: $padding-5xl;
   cursor: pointer;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .main.selected {
@@ -21,6 +24,10 @@
 .image {
   width: $icon-size-s;
   filter: $filter-image-secondary;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  pointer-events: none;
 }
   
 .text {
