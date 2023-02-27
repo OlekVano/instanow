@@ -21,3 +21,9 @@
   font-weight: $weight-lg;
   color: $text-color-secondary;
 }
+
+.name,
+.tag {
+  text-overflow: clip;
+  white-space: nowrap;
+}

@@ -15,7 +15,7 @@ export default function LeftColumn() {
         !ctx?.currProfile ? null : 
         <>
         <CardWrapper>
-          <ProfileMedium src={ctx.currProfile.profilePicture} />
+          <ProfileMedium profile={ctx.currProfile} />
         </CardWrapper>
         </>
       }

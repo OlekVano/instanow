@@ -1,17 +1,18 @@
+import { Profile } from '../../types'
 import ProfilePicture from '../ProfilePicture'
 import styles from './index.module.scss'
 
 type Props = {
-  src?: string
+  profile: Profile
 }
 
-export default function ProfileMedium({ src='' }: Props) {
+export default function ProfileMedium({ profile }: Props) {
   return (
     <div className={styles.main}>
-      <ProfilePicture size='md' src={src} />
+      <ProfilePicture size='md' src={profile.profilePicture} />
       <div className={styles.nameAndTagContainer}>
-        <div className={styles.name}>Laura Fitscher</div>
-        <div className={styles.tag}>@laurafitscher</div>
+        <div className={styles.name}>{profile.username}</div>
+        <div className={styles.tag}>{profile.tag}</div>
       </div>
     </div>
   )
