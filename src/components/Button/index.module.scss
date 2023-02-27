@@ -7,6 +7,15 @@
   text-align: center;
   font-weight: $weight-md;
   user-select: none;
+  transition: filter 0.2s;
+}
+
+.main:hover {
+  filter: brightness(0.9);
+}
+
+.main:active {
+  filter: brightness(0.8);
 }
 
 .typeOne {
