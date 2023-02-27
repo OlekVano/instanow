@@ -1,14 +1,15 @@
+import { MouseEventHandler } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './index.module.scss'
 
 type Props = {
   highlighted?: boolean,
   text: string,
-  path: string
+  func: Function
 }
 
-export default function AuthLink({ highlighted=false, text, path } : Props) {
+export default function AuthButton({ highlighted=false, text, func } : Props) {
   return (
-    <Link to={path} className={styles.main}><div className={`${styles.text} ${highlighted ? styles.highlighted : ''}`}>{text}</div></Link>
+    <div onClick={func as MouseEventHandler} className={styles.main}><div className={`${styles.text} ${highlighted ? styles.highlighted : ''}`}>{text}</div></div>
   )
 }
