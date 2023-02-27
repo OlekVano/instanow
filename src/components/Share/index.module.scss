@@ -3,7 +3,8 @@
 .main {
   display: flex;
   align-items: center;
-  gap: $gap-lg
+  gap: $gap-lg;
+  cursor: pointer;
 }
 
 .text {
