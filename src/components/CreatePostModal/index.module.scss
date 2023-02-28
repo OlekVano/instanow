@@ -1,0 +1,54 @@
+@import '../../consts.scss';
+
+.main {
+  padding: $padding-2xl;
+  display: flex;
+  flex-direction: column;
+  gap: $gap-2xl;
+  width: 800px;
+  max-width: 80vw;
+}
+
+.container {
+  display: flex;
+  gap: $gap-3xl;
+}
+
+.input {
+  border: none;
+  outline: none;
+  min-width: fit-content;
+  font-size: $text-xl;
+}
+
+.input::placeholder {
+  color: $text-color-secondary;
+  font-weight: $weight-lg;
+}
+
+.photoContainer {
+  background-color: $background-secondary;
+  padding: $padding-xl;
+  padding-bottom: $padding-5xl;
+  border-radius: $border-radius-lg;
+  gap: $gap-xl;
+  display: flex;
+  flex-direction: column;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.buttonsContainer2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.image {
+  filter: $filter-image-secondary;
+  width: 50%;
+  margin: 0 auto;
+  display: block;
+}

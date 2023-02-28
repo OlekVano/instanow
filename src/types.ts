@@ -15,3 +15,8 @@ export type UserContextType = {
   currUser: User | undefined | null,
   setCurrProfile: Function
 }
+
+export type ShareModalContextType = {
+  openModal: Function,
+  closeModal: Function
+}

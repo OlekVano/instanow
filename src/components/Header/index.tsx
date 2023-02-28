@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+import { ShareModalContext } from '../../share-modal-context'
 import { UserContext } from '../../user-context'
 import Button from '../Button'
 import LogoWithBrand from '../LogoWithBrand'
@@ -10,27 +12,24 @@ type Props = {
 }
 
 export default function Header({ rightSideEmpty=false }: Props) {
+  const userCtx = useContext(UserContext)
+  const shareModalCtx = useContext(ShareModalContext)
+
   return (
-    <UserContext.Consumer>
-      {function renderFromContext(ctx) {
-        return (
-          <header className={styles.main}>
-            <div className={`container-xl ${styles.wrapper}`}>
-              <LogoWithBrand />
-              {
-                rightSideEmpty || !ctx.currProfile ? null
-                : <>
-                  <div style={{flexGrow: 1}}></div>
-                  <SearchBar />
-                  <Button type={1} text='Create' />
-                  <ProfilePicture size='md' src={ctx.currProfile?.profilePicture} />
-                </>
-              }
-              
-            </div>
-          </header>
-        )
-      }}
-    </UserContext.Consumer>
+    <header className={styles.main}>
+      <div className={`container-xl ${styles.wrapper}`}>
+        <LogoWithBrand />
+        {
+          rightSideEmpty || !userCtx.currProfile ? null
+          : <>
+            <div style={{flexGrow: 1}}></div>
+            <SearchBar />
+            <Button type={1} text='Create' func={shareModalCtx.openModal} />
+            <ProfilePicture size='md' src={userCtx.currProfile?.profilePicture} />
+          </>
+        }
+        
+      </div>
+    </header>
   )
 }
