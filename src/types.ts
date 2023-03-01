@@ -7,8 +7,21 @@ export type Profile = {
   bio: string,
   followers: string[],
   following: string[],
-  posts: string[]
+  posts: PostWithoutAuthor[]
 }
+
+export type Post = {
+  author: ProfileWithoutPosts,
+  authorId: string,
+  comments: Object[],
+  likes: string[],
+  picture: string,
+  text: string
+}
+
+export type PostWithoutAuthor = Omit<Post, 'author'>
+
+export type ProfileWithoutPosts = Omit<Profile, 'posts'>
 
 export type UserContextType = {
   currProfile: Profile | undefined,

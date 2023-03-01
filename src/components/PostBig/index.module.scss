@@ -1,0 +1,11 @@
+@import '../../consts.scss';
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-xl;
+}
+
+.image {
+  border-radius: $border-radius-xl;
+}

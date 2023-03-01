@@ -4,9 +4,10 @@ import { UserContext } from '../../user-context'
 import ProfileBig from '../ProfileBig'
 import styles from './index.module.scss'
 import { getProfileById } from '../../utils'
-import { Profile } from '../../types'
+import { Post, PostWithoutAuthor, Profile } from '../../types'
 import CardWrapper from '../CardWrapper'
 import Share from '../Share'
+import PostBig from '../PostBig'
 
 export default function ProfileSection() {
   const { profileId } = useParams()
@@ -32,6 +33,17 @@ export default function ProfileSection() {
         <CardWrapper>
           <Share />
         </CardWrapper>
+      }
+      {
+        profile.posts.map(function renderPost(post: PostWithoutAuthor, i: number) {
+          return (
+            <CardWrapper key={i}>
+              <PostBig post={Object.assign({
+                author: profile
+              }, post) as Post} />
+            </CardWrapper>
+          )
+        })
       }
     </div>
   )

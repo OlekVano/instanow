@@ -3,7 +3,12 @@ import ProfilePicture from '../ProfilePicture'
 import styles from './index.module.scss'
 
 type Props = {
-  profile: Profile
+  profile: {
+    profilePicture: string,
+    username: string,
+    tag: string,
+    [key: string]: any
+  }
 }
 
 export default function ProfileMedium({ profile }: Props) {

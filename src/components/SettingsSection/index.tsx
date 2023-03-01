@@ -114,7 +114,6 @@ export default function SettingsSection() {
   }
 
   function manageImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log('manageImageUpload')
     if (!e.target.files) return
     const file = e.target.files[0]
     const fileReader = new FileReader()
@@ -122,7 +121,6 @@ export default function SettingsSection() {
     fileReader.onload = () => {
       const image = new Image()
       image.onload = () => {
-        console.log('onload')
         setProfilePicture(fileReader.result as string)
       }
       // The line below calls image.onload

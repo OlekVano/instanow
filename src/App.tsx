@@ -15,6 +15,7 @@ import { UserContext } from './user-context'
 import ProfileSection from './components/ProfileSection'
 import CreatePostModal from './components/CreatePostModal'
 import { ShareModalContext } from './share-modal-context'
+import PostSection from './components/PostSection'
 
 function App() {
   const [currProfile, setCurrProfile] = useState<Profile | undefined>()
@@ -55,6 +56,7 @@ function App() {
           <Route path='/' element={<PageWrapper />}>
             <Route path='/settings' element={<SettingsSection />} />
             <Route path='/profiles/:profileId' element={<ProfileSection />} />
+            <Route path='/posts/:postId' element={<PostSection />} />
           </Route>
         </Routes>
       </div>
