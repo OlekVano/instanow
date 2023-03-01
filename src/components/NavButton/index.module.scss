@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   gap: $gap-md;
-  padding: $padding-5xl;
+  padding: $padding-3xl;
   cursor: pointer;
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -32,6 +32,6 @@
   
 .text {
   color: $text-color-secondary;
-  font-size: $text-xl;
+  font-size: $text-lg;
   font-weight: $weight-lg;
 }
