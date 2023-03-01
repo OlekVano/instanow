@@ -54,7 +54,7 @@ function App() {
           </Route>
           <Route path='/' element={<PageWrapper />}>
             <Route path='/settings' element={<SettingsSection />} />
-            <Route path='/profile/:profileId' element={<ProfileSection />} />
+            <Route path='/profiles/:profileId' element={<ProfileSection />} />
           </Route>
         </Routes>
       </div>
