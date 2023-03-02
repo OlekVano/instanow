@@ -29,7 +29,6 @@ export type UserContextType = {
   setCurrProfile: Function
 }
 
-export type ShareModalContextType = {
-  openModal: Function,
-  closeModal: Function
+export type ModalContextType = {
+  setModal: Function
 }

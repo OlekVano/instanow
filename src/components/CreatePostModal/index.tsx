@@ -6,13 +6,13 @@ import Modal from '../Modal';
 import ProfilePicture from '../ProfilePicture';
 import styles from './index.module.scss'
 import landscapeIcon from '../../assets/picture.png'
-import { ShareModalContext } from '../../share-modal-context';
+import { ModalContext } from '../../modal-context';
 import { generateUniqueId } from '../../utils';
 import { useNavigate } from 'react-router-dom';
 
 export default function CreatePostModal() {
   const userCtx = useContext(UserContext)
-  const shareModalCtx = useContext(ShareModalContext)
+  const modalCtx = useContext(ModalContext)
 
   const [pictureInputId] = useState(generateUniqueId())
   const [picture, setPicture] = useState<string>()
@@ -21,7 +21,7 @@ export default function CreatePostModal() {
   const navigate = useNavigate()
 
   return (
-    <Modal onExit={shareModalCtx.closeModal}>
+    <Modal onExit={closeModal}>
       <CardWrapper>
         <div className={styles.main}>
           <div className={styles.container}>
@@ -42,7 +42,7 @@ export default function CreatePostModal() {
             </div>
           }
           <div className={styles.buttonsContainer2}>
-            <Button text='Close' type={2} func={shareModalCtx.closeModal} />
+            <Button text='Close' type={2} func={closeModal} />
             <Button text='Post' func={createPost} />
           </div>
         </div>
@@ -51,6 +51,10 @@ export default function CreatePostModal() {
   )
 
   // *************************************
+
+  function closeModal() {
+    modalCtx.setModal('')
+  }
 
   async function createPost() {
     if (!text && !picture) {

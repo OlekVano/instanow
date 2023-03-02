@@ -14,13 +14,13 @@ import styles from './App.module.scss'
 import { UserContext } from './user-context'
 import ProfileSection from './components/ProfileSection'
 import CreatePostModal from './components/CreatePostModal'
-import { ShareModalContext } from './share-modal-context'
+import { ModalContext } from './modal-context'
 import PostSection from './components/PostSection'
 
 function App() {
   const [currProfile, setCurrProfile] = useState<Profile | undefined>()
   const [currUser] = useAuthState(auth)
-  const [showShareModal, setShowShareModal] = useState(false)
+  const [modal, setModal] = useState()
 
   const navigate = useNavigate()
 
@@ -32,13 +32,13 @@ function App() {
       currUser: currUser,
       setCurrProfile: setCurrProfile
     }}>
-    <ShareModalContext.Provider value={{
-      closeModal: closeShareModal,
-      openModal: openShareModal
+    <ModalContext.Provider value={{
+      setModal: setModal
     }}>
       {
-        !showShareModal ? null :
+        modal == 'CREATE_POST' ?
         <CreatePostModal />
+        : null
       }
       <Routes>
         {
@@ -60,7 +60,7 @@ function App() {
           </Route>
         </Routes>
       </div>
-    </ShareModalContext.Provider>
+    </ModalContext.Provider>
     </UserContext.Provider>
   )
 
@@ -72,14 +72,6 @@ function App() {
       if (!profile) navigate('/settings')
       else setCurrProfile(profile)
     })
-  }
-
-  function openShareModal() {
-    setShowShareModal(true)
-  }
-
-  function closeShareModal() {
-    setShowShareModal(false)
   }
 }
 

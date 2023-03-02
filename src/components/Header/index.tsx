@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { ShareModalContext } from '../../share-modal-context'
+import { ModalContext } from '../../modal-context'
 import { UserContext } from '../../user-context'
 import Button from '../Button'
 import LogoWithBrand from '../LogoWithBrand'
@@ -13,7 +13,7 @@ type Props = {
 
 export default function Header({ rightSideEmpty=false }: Props) {
   const userCtx = useContext(UserContext)
-  const shareModalCtx = useContext(ShareModalContext)
+  const modalCtx = useContext(ModalContext)
 
   return (
     <header className={styles.main}>
@@ -24,7 +24,7 @@ export default function Header({ rightSideEmpty=false }: Props) {
           : <>
             <div style={{flexGrow: 1}}></div>
             <SearchBar />
-            <Button type={1} text='Create' func={shareModalCtx.openModal} />
+            <Button type={1} text='Create' func={openCreatePostModal} />
             <ProfilePicture size='md' src={userCtx.currProfile?.profilePicture} />
           </>
         }
@@ -32,4 +32,10 @@ export default function Header({ rightSideEmpty=false }: Props) {
       </div>
     </header>
   )
+
+  // *****************************
+
+  function openCreatePostModal() {
+    modalCtx.setModal('CREATE_POST')
+  }
 }
