@@ -22,7 +22,7 @@ export default function PostSection() {
     <div className={styles.main} >
     {
       !post ? null :
-      <CardWrapper>
+      <CardWrapper style={{padding: 0}}>
         <PostBig post={post} />
       </CardWrapper>
     }

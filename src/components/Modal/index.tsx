@@ -3,10 +3,10 @@ import { EventHandler, MouseEvent, MouseEventHandler, PropsWithChildren, useEffe
 import { createPortal } from 'react-dom'
 
 type Props = {
-  onExit: Function
+  onExit?: Function
 }
 
-export default function Modal({ children, onExit }: PropsWithChildren & Props) {
+export default function Modal({ children, onExit=function(){} }: PropsWithChildren & Props) {
   const elRef = useRef<HTMLDivElement | null>(null)
   if (!elRef.current) {
     elRef.current = document.createElement('div')

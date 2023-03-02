@@ -1,9 +1,13 @@
-import { PropsWithChildren } from 'react'
+import { CSSProperties, PropsWithChildren } from 'react'
 import styles from './index.module.scss'
 
-export default function CardWrapper(props: PropsWithChildren) {
+type Props = {
+  style?: CSSProperties
+}
+
+export default function CardWrapper(props: PropsWithChildren & Props) {
   return (
-    <div className={styles.main}>
+    <div className={styles.main} style={props.style}>
       {props.children}
     </div>
   )

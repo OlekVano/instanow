@@ -1,11 +1,34 @@
 @import '../../consts.scss';
 
-.main {
+.container {
   display: flex;
   flex-direction: column;
   gap: $gap-xl;
+  padding: $padding-2xl;
 }
 
 .image {
   border-radius: $border-radius-xl;
+}
+
+.commentInputContainer {
+  display: flex;
+  align-items: center;
+  gap: $gap-lg;
+  cursor: pointer;
+  padding: $padding-2xl;
+  padding-top: $padding-md;
+}
+
+.text {
+  font-size: $text-md;
+  font-weight: $weight-md;
+  color: $text-color-primary;
+}
+
+.input {
+  flex: 1;
+  font-size: $text-lg;
+  font-weight: $weight-lg;
+  color: $text-color-secondary;
 }

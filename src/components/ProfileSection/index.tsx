@@ -37,7 +37,7 @@ export default function ProfileSection() {
       {
         profile.posts.map(function renderPost(post: PostWithoutAuthor, i: number) {
           return (
-            <CardWrapper key={i}>
+            <CardWrapper key={i} style={{padding: 0}}>
               <PostBig post={Object.assign({
                 author: profile
               }, post) as Post} />
