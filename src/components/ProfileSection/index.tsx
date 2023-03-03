@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { UserContext } from '../../user-context'
 import ProfileBig from '../ProfileBig'
 import styles from './index.module.scss'
-import { addAuthorsToComments, getProfileById } from '../../utils'
+import { addAuthorsToComments, getProfileById, sortByRecent } from '../../utils'
 import { Post, PostWithoutAuthor, Profile } from '../../types'
 import CardWrapper from '../CardWrapper'
 import Share from '../Share'
@@ -35,7 +35,7 @@ export default function ProfileSection() {
         </CardWrapper>
       }
       {
-        profile.posts.map(function renderPost(post: PostWithoutAuthor, i: number) {
+        (sortByRecent(profile.posts) as PostWithoutAuthor[]).map(function renderPost(post: PostWithoutAuthor, i: number) {
           let postWithAuthor: Post = Object.assign({}, post, {
             author: profile,
             comments: addAuthorsToComments(post.comments, profile)

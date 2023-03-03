@@ -38,6 +38,13 @@ export async function getPostById(id: string, currUser: User): Promise<Post | un
   return await res.json()
 }
 
+export async function getPosts(currUser: User): Promise<Post[] | undefined> {
+  const token = await currUser.getIdToken()
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/posts`, {headers: new Headers({'Authorization': `Bearer ${token}`})})
+  if (res.status !== 200) return undefined
+  return await res.json()
+}
+
 export function timestampToStr(ms: number) {
   const intervals = {
     year: 31536000,
@@ -88,4 +95,12 @@ export function addAuthorToComment(comment: CommentWithoutAuthor, author: Profil
   }, comment)
   commentWithAuthor.comments = addAuthorsToComments(commentWithAuthor.comments, author)
   return commentWithAuthor
+}
+
+export function sortByRecent(array: ({createdAt: number} & {[key: string]: any})[]) {
+  let sortedArray = [...array]
+  sortedArray.sort(function sort(elem) {
+    return elem.createdAt
+  }).reverse()
+  return sortedArray
 }
