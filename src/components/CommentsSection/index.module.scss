@@ -1,0 +1,11 @@
+@import '../../consts.scss';
+
+.main {
+  padding: $padding-2xl;
+}
+
+.heading {
+  font-weight: $weight-md;
+  font-size: $text-lg;
+  padding: $padding-2xl 0;
+}

@@ -1,0 +1,41 @@
+@import '../../consts.scss';
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-s;
+}
+
+.text {
+  font-size: $text-md;
+  font-weight: $weight-md;
+}
+
+.container {
+  display: flex;
+  gap: $gap-xl;
+  align-items: center;
+}
+
+.imageContainer {
+  width: 42px;
+  cursor: pointer;
+}
+
+.image {
+  width: 100%;
+  filter: $filter-image-tertiary;
+  pointer-events: none;
+  user-select: none;
+}
+
+.replyBtn {
+  cursor: pointer;
+  font-weight: $weight-lg;
+  font-size: $text-lg;
+  color: $color-primary;
+}
+
+.commentsWrapper {
+  padding-left: $padding-8xl;
+}

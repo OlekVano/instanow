@@ -1,13 +1,20 @@
+import { useEffect } from 'react'
+import { Profile } from '../../types'
 import ProfilePicture from '../ProfilePicture'
 import styles from './index.module.scss'
 
-export default function ProfileSmall() {
+type Props = {
+  profile: Profile,
+  timestamp?: string
+}
+
+export default function ProfileSmall({ profile, timestamp=undefined }: Props) {
   return (
     <div className={styles.main}>
-      <ProfilePicture size='s' />
+      <ProfilePicture size='s' src={profile.profilePicture} />
       <div className={styles.nameAndTagContainer}>
-        <div className={styles.name}>Laura Fitscher</div>
-        <div className={styles.tag}>@laurafitscher</div>
+        <div className={styles.name}>{profile.username}</div>
+        <div className={styles.tag}>{timestamp ? timestamp : profile.username}</div>
       </div>
     </div>
   )

@@ -11,8 +11,8 @@ export default function Following() {
         <Circle text='2' type={2} />
       </div>
       <div className={styles.container}>
-        <ProfileSmall />
-        <ProfileSmall />
+        {/* <ProfileSmall />
+        <ProfileSmall /> */}
       </div>
     </div>
   )

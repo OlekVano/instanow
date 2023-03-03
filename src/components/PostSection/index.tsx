@@ -5,7 +5,6 @@ import { UserContext } from '../../user-context'
 import { getPostById, getProfileById } from '../../utils'
 import CardWrapper from '../CardWrapper'
 import PostBig from '../PostBig'
-import ProfileMedium from '../ProfileMedium'
 import styles from './index.module.scss'
 
 
@@ -34,7 +33,6 @@ export default function PostSection() {
   function fetchPost() {
     if (!ctx.currUser) return
     getPostById(postId!, ctx.currUser).then(function updatePost(p) {
-      console.log(p)
       if (p) setPost(p)
     })
   }

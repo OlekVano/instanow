@@ -1,12 +1,11 @@
-import { useContext, useState } from 'react'
-import { ModalContext } from '../../modal-context'
+import { useContext, useEffect, useState } from 'react'
 import { Post } from '../../types'
 import { UserContext } from '../../user-context'
+import { timestampToStr } from '../../utils'
 import Button from '../Button'
-import CardWrapper from '../CardWrapper'
 import CommentModal from '../CommentModal'
+import CommentsSection from '../CommentsSection'
 import Line from '../Line'
-import Modal from '../Modal'
 import ProfileMedium from '../ProfileMedium'
 import ProfilePicture from '../ProfilePicture'
 import styles from './index.module.scss'
@@ -24,13 +23,14 @@ export default function PostBig({ post }: Props) {
     <div className={styles.main}>
       {
         !showCommentModal ? null :
-        <CommentModal onExit={closeCommentModal} />
+        <CommentModal postId={post.id} onExit={closeCommentModal} />
       }
       <div className={styles.container}>
-        <ProfileMedium profile={post.author} />
+        <ProfileMedium profile={post.author} timestamp={timestampToStr(post.createdAt)} />
         <div className={styles.text}>{post.text}</div>
         <img src={post.picture} className={styles.image} />
       </div>
+      <CommentsSection comments={post.comments} />
       <Line />
       <div role='button' className={styles.commentInputContainer} onClick={openCommentModal}>
         <ProfilePicture src={userCtx.currProfile?.profilePicture} size='s' />

@@ -7,19 +7,31 @@ export type Profile = {
   bio: string,
   followers: string[],
   following: string[],
-  posts: PostWithoutAuthor[]
+  posts: PostWithoutAuthor[],
 }
 
 export type Post = {
+  id: string,
   author: ProfileWithoutPosts,
   authorId: string,
-  comments: Object[],
+  comments: Comment[],
   likes: string[],
   picture: string,
-  text: string
+  text: string,
+  createdAt: number
 }
 
-export type PostWithoutAuthor = Omit<Post, 'author'>
+export type PostWithoutAuthor = Omit<Post, 'author' | 'comments'> & {comments: CommentWithoutAuthor[]}
+
+export type Comment = {
+  text: string,
+  authorId: string,
+  comments: Comment[],
+  author: Profile,
+  createdAt: number
+}
+
+export type CommentWithoutAuthor = Omit<Comment, 'author'>
 
 export type ProfileWithoutPosts = Omit<Profile, 'posts'>
 

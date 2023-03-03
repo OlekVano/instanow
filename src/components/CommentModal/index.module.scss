@@ -59,3 +59,14 @@
   margin: 0 auto;
   border-radius: $border-radius-lg;
 }
+
+.editableDiv {
+  outline: none;
+  font-size: $text-2xl;
+  width: 100%;
+}
+
+.inputContainer {
+  flex-grow: 1;
+  overflow-x: auto;
+}
