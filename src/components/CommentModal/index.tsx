@@ -1,4 +1,5 @@
 import { ChangeEvent, useContext, useEffect, useState } from 'react'
+import { Comment, Profile, WithComments } from '../../types'
 import { UserContext } from '../../user-context'
 import { generateUniqueId } from '../../utils'
 import Button from '../Button'
@@ -10,10 +11,12 @@ import styles from './index.module.scss'
 
 type Props = {
   onExit?: Function,
-  postId: string
+  postId: string,
+  query: number[],
+  onComment: (text: string) => unknown
 }
 
-export default function CommentModal({ onExit=function(){}, postId }: Props) {
+export default function CommentModal({ onExit=function(){}, onComment, postId, query }: Props) {
   const userCtx = useContext(UserContext)
   const [text, setText] = useState('')
   const [inputId] = generateUniqueId()
@@ -28,8 +31,6 @@ export default function CommentModal({ onExit=function(){}, postId }: Props) {
       <div className={styles.main}>
           <div className={styles.container}>
             <ProfilePicture size='md' src={userCtx.currProfile?.profilePicture} />
-            {/* <textarea value={text} placeholder='What do you think?' className={styles.input} onChange={manageTextChange} /> */}
-            {/* <div id={inputId} className={styles.editableDiv} contentEditable></div> */}
             <div className={styles.inputContainer}>
               <MultilineInput autofocus={true} onInput={manageTextChange} />
             </div>
@@ -56,7 +57,8 @@ export default function CommentModal({ onExit=function(){}, postId }: Props) {
     }
 
     const json = JSON.stringify({
-      text: text
+      text: text,
+      query: query
     })
 
     const res = await fetch(`${import.meta.env.VITE_API_URL}/posts/${postId}/comment`, {
@@ -65,7 +67,10 @@ export default function CommentModal({ onExit=function(){}, postId }: Props) {
       body: json,
     })
 
-    if (res.status === 200) onExit()
+    if (res.status === 200) {
+      onComment(text)
+      onExit()
+    }
     else alert(`Error: ${res.statusText}`) 
   }
 }

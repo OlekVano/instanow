@@ -4,14 +4,16 @@ import CommentsRender from '../CommentsRender'
 import styles from './index.module.scss'
 
 type Props = {
-  comments: Comment[]
+  comments: Comment[],
+  postId: string,
+  updateComments: (text: string, query: number[]) => unknown
 }
 
-export default function CommentsSection({ comments }: Props) {
+export default function CommentsSection({ comments, postId, updateComments }: Props) {
   return (
     <div className={styles.main}>
       <div className={styles.heading}>Comments</div>
-      <CommentsRender comments={comments} />
+      <CommentsRender postId={postId} comments={comments} updateComments={updateComments} />
     </div>
   )
 }

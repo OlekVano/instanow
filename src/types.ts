@@ -44,3 +44,5 @@ export type UserContextType = {
 export type ModalContextType = {
   setModal: Function
 }
+
+export type WithComments = {comments: Comment[]} & {[key: string]: any}
