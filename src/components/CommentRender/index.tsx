@@ -7,6 +7,7 @@ import CommentsRender from '../CommentsRender'
 import { useContext, useState } from 'react'
 import CommentModal from '../CommentModal'
 import { UserContext } from '../../user-context'
+import LikeButton from '../LikeButton'
 
 type Props = {
   comment: Comment,
@@ -27,9 +28,10 @@ export default function CommentRender({ postId, comment, query=[], updateComment
       <ProfileSmall profile={comment.author} timestamp={timestampToStr(comment.createdAt)} />
       <div className={styles.text}>{comment.text}</div>
       <div className={styles.container}>
-        <div className={styles.imageContainer}>
+        <LikeButton postId={postId} likes={comment.likes} query={query} />
+        {/* <div className={styles.imageContainer}>
           <img src={heartOutline} className={styles.image} />
-        </div>
+        </div> */}
         <div role='button' onClick={openCommentModal} className={styles.replyBtn}>Reply to this comment</div>
       </div>
       {

@@ -1,0 +1,21 @@
+@import '../../consts.scss';
+
+.main {
+  width: 42px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: $gap-xs;
+}
+
+.image {
+  width: 100%;
+  filter: $filter-image-tertiary;
+  pointer-events: none;
+  user-select: none;
+}
+
+.nLikes {
+  font-size: $text-lg;
+  font-weight: $weight-md;
+}

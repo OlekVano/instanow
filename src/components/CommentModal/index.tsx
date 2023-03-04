@@ -71,6 +71,6 @@ export default function CommentModal({ onExit=function(){}, onComment, postId, q
       onComment(text)
       onExit()
     }
-    else alert(`Error: ${res.statusText}`) 
+    else alert(`Error: ${res.statusText}`)
   }
 }

@@ -28,7 +28,8 @@ export type Comment = {
   authorId: string,
   comments: Comment[],
   author: Profile,
-  createdAt: number
+  createdAt: number,
+  likes: string[]
 }
 
 export type CommentWithoutAuthor = Omit<Comment, 'author'>

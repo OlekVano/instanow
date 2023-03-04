@@ -5,6 +5,7 @@ import { timestampToStr } from '../../utils'
 import Button from '../Button'
 import CommentModal from '../CommentModal'
 import CommentsSection from '../CommentsSection'
+import LikeButton from '../LikeButton'
 import Line from '../Line'
 import ProfileMedium from '../ProfileMedium'
 import ProfilePicture from '../ProfilePicture'
@@ -31,8 +32,11 @@ export default function PostBig({ post }: Props) {
         <ProfileMedium profile={post.author} timestamp={timestampToStr(post.createdAt)} />
         <div className={styles.text}>{post.text}</div>
         <img src={post.picture} className={styles.image} />
+        <LikeButton postId={post.id} likes={post.likes} query={[]} />
       </div>
-      <CommentsSection updateComments={updateComments} postId={post.id} comments={comments} />
+      {
+        comments.length === 0 ? null : <CommentsSection updateComments={updateComments} postId={post.id} comments={comments} />
+      }
       <Line />
       <div role='button' className={styles.commentInputContainer} onClick={openCommentModal}>
         <ProfilePicture src={userCtx.currProfile?.profilePicture} size='s' />
@@ -63,7 +67,8 @@ export default function PostBig({ post }: Props) {
         authorId: userCtx.currUser?.uid,
         comments: [],
         createdAt: Date.now(),
-        text: text
+        text: text,
+        likes: []
       } as Comment)
     }
     else {
