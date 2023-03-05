@@ -1,13 +1,18 @@
 import { User } from 'firebase/auth'
 
 export type Profile = {
+  id: string,
   profilePicture: string,
   username: string,
   tag: string,
   bio: string,
-  followers: string[],
-  following: string[],
+  followersIds: string[],
+  followingIds: string[],
   posts: PostWithoutAuthor[],
+}
+
+export type CurrentProfile = Profile & {
+  following: ProfileWithoutPosts[]
 }
 
 export type Post = {
@@ -37,7 +42,7 @@ export type CommentWithoutAuthor = Omit<Comment, 'author'>
 export type ProfileWithoutPosts = Omit<Profile, 'posts'>
 
 export type UserContextType = {
-  currProfile: Profile | undefined,
+  currProfile: CurrentProfile | undefined,
   currUser: User | undefined | null,
   setCurrProfile: Function
 }

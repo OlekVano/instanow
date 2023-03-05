@@ -1,7 +1,7 @@
 import { getAuth, signInWithPopup, GoogleAuthProvider, User } from 'firebase/auth'
 import { auth } from '../firebase-setup'
 import { v4 } from 'uuid'
-import { Comment, CommentWithoutAuthor, Post, Profile } from './types'
+import { Comment, CommentWithoutAuthor, Post, Profile, ProfileWithoutPosts } from './types'
 
 export function signInWithGoogle(callback?: Function) {
   const provider = new GoogleAuthProvider()
@@ -103,4 +103,12 @@ export function sortByRecent(array: ({createdAt: number} & {[key: string]: any})
     return elem.createdAt
   }).reverse()
   return sortedArray
+}
+
+export async function getFollowedProfiles (currUser: User): Promise<ProfileWithoutPosts[] | undefined> {
+  const token = await currUser.getIdToken()
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/profiles/following`, {headers: new Headers({'Authorization': `Bearer ${token}`})})
+  if (res.status !== 200) return undefined
+  const json = await res.json()
+  return json
 }

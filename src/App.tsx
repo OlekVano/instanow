@@ -8,8 +8,8 @@ import { auth } from '../firebase-setup'
 import { useEffect, useState } from 'react'
 import PageWrapper from './components/PageWrapper'
 import SettingsSection from './components/SettingsSection'
-import { getProfileById } from './utils'
-import { Profile } from './types'
+import { getFollowedProfiles, getProfileById } from './utils'
+import { CurrentProfile, Profile } from './types'
 import styles from './App.module.scss'
 import { UserContext } from './user-context'
 import ProfileSection from './components/ProfileSection'
@@ -19,7 +19,7 @@ import PostSection from './components/PostSection'
 import HomeSection from './components/HomeSection'
 
 function App() {
-  const [currProfile, setCurrProfile] = useState<Profile | undefined>()
+  const [currProfile, setCurrProfile] = useState<CurrentProfile | undefined>()
   const [currUser] = useAuthState(auth)
   const [modal, setModal] = useState()
 
@@ -69,9 +69,11 @@ function App() {
 
   function manageAccountChange() {
     if (!currUser) return
-    getProfileById(currUser.uid, currUser).then(function afterGotProfile(profile) {
+    getProfileById(currUser.uid, currUser).then(async function afterGotProfile(profile) {
       if (!profile) navigate('/settings')
-      else setCurrProfile(profile)
+      else setCurrProfile(Object.assign({
+        following: await getFollowedProfiles(currUser) || []
+      }, profile))
     })
   }
 }

@@ -14,12 +14,13 @@ export default function SettingsSection() {
   const [profilePictureInputId] = useState(generateUniqueId())
 
   const defaultProfile: Profile = {
+    id: '',
     username: '',
     profilePicture: '',
     tag: '',
     bio: '',
-    followers: [],
-    following: [],
+    followersIds: [],
+    followingIds: [],
     posts: []
   }
 

@@ -13,8 +13,8 @@ export default function RightColumn() {
             {
               !ctx?.currProfile ? null :
               <>
-                {/* <NewMessages />
-                <Following /> */}
+                {/* <NewMessages /> */}
+                <Following />
               </>
             }
           </div>
