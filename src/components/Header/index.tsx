@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import { ModalContext } from '../../modal-context'
 import { UserContext } from '../../user-context'
 import Button from '../Button'
@@ -25,10 +26,11 @@ export default function Header({ rightSideEmpty=false }: Props) {
             <div style={{flexGrow: 1}}></div>
             <SearchBar />
             <Button type={1} text='Create' func={openCreatePostModal} />
-            <ProfilePicture size='md' src={userCtx.currProfile?.profilePicture} />
+            <Link to={`/profiles/${userCtx.currUser?.uid}`}>
+              <ProfilePicture size='md' src={userCtx.currProfile?.profilePicture} />
+            </Link>
           </>
         }
-        
       </div>
     </header>
   )

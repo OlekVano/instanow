@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { UserContextType } from '../../types'
 import { UserContext } from '../../user-context'
 import CardWrapper from '../CardWrapper'
@@ -13,11 +14,11 @@ export default function LeftColumn() {
     <div className={styles.main}>
       {
         !ctx?.currProfile ? null : 
-        <>
-        <CardWrapper>
-          <ProfileMedium profile={ctx.currProfile} />
-        </CardWrapper>
-        </>
+        <Link to={`/profiles/${ctx.currUser?.uid}`}>
+          <CardWrapper>
+            <ProfileMedium profile={ctx.currProfile} />
+          </CardWrapper>
+        </Link>
       }
       <NavBar />
     </div>
