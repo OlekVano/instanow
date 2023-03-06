@@ -7,6 +7,8 @@
   gap: $gap-2xl;
   width: 800px;
   max-width: 80vw;
+  max-height: 95vh;
+  overflow-y: auto;
 }
 
 .container {
@@ -58,4 +60,9 @@
   display: block;
   margin: 0 auto;
   border-radius: $border-radius-lg;
+}
+
+.inputWrapper {
+  flex-grow: 1;
+  overflow-x: auto;
 }

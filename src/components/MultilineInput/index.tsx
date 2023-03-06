@@ -5,10 +5,9 @@ import  styles from './index.module.scss'
 type Props = {
   onInput?: Function,
   defaultValue?: string,
-  autofocus?: boolean
 }
 
-export default function MultilineInput({ onInput=function(){}, defaultValue='', autofocus=false }: Props) {
+export default function MultilineInput({ onInput=function(){}, defaultValue='' }: Props) {
   return (
     <div className={styles.main} onInput={onInput as FormEventHandler} suppressContentEditableWarning={true} contentEditable>{defaultValue}</div>
   )

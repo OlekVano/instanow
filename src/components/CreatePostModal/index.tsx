@@ -9,6 +9,7 @@ import landscapeIcon from '../../assets/picture.png'
 import { ModalContext } from '../../modal-context';
 import { generateUniqueId } from '../../utils';
 import { useNavigate } from 'react-router-dom';
+import MultilineInput from '../MultilineInput';
 
 export default function CreatePostModal() {
   const userCtx = useContext(UserContext)
@@ -26,7 +27,10 @@ export default function CreatePostModal() {
         <div className={styles.main}>
           <div className={styles.container}>
             <ProfilePicture size='md' src={userCtx.currProfile?.profilePicture} />
-            <textarea value={text} placeholder="What's happening?" className={styles.input} onChange={manageTextChange} />
+            {/* <textarea value={text} placeholder="What's happening?" className={styles.input} onChange={manageTextChange} /> */}
+            <div className={styles.inputWrapper}>
+              <MultilineInput onInput={manageTextChange} />
+            </div>
           </div>
           {
             picture ? 
@@ -59,6 +63,7 @@ export default function CreatePostModal() {
   async function createPost() {
     if (!text && !picture) {
       alert('Post can\'t be empty')
+      return
     }
 
     const json = JSON.stringify({
@@ -72,12 +77,15 @@ export default function CreatePostModal() {
       body: json,
     })
 
-    if (res.status === 200) navigate(`/posts/${(await res.json()).id}`)
+    if (res.status === 200) {
+      navigate(`/posts/${(await res.json()).id}`)
+      modalCtx.setModal('')
+    }
     else alert(`Error: ${res.statusText}`) 
   }
 
   function manageTextChange(e: ChangeEvent<HTMLTextAreaElement>) {
-    setText(e.target.value)
+    setText(e.target.innerText)
   }
 
   function triggerImageUpload() {

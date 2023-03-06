@@ -32,7 +32,7 @@ export default function CommentModal({ onExit=function(){}, onComment, postId, q
           <div className={styles.container}>
             <ProfilePicture size='md' src={userCtx.currProfile?.profilePicture} />
             <div className={styles.inputContainer}>
-              <MultilineInput autofocus={true} onInput={manageTextChange} />
+              <MultilineInput onInput={manageTextChange} />
             </div>
           </div>
           <div className={styles.buttonsContainer2}>
