@@ -23,10 +23,6 @@ function App() {
   const [currUser] = useAuthState(auth)
   const [modal, setModal] = useState()
 
-  const navigate = useNavigate()
-
-  useEffect(manageAccountChange, [currUser])
-
   return (
     <UserContext.Provider value={{
       currProfile: currProfile,
@@ -64,18 +60,6 @@ function App() {
     </ModalContext.Provider>
     </UserContext.Provider>
   )
-
-  // **********************************
-
-  function manageAccountChange() {
-    if (!currUser) return
-    getProfileById(currUser.uid, currUser).then(async function afterGotProfile(profile) {
-      if (!profile) navigate('/settings')
-      else setCurrProfile(Object.assign({
-        following: await getFollowedProfiles(currUser) || []
-      }, profile))
-    })
-  }
 }
 
 export default App
