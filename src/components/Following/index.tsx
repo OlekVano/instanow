@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import { UserContext } from '../../user-context'
 import Circle from '../Circle'
 import ProfileMessage from '../ProfileMessage'
@@ -15,9 +16,12 @@ export default function Following() {
         <Circle text={userCtx.currProfile!.followingIds.length.toString()} type={2} />
       </div>
       <div className={styles.container}>
-        {userCtx.currProfile?.following.map(function renderFollowedProfile(p, i) {
+        {userCtx.currProfile?.following.length !== 0 ? 
+        userCtx.currProfile?.following.map(function renderFollowedProfile(p, i) {
           return <ProfileSmall key={i} profile={p} />
-        })}
+        })
+        : <div className={styles.text}>You can find someone interesting <Link to='/people' className={styles.link}>here</Link></div>
+        }
       </div>
     </div>
   )

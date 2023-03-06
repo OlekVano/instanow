@@ -25,3 +25,13 @@
   flex-direction: column;
   gap: $gap-xl;
 }
+
+.text {
+  font-size: $text-md;
+  font-weight: $weight-md;
+}
+
+.link {
+  text-decoration: underline;
+  color: $color-primary;
+}
