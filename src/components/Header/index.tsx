@@ -18,14 +18,16 @@ export default function Header({ rightSideEmpty=false }: Props) {
 
   return (
     <header className={styles.main}>
-      <div className={`container-xl ${styles.wrapper}`}>
+      <div className={`container-xl ${styles.container}`}>
         <LogoWithBrand />
         {
           rightSideEmpty || !userCtx.currProfile ? null
           : <>
             <div style={{flexGrow: 1}}></div>
-            <SearchBar />
-            <Button type={1} text='Create' func={openCreatePostModal} />
+            <div className='d-md-none d-block'><Button text='+' width='44px' func={openCreatePostModal} /></div>
+
+            <div className='d-none d-md-block'><SearchBar /></div>
+            <div className='d-none d-md-block'><Button type={1} text='Create' func={openCreatePostModal} /></div>
             <Link to={`/profiles/${userCtx.currUser?.uid}`}>
               <ProfilePicture size='md' src={userCtx.currProfile?.profilePicture} />
             </Link>

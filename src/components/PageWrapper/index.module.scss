@@ -1,7 +1,10 @@
 @import '../../consts.scss';
 
 .stickyCol {
-  padding-top: $padding-10xl;
   max-height: 100vh;
   overflow-y: auto;
+}
+
+.paddingTop {
+  padding-top: $padding-10xl;
 }
