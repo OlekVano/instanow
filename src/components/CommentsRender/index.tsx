@@ -13,7 +13,7 @@ type Props = {
 export default function CommentsRender({ postId, comments, query=[], updateComments }: Props) {
   return (
     <div className={styles.main}>
-      {comments.map(function renderComment(comment, i) {
+      {comments.reverse().map(function renderComment(comment, i) {
         return <CommentRender postId={postId} key={i} comment={comment} query={[...query, i]} updateComments={updateComments} />
       })}
     </div>

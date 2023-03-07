@@ -24,6 +24,9 @@
   font-size: $text-md;
   font-weight: $weight-md;
   color: $text-color-primary;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  overflow: hidden;
 }
 
 .input {
@@ -31,4 +34,10 @@
   font-size: $text-lg;
   font-weight: $weight-lg;
   color: $text-color-secondary;
+}
+
+.postButtonsContainer {
+  display: flex;
+  gap: $gap-xl;
+  align-items: center;
 }

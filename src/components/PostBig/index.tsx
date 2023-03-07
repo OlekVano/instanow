@@ -9,6 +9,7 @@ import LikeButton from '../LikeButton'
 import Line from '../Line'
 import ProfileMedium from '../ProfileMedium'
 import ProfilePicture from '../ProfilePicture'
+import TextButton from '../TextButton'
 import styles from './index.module.scss'
 
 type Props = {
@@ -31,8 +32,13 @@ export default function PostBig({ post }: Props) {
       <div className={styles.container}>
         <ProfileMedium profile={post.author} timestamp={timestampToStr(post.createdAt)} />
         <div className={styles.text}>{post.text}</div>
-        <img src={post.picture} className={styles.image} />
-        <LikeButton postId={post.id} likes={post.likes} query={[]} />
+        {
+          post.picture ? <img src={post.picture} className={styles.image} /> : null
+        }
+        <div className={styles.postButtonsContainer}>
+          <LikeButton postId={post.id} likes={post.likes} query={[]} />
+          <TextButton text='Comment this post' func={openCommentModal} />
+        </div>
       </div>
       {
         comments.length === 0 ? null : <CommentsSection updateComments={updateComments} postId={post.id} comments={comments} />

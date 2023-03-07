@@ -8,6 +8,7 @@ import { useContext, useState } from 'react'
 import CommentModal from '../CommentModal'
 import { UserContext } from '../../user-context'
 import LikeButton from '../LikeButton'
+import TextButton from '../TextButton'
 
 type Props = {
   comment: Comment,
@@ -29,10 +30,7 @@ export default function CommentRender({ postId, comment, query=[], updateComment
       <div className={styles.text}>{comment.text}</div>
       <div className={styles.container}>
         <LikeButton postId={postId} likes={comment.likes} query={query} />
-        {/* <div className={styles.imageContainer}>
-          <img src={heartOutline} className={styles.image} />
-        </div> */}
-        <div role='button' onClick={openCommentModal} className={styles.replyBtn}>Reply to this comment</div>
+        <TextButton text='Reply to this comment' func={openCommentModal} />
       </div>
       {
         comment.comments.length === 0 ? null :

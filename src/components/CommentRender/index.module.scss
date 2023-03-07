@@ -9,6 +9,9 @@
 .text {
   font-size: $text-md;
   font-weight: $weight-md;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  overflow: hidden;
 }
 
 .container {
