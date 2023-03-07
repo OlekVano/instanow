@@ -2,13 +2,15 @@
 
 .main {
   display: flex;
-  gap: $gap-xs
+  gap: $gap-xs;
+  overflow-x: hidden;
 }
 
 .nameAndTagContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow-x: hidden;
 }
 
 .name {
@@ -24,6 +26,7 @@
 
 .name,
 .tag {
-  text-overflow: clip;
+  text-overflow: ellipsis;
+  overflow-x: hidden; 
   white-space: nowrap;
 }
