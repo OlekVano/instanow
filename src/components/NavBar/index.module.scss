@@ -3,5 +3,6 @@
 .main {
   background-color: $background-content;
   border-radius: $border-radius-lg;
-  overflow-y: hidden;
+  flex-grow: 1;
+  overflow-y: auto;
 }

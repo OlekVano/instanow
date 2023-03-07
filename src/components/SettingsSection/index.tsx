@@ -31,7 +31,7 @@ export default function SettingsSection() {
   useEffect(manageContextChange, [ctx])
 
   return (
-    <div className={styles.main}>
+    <div className={`col-6 ${styles.main}`}>
     <CardWrapper>
       <div className={styles.container}>
         <ProfilePicture size='xxl' src={profile.profilePicture} />

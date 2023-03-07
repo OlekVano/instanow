@@ -1,5 +1,11 @@
-.container {
-  display: flex;
-  justify-content: space-between;
+@import '../../consts.scss';
+
+.row {
   width: 100%;
+}
+
+.stickyCol {
+  padding-top: $padding-10xl;
+  max-height: 100vh;
+  overflow-y: auto;
 }

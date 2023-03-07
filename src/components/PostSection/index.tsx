@@ -18,7 +18,7 @@ export default function PostSection() {
   useEffect(fetchPost, [ctx.currUser])
 
   return (
-    <div className={styles.main} >
+    <div className={`col-6 ${styles.main}`} >
     {
       !post ? null :
       <CardWrapper style={{padding: 0}}>

@@ -24,7 +24,7 @@ export default function ProfileSection() {
 
   if (!profile) return null
   return (
-    <div className={styles.main}>
+    <div className={`col-6 ${styles.main}`}>
       <CardWrapper>
         <ProfileBig profile={profile} buttons={ctx.currUser?.uid !== profileId} />
       </CardWrapper>

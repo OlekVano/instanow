@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { UserContext } from '../../user-context'
 import { getProfileById, getFollowedProfiles } from '../../utils'
 import LeftColumn from '../LeftColumn'
@@ -10,14 +10,28 @@ export default function PageWrapper() {
   const userCtx = useContext(UserContext)
 
   const navigate = useNavigate()
+  const location = useLocation()
 
   useEffect(manageAccountChange, [userCtx.currUser])
 
   return (
-    <div className={`container-xl ${styles.container}`}>
-      <LeftColumn />
-      <Outlet />
-      <RightColumn />
+    <div className={`container-xl`}>
+      <div className={`row ${styles.row}`}>
+        <div className='col-3'> 
+          <div className={`sticky-top ${styles.stickyCol}`} >
+            <LeftColumn />
+          </div>
+        </div>
+        <Outlet />
+        {
+          location.pathname === 'messages' ? null :
+          <div className='col-3'>
+            <div className={`sticky-top ${styles.stickyCol}`}>
+              <RightColumn />
+            </div>
+          </div>
+        }
+      </div>
     </div>
   )
 
