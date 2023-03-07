@@ -20,7 +20,7 @@ export default function NavBar() {
 
   return (
     <div className={styles.main}>
-      <NavButton func={() => {navigate('/')}} text={'Home'} image={house} selected={location.pathname === '/'} roundedTop={true} />
+      <NavButton func={() => {navigate('/')}} text={'Home'} image={house} selected={location.pathname === '/'} />
       <NavButton func={() => {navigate(`/profiles/${ctx.currUser?.uid}`)}} text={'Profile'} image={profile} selected={location.pathname === `/profiles/${ctx.currUser?.uid}`} />
       <NavButton func={() => {navigate('/messages')}} text={'Messages'} image={messages} selected={location.pathname === '/messages'} />
       <NavButton func={() => {navigate('/people')}} text={'People'} image={people} selected={location.pathname === '/people'} />

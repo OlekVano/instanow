@@ -13,12 +13,16 @@
 
 .main.selected {
   background-color: $background-secondary;
-  border-left: 7.5px solid $color-primary;
+  position: relative;
 }
 
-.main.selected.roundedTop {
-  border-top-left-radius: $border-radius-lg;
-  border-top-right-radius: $border-radius-lg;
+.main.selected::before {
+  position: absolute;
+  left: 0;
+  content: '';
+  height: 100%;
+  width: 8px;
+  background-color: $color-primary;
 }
   
 .image {
