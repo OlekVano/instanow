@@ -12,6 +12,7 @@ body, html, #root {
 body {
   background-color: $background-surface;
   font-family: $font-primary;
+  overflow-x: hidden;
 }
 
 * {
