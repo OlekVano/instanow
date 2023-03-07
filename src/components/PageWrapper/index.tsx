@@ -16,16 +16,18 @@ export default function PageWrapper() {
 
   return (
     <div className={`container-xl`}>
-      <div className={`row ${styles.row}`}>
+      <div className={`row gx-5 ${styles.row}`}>
         <div className='col-3'> 
           <div className={`sticky-top ${styles.stickyCol}`} >
             <LeftColumn />
           </div>
         </div>
-        <Outlet />
+        <div className={location.pathname === 'messages' ? 'col-9' : 'col-6'}>
+          <Outlet />
+        </div>
         {
           location.pathname === 'messages' ? null :
-          <div className='col-3'>
+          <div className='col-3 d-none d-lg-block'>
             <div className={`sticky-top ${styles.stickyCol}`}>
               <RightColumn />
             </div>

@@ -20,7 +20,7 @@ export default function HomeSection() {
   }, [userCtx.currUser])
 
   return (
-    <div className={`col-6 ${styles.main}`}>
+    <div className={styles.main}>
       <CardWrapper>
         <Share />
       </CardWrapper>
