@@ -63,11 +63,6 @@ export default function SettingsSection() {
 
   // *********************************
 
-  function clearProfilePictureInput() {
-    const input = document.getElementById(profilePictureInputId) as HTMLInputElement
-    if (input) input.value = ''
-  }
-
   function undoChanges() {
     if (ctx.currProfile) setProfile(ctx.currProfile)
     else setProfile(defaultProfile)
@@ -107,7 +102,10 @@ export default function SettingsSection() {
     // else alert(`Error: ${res.statusText}`)
 
     if (res.status !== 200) alert(`Error: ${res.statusText}`)
-    else ctx.setCurrProfile(profile)
+    else {
+      ctx.setCurrProfile(profile)
+      alert('Saved')
+    }
   }
 
   function triggerImageUpload() {
