@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import { UserContext } from '../../user-context'
 import NavBar from '../NavBar'
 import ProfileMedium from '../ProfileMedium'
@@ -14,7 +15,9 @@ export default function MobileMenu() {
       <div className={styles.wrapper}>
         <div className={styles.container}>
           <SearchBar width='100%' />
-          <ProfileSmall profile={userCtx.currProfile!} />
+          <Link to={`/profiles/${userCtx.currUser!.uid}`}>
+            <ProfileSmall profile={userCtx.currProfile!} />
+          </Link>
         </div>
         <NavBar />
       </div>

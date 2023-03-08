@@ -14,11 +14,12 @@ import close from '../../assets/close.png'
 
 type Props = {
   rightSideEmpty?: boolean,
-  setShowMenu: Function,
+  openMenu: Function,
+  closeMenu: Function,
   showMenu: boolean
 }
 
-export default function Header({ rightSideEmpty=false, setShowMenu, showMenu }: Props) {
+export default function Header({ rightSideEmpty=false, showMenu, openMenu, closeMenu }: Props) {
   const userCtx = useContext(UserContext)
   const modalCtx = useContext(ModalContext)
 
@@ -58,14 +59,6 @@ export default function Header({ rightSideEmpty=false, setShowMenu, showMenu }: 
   )
 
   // *****************************
-
-  function openMenu() {
-    setShowMenu(true)
-  }
-
-  function closeMenu() {
-    setShowMenu(false)
-  }
 
   function openCreatePostModal() {
     modalCtx.setModal('CREATE_POST')

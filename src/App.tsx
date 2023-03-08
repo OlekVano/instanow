@@ -1,5 +1,5 @@
 import Header from './components/Header'
-import { Route, Routes, useNavigate } from 'react-router-dom'
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import LoginSignUpWrapper from './components/LoginSignUpWrapper'
 import LoginMenu from './components/LoginMenu'
@@ -24,6 +24,10 @@ function App() {
   const [modal, setModal] = useState()
   const [showMenu, setShowMenu] = useState(false)
 
+  const location = useLocation()
+
+  useEffect(managePageChange, [location.pathname])
+
   return (
     <UserContext.Provider value={{
       currProfile: currProfile,
@@ -40,9 +44,9 @@ function App() {
       }
       <Routes>
         {
-          ['/login', '/sign-up'].map((path: string, i: number) => <Route path={path} key={i} element={<Header setShowMenu={setShowMenu} showMenu={showMenu} rightSideEmpty={true} />} />)
+          ['/login', '/sign-up'].map((path: string, i: number) => <Route path={path} key={i} element={<Header closeMenu={closeMenu} openMenu={openMenu} showMenu={showMenu} rightSideEmpty={true} />} />)
         }
-        <Route path='*' element={<Header setShowMenu={setShowMenu} showMenu={showMenu} />} />
+        <Route path='*' element={<Header closeMenu={closeMenu} openMenu={openMenu} showMenu={showMenu} />} />
       </Routes>
       <div className={styles.contentContainer}>
         {
@@ -64,6 +68,20 @@ function App() {
     </ModalContext.Provider>
     </UserContext.Provider>
   )
+
+  // ****************************
+
+  function managePageChange() {
+    closeMenu()
+  }
+
+  function openMenu() {
+    setShowMenu(true)
+  }
+
+  function closeMenu() {
+    setShowMenu(false)
+  }
 }
 
 export default App
