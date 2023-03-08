@@ -19,7 +19,7 @@ export default function NavBar() {
   const ctx = useContext(UserContext)
 
   return (
-    <div className={styles.main}>
+    <div>
       <NavButton func={() => {navigate('/')}} text={'Home'} image={house} selected={location.pathname === '/'} />
       <NavButton func={() => {navigate(`/profiles/${ctx.currUser?.uid}`)}} text={'Profile'} image={profile} selected={location.pathname === `/profiles/${ctx.currUser?.uid}`} />
       <NavButton func={() => {navigate('/messages')}} text={'Messages'} image={messages} selected={location.pathname === '/messages'} />

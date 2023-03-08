@@ -1,0 +1,26 @@
+@import '../../consts.scss';
+
+.main {
+  z-index: 50;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color: black, $alpha: 0.5);
+}
+
+.wrapper {
+  padding-top: $padding-10xl;
+  background-color: $background-content;
+  height: 100%;
+  margin-left: auto;
+  width: 80%;
+}
+
+.container {
+  padding: $padding-lg;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: $gap-2xl;
+  padding: $padding-2xl;
+}

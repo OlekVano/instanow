@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ModalContext } from '../../modal-context'
 import { UserContext } from '../../user-context'
@@ -9,12 +9,16 @@ import ProfilePicture from '../ProfilePicture'
 import SearchBar from '../SearchBar'
 import styles from './index.module.scss'
 import plus from '../../assets/plus.png'
+import menu from '../../assets/menu.png'
+import close from '../../assets/close.png'
 
 type Props = {
-  rightSideEmpty?: boolean
+  rightSideEmpty?: boolean,
+  setShowMenu: Function,
+  showMenu: boolean
 }
 
-export default function Header({ rightSideEmpty=false }: Props) {
+export default function Header({ rightSideEmpty=false, setShowMenu, showMenu }: Props) {
   const userCtx = useContext(UserContext)
   const modalCtx = useContext(ModalContext)
 
@@ -27,10 +31,18 @@ export default function Header({ rightSideEmpty=false }: Props) {
           : <>
             <div style={{flexGrow: 1}}></div>
             <div className='d-md-none d-block'>
-              {/* <Button text='+' width='44px' func={openCreatePostModal} /> */}
               <ButtonSmall image={plus} func={openCreatePostModal} />
             </div>
-
+            {
+              showMenu ?
+              <div className='d-md-none d-block'>
+                <ButtonSmall type={2} image={close} func={closeMenu} />
+              </div>
+              :
+              <div className='d-md-none d-block'>
+                <ButtonSmall type={2} image={menu} func={openMenu} />
+              </div>
+            }
             <div className='d-none d-md-block'><SearchBar /></div>
             <div className='d-none d-md-block'><Button type={1} text='Create' func={openCreatePostModal} /></div>
             <div className='d-none d-md-block'>
@@ -46,6 +58,14 @@ export default function Header({ rightSideEmpty=false }: Props) {
   )
 
   // *****************************
+
+  function openMenu() {
+    setShowMenu(true)
+  }
+
+  function closeMenu() {
+    setShowMenu(false)
+  }
 
   function openCreatePostModal() {
     modalCtx.setModal('CREATE_POST')

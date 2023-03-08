@@ -9,7 +9,6 @@
   font-weight: $weight-md;
   user-select: none;
   transition: filter 0.2s;
-  background-color: $color-primary;
 }
 
 .main:hover {
@@ -23,5 +22,20 @@
 .image {
   width: 100%;
   height: 100%;
+}
+
+.typeOne {
+  background-color: $color-primary;
+}
+
+.typeOne > .image {
   filter: brightness(0) invert(1);
+}
+
+.typeTwo {
+  background-color: $background-secondary;
+}
+
+.typeTwo > .image {
+  filter: $filter-image-secondary;
 }

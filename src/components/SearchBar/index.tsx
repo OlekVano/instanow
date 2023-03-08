@@ -1,7 +1,11 @@
 import styles from './index.module.scss'
 
-export default function SearchBar() {
+type Props = {
+  width?: string
+}
+
+export default function SearchBar({ width='300px' }: Props) {
   return (
-    <div className={styles.main}>Search for someone...</div>
+    <div style={{width: width}} className={styles.main}>Search for someone...</div>
   )
 }

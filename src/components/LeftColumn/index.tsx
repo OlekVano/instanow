@@ -20,7 +20,9 @@ export default function LeftColumn() {
           </CardWrapper>
         </Link>
       }
-      <NavBar />
+      <div className={styles.navbarContainer}>
+        <NavBar />
+      </div>
     </div>
   )
 }
