@@ -5,6 +5,7 @@
   height: 100%;
   display: grid;
   place-items: center;
+  padding-top: $padding-10xl;
 }
 
 .background {
@@ -66,9 +67,16 @@
 
   .content {
     justify-content: center;
+    padding: 0
   }
 
   .links {
     font-size: $text-xl;
+  }
+}
+
+@media (max-width: 300px) {
+  .links {
+    font-size: $text-lg;
   }
 }
