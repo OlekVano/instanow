@@ -37,7 +37,6 @@ export default function PostBig({ post }: Props) {
         }
         <div className={styles.postButtonsContainer}>
           <LikeButton postId={post.id} likes={post.likes} query={[]} />
-          <TextButton text='Comment this post' func={openCommentModal} />
         </div>
       </div>
       {
