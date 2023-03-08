@@ -15,9 +15,12 @@ export default function MobileMenu() {
       <div className={styles.wrapper}>
         <div className={styles.container}>
           <SearchBar width='100%' />
-          <Link to={`/profiles/${userCtx.currUser!.uid}`}>
-            <ProfileSmall profile={userCtx.currProfile!} />
-          </Link>
+          {
+            !userCtx.currUser ? null :
+            <Link to={`/profiles/${userCtx.currUser!.uid}`}>
+              <ProfileSmall profile={userCtx.currProfile!} />
+            </Link>
+          }
         </div>
         <NavBar />
       </div>
