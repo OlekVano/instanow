@@ -20,7 +20,7 @@ export default function LoginMenu() {
       <div className={styles.buttonsContainer}>
         <Button text='Login' func={loginWithEmail} />
         <div>or</div>
-        <Button type={2} text='Login with Google' func={loginWithGoogle} />
+        <Button type={2} width='auto' text='Login with Google' func={loginWithGoogle} />
       </div>
     </div>
   )

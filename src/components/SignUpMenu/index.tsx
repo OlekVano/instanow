@@ -22,7 +22,7 @@ export default function SignUpMenu() {
       <div className={styles.buttonsContainer}>
         <Button text='Sign up' func={createEmailAccount} />
         <div>or</div>
-        <Button type={2} text='Sign up with Google' func={signUpWithGoogle} />
+        <Button type={2} text='Sign up with Google' width='auto' func={signUpWithGoogle} />
       </div>
     </div>
   )

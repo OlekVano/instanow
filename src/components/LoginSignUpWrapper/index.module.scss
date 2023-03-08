@@ -35,7 +35,7 @@
   padding: $padding-5xl;
   border-radius: $border-radius-2xl;
   width: 500px;
-  max-width: 100%;
+  max-width: 95vw;
 }
 
 .content {
@@ -51,4 +51,24 @@
   font-weight: $weight-lg;
   color: $text-color-tertiary;
   text-shadow: 2px 2px black;
+}
+
+@media (max-width: 1200px) {
+  .text {
+    font-size: $text-3xl;
+  }
+}
+
+@media (max-width: 800px) {
+  .text {
+    display: none;
+  }
+
+  .content {
+    justify-content: center;
+  }
+
+  .links {
+    font-size: $text-xl;
+  }
 }
