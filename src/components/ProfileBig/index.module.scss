@@ -33,6 +33,9 @@
   font-size: $text-lg;
   word-wrap: break-word;
   padding: 0 $padding-2xl;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  overflow: hidden;
 }
 
 .stats {
