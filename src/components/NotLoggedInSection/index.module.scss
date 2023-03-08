@@ -1,0 +1,15 @@
+@import '../../consts.scss';
+
+.main {
+  padding: $padding-10xl;
+  display: grid;
+  place-items: center;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $gap-2xl;
+}

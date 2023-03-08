@@ -3,6 +3,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { UserContext } from '../../user-context'
 import { getProfileById, getFollowedProfiles } from '../../utils'
 import LeftColumn from '../LeftColumn'
+import NotLoggedInSection from '../NotLoggedInSection'
 import RightColumn from '../RightColumn'
 import styles from './index.module.scss'
 
@@ -13,6 +14,10 @@ export default function PageWrapper() {
   const location = useLocation()
 
   useEffect(manageAccountChange, [userCtx.currUser])
+
+  if (!userCtx.currUser) {
+    return <NotLoggedInSection />
+  }
 
   return (
     <div className={`container-xl`}>
