@@ -28,6 +28,8 @@ function App() {
 
   useEffect(managePageChange, [location.pathname])
 
+  useEffect(manageShowMenuChange, [showMenu])
+
   return (
     <UserContext.Provider value={{
       currProfile: currProfile,
@@ -70,6 +72,11 @@ function App() {
   )
 
   // ****************************
+
+  function manageShowMenuChange() {
+    if (showMenu) document.body.style.overflowY = 'hidden'
+    else document.body.style.overflowY = 'auto'
+  }
 
   function managePageChange() {
     closeMenu()

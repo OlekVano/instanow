@@ -14,13 +14,14 @@
   height: 100%;
   margin-left: auto;
   width: 80%;
+  overflow-y: auto;
 }
 
 .container {
-  padding: $padding-lg;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   gap: $gap-2xl;
   padding: $padding-2xl;
+  overflow-y: auto;
 }
