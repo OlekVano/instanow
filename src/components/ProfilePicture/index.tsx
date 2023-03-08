@@ -1,5 +1,5 @@
 import styles from './index.module.scss'
-import defaultProfile from '../../assets/profile.png'
+import defaultProfile from '../../assets/user.png'
 
 type Props = {
   size: 's' | 'md' | 'lg' | 'xl' | 'xxl',
@@ -8,6 +8,6 @@ type Props = {
 
 export default function ProfilePicture({ size, src=undefined }: Props) {
   return (
-    <img className={`${styles.main} ${styles[size]}`} src={src ? src : defaultProfile} style={{filter: src ? '' : 'invert(68%) sepia(13%) saturate(334%) hue-rotate(176deg) brightness(101%) contrast(87%)'}} />
+    <img className={`${styles.main} ${styles[size]}`} src={src ? src : defaultProfile} style={{filter: src ? '' : 'brightness(120%)'}} />
   )
 }
