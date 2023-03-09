@@ -44,7 +44,9 @@ export type ProfileWithoutPosts = Omit<Profile, 'posts'>
 export type UserContextType = {
   currProfile: CurrentProfile | undefined,
   currUser: User | undefined | null,
-  setCurrProfile: Function
+  setCurrProfile: Function,
+  chats: Chat[],
+  setChats: Function
 }
 
 export type ModalContextType = {
@@ -52,3 +54,17 @@ export type ModalContextType = {
 }
 
 export type WithComments = {comments: Comment[]} & {[key: string]: any}
+
+export type Chat = {
+  user: ProfileWithoutPosts,
+  id: string,
+  userIds: string[],
+  messages: Message[]
+}
+
+export type Message = {
+  authorId: string,
+  read: boolean,
+  text: string,
+  image: string
+}

@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import { Profile } from '../../types'
 import { UserContext } from '../../user-context'
 import Button from '../Button'
@@ -30,8 +31,9 @@ export default function ProfileBig({ profile, buttons }: Props) {
                 <Button text='Unfollow' func={unfollow} width='150px' type={2}  /> :
                 <Button text='Follow' func={follow} width='150px' />
               }
-              
-              <Button text='Message' width='150px'  />
+              <Link to={`/messages/${profile.id}`}>
+                <Button text='Message' width='150px'  />
+              </Link>
             </div>
           }
         </div>

@@ -1,5 +1,10 @@
 @import '../../consts.scss';
 
+.main,
+.row {
+  height: 100%;
+}
+
 .stickyCol {
   max-height: 100vh;
   overflow-y: auto;

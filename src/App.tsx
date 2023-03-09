@@ -8,7 +8,7 @@ import { auth } from '../firebase-setup'
 import { useEffect, useState } from 'react'
 import PageWrapper from './components/PageWrapper'
 import SettingsSection from './components/SettingsSection'
-import { CurrentProfile } from './types'
+import { Chat, CurrentProfile } from './types'
 import styles from './App.module.scss'
 import { UserContext } from './user-context'
 import ProfileSection from './components/ProfileSection'
@@ -17,12 +17,16 @@ import { ModalContext } from './modal-context'
 import PostSection from './components/PostSection'
 import HomeSection from './components/HomeSection'
 import MobileMenu from './components/MobileMenu'
+import MessagesSection from './components/MessagesWrapper'
+import MessagesWrapper from './components/MessagesWrapper'
+import MessagesRoom from './components/MessagesRoom'
 
 function App() {
   const [currProfile, setCurrProfile] = useState<CurrentProfile | undefined>()
   const [currUser] = useAuthState(auth)
   const [modal, setModal] = useState()
   const [showMenu, setShowMenu] = useState(false)
+  const [chats, setChats] = useState<Chat[]>([])
 
   const location = useLocation()
 
@@ -34,7 +38,9 @@ function App() {
     <UserContext.Provider value={{
       currProfile: currProfile,
       currUser: currUser,
-      setCurrProfile: setCurrProfile
+      setCurrProfile: setCurrProfile,
+      chats: chats,
+      setChats: setChats
     }}>
     <ModalContext.Provider value={{
       setModal: setModal
@@ -60,6 +66,10 @@ function App() {
             <Route path='/settings' element={<SettingsSection />} />
             <Route path='/profiles/:profileId' element={<ProfileSection />} />
             <Route path='/posts/:postId' element={<PostSection />} />
+            <Route path='/messages' element={<MessagesWrapper />}>
+              <Route index element={null} />
+              <Route path='/messages/:userId' element={<MessagesRoom />} />
+            </Route>
           </Route>
           <Route path='/' element={<LoginSignUpWrapper />}>
             <Route path='/login' element={<LoginMenu />} />
