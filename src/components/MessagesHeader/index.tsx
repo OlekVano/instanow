@@ -1,7 +1,20 @@
-import React from 'react'
+import { useContext } from 'react'
+import { Profile, ProfileWithoutPosts } from '../../types'
+import { UserContext } from '../../user-context'
+import ProfileMedium from '../ProfileMedium'
+import styles from './index.module.scss'
 
-export default function MessagesHeader() {
+type Props = {
+  userId: string,
+  profile: ProfileWithoutPosts
+}
+
+export default function MessagesHeader({ userId, profile }: Props) {
+  const userCtx = useContext(UserContext)
+
   return (
-    <div>MessagesHeader</div>
+    <div className={styles.main}>
+      <ProfileMedium profile={profile} />
+    </div>
   )
 }

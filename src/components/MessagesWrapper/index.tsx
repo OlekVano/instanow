@@ -1,7 +1,5 @@
 import { Outlet } from 'react-router-dom'
 import CardWrapper from '../CardWrapper'
-import MessagesHeader from '../MessagesHeader'
-import MessagesRoom from '../MessagesRoom'
 import MessagesSidebar from '../MessagesSidebar'
 import styles from './index.module.scss'
 

@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom'
 import { Chat } from '../../types'
 import { UserContext } from '../../user-context'
 import { getChatById } from '../../utils'
+import MessagesHeader from '../MessagesHeader'
+import MessagesInput from '../MessagesInput'
+import styles from './index.module.scss'
 
 export default function MessagesRoom() {
   const { userId } = useParams()
@@ -11,10 +14,16 @@ export default function MessagesRoom() {
 
   const [chat, setChat] = useState<Chat>()
 
-  useEffect(manageRoomFetch, [userCtx.currUser])
+  useEffect(manageRoomFetch, [userCtx.currUser, userCtx.currProfile])
 
   return (
-    <div>MessagesRoom</div>
+    <div className={styles.main}>
+      {
+        userId && chat?.user ? <MessagesHeader userId={userId} profile={chat.user} /> : null
+      }
+      <div className={styles.messagesWrapper}></div>
+      <MessagesInput />
+    </div>
   )
 
   // *************************
