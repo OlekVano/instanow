@@ -14,7 +14,7 @@ export default function MobileMenu() {
     <div className={`d-block d-md-none ${styles.main}`}>
       <div className={styles.wrapper}>
         <div className={styles.container}>
-          <SearchBar width='100%' />
+          {/* <SearchBar width='100%' /> */}
           {
             !userCtx.currUser ? null :
             <Link to={`/profiles/${userCtx.currUser!.uid}`}>
