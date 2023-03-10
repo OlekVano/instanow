@@ -31,7 +31,7 @@ export default function ProfileBig({ profile, buttons }: Props) {
                 <Button text='Follow' func={follow} width='150px' />
               }
               
-              <Button text='Message' width='150px'  />
+              {/* <Button text='Message' width='150px'  /> */}
             </div>
           }
         </div>
