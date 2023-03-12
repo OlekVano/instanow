@@ -9,11 +9,13 @@ import { Profile } from '../../types'
 import { UserContext } from '../../user-context'
 import { useNavigate } from 'react-router-dom'
 import CardWrapper from '../CardWrapper'
+import MultilineInput from '../MultilineInput'
 
 export default function SettingsSection() {
   const navigate = useNavigate()
 
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const bioInputRef = useRef<HTMLInputElement>(null)
 
   const defaultProfile: Profile = {
     id: '',
@@ -44,15 +46,22 @@ export default function SettingsSection() {
         </div>
         <div className={styles.inputContainer}>
           <div className={styles.inputLabel}>Username</div>
-          <Input value={profile.username} func={manageUsernameInputChange} />
+          <div className={styles.inputWrapper}>
+            <Input value={profile.username} func={manageUsernameInputChange} />
+          </div>
+
         </div>
         <div className={styles.inputContainer}>
           <div className={styles.inputLabel}>Tag</div>
-          <Input value={profile.tag} func={manageTagInputChange} />
+          <div className={styles.inputWrapper}>
+            <Input value={profile.tag} func={manageTagInputChange} />
+          </div>
         </div>
         <div className={styles.inputContainer}>
           <div className={styles.inputLabel}>Bio</div>
-          <Textarea value={profile.bio} func={manageBioInputChange} />
+          <div className={styles.inputWrapper}>
+            <MultilineInput style={{padding: '0'}} reference={bioInputRef} defaultValue={profile.bio} />
+          </div>
         </div>
         <div className={styles.buttonsContainer}>
           <Button text='Undo' type={2} func={undoChanges} />
@@ -92,7 +101,15 @@ export default function SettingsSection() {
       return
     }
 
-    const json = JSON.stringify(Object.fromEntries(Object.entries(profile).filter(entry => requiredProfileKeys.includes(entry[0]))))
+    if (profile.tag.split('').some(function findSpace(c: string) {return c === ' '})) {
+      alert('Tag cannot contain spaces')
+      return
+    }
+
+    let profileToPost = Object.fromEntries(Object.entries(profile).filter(entry => requiredProfileKeys.includes(entry[0])))
+    profileToPost.bio = bioInputRef.current!.innerText
+
+    const json = JSON.stringify(profileToPost)
 
     const res = await fetch(`${import.meta.env.VITE_API_URL}/profiles/${ctx.currUser?.uid}`, {
       method: 'POST',

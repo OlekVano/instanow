@@ -24,3 +24,8 @@
   font-weight: $weight-lg;
   font-size: $text-lg;
 }
+
+.inputWrapper {
+  border-bottom: solid 2px $text-color-secondary;
+  padding-bottom: $gap-2xs;
+}
