@@ -38,7 +38,7 @@ export default function SettingsSection() {
         <div className={styles.buttonsContainer}>
           <Button width='150px' text='Upload picture' func={triggerImageUpload} />
           <input id={profilePictureInputId} onChange={manageImageUpload} type='file' accept='image/*' style={{display: 'none'}} /> 
-          <Button width='150px' text='Take picture' />
+          {/* <Button width='150px' text='Take picture' /> */}
         </div>
         <div className={styles.inputContainer}>
           <div className={styles.inputLabel}>Username</div>
