@@ -13,3 +13,9 @@
   font-weight: $weight-lg;
   color: $text-color-secondary;
 }
+
+@media (max-width: 500px) {
+  .text {
+    font-size: $text-md;
+  }
+}
