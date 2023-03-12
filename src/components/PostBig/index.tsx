@@ -22,7 +22,11 @@ export default function PostBig({ post }: Props) {
   
   const [showCommentModal, setShowCommentModal] = useState(false)
 
-  const [comments, setComments] = useState(post.comments)
+  const [comments, setComments] = useState<Comment[]>([])
+
+  useEffect(function updateComments() {
+    setComments(post.comments)
+  }, [post.comments])
 
   return (
     <div className={styles.main}>
