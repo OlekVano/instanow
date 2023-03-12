@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Comment, Post, Profile, WithComments } from '../../types'
 import { UserContext } from '../../user-context'
 import { timestampToStr } from '../../utils'
@@ -30,7 +31,9 @@ export default function PostBig({ post }: Props) {
         <CommentModal onComment={onComment} postId={post.id} onExit={closeCommentModal} query={[]} />
       }
       <div className={styles.container}>
-        <ProfileMedium profile={post.author} timestamp={timestampToStr(post.createdAt)} />
+        <Link to={post.authorId}>
+          <ProfileMedium profile={post.author} timestamp={timestampToStr(post.createdAt)} />
+        </Link>
         <div className={styles.text}>{post.text}</div>
         {
           post.picture ? <img src={post.picture} className={styles.image} /> : null
