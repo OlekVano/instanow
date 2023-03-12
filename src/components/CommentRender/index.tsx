@@ -9,6 +9,7 @@ import CommentModal from '../CommentModal'
 import { UserContext } from '../../user-context'
 import LikeButton from '../LikeButton'
 import TextButton from '../TextButton'
+import { Link } from 'react-router-dom'
 
 type Props = {
   comment: Comment,
@@ -26,7 +27,9 @@ export default function CommentRender({ postId, comment, query=[], updateComment
         showCommentModal ? <CommentModal postId={postId} query={query} onExit={closeCommentModal} onComment={onComment} />
         : null
       }
-      <ProfileSmall profile={comment.author} timestamp={timestampToStr(comment.createdAt)} />
+      <Link to={`/profiles/${comment.authorId}`}>
+        <ProfileSmall profile={comment.author} timestamp={timestampToStr(comment.createdAt)} />
+      </Link>
       <div className={styles.text}>{comment.text}</div>
       <div className={styles.container}>
         <LikeButton postId={postId} likes={comment.likes} query={query} />
