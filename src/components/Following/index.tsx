@@ -10,6 +10,8 @@ type Props = {
 }
 
 export default function Following({ profile }: Props) {
+  console.log(profile)
+
   return (
     <div className={styles.main}>
       <div className={styles.headingContainer}>

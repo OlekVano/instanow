@@ -5,7 +5,7 @@ import styles from './index.module.scss'
 import Textarea from '../Textarea'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { generateUniqueId, getProfileById } from '../../utils'
-import { Profile } from '../../types'
+import { CurrentProfile, Profile } from '../../types'
 import { UserContext } from '../../user-context'
 import { useNavigate } from 'react-router-dom'
 import CardWrapper from '../CardWrapper'
@@ -17,7 +17,7 @@ export default function SettingsSection() {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const bioInputRef = useRef<HTMLInputElement>(null)
 
-  const defaultProfile: Profile = {
+  const defaultProfile: CurrentProfile = {
     id: '',
     username: '',
     profilePicture: '',
@@ -25,7 +25,8 @@ export default function SettingsSection() {
     bio: '',
     followersIds: [],
     followingIds: [],
-    posts: []
+    posts: [],
+    following: []
   }
 
   const ctx = useContext(UserContext)
@@ -101,7 +102,18 @@ export default function SettingsSection() {
       return
     }
 
-    if (profile.tag.split('').some(function findSpace(c: string) {return c === ' '})) {
+    if (profile.tag.trim()[0] !== '@') {
+      alert('Tag must start with "@"')
+      return
+    }
+
+    
+    if (profile.tag.trim().split('').filter(function filterAtSign(c: string) {return c === '@'}).length !== 1) {
+      alert('Tag must contain exactly one "@" at the start')
+      return
+    }
+
+    if (profile.tag.trim().split('').some(function findSpace(c: string) {return c === ' '})) {
       alert('Tag cannot contain spaces')
       return
     }

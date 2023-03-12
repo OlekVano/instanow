@@ -13,17 +13,21 @@ import { auth } from '../../../firebase-setup'
 import { UserContext } from '../../user-context'
 import { useContext } from 'react'
 
-export default function NavBar() {
+type Props = {
+  disabled?: boolean
+}
+
+export default function NavBar({ disabled=false }: Props) {
   const navigate = useNavigate()
   const location = useLocation()
   const ctx = useContext(UserContext)
 
   return (
     <div>
-      <NavButton func={() => {navigate('/')}} text={'Home'} image={house} selected={location.pathname === '/'} />
-      <NavButton func={() => {navigate(`/profiles/${ctx.currUser?.uid}`)}} text={'Profile'} image={profile} selected={location.pathname === `/profiles/${ctx.currUser?.uid}`} />
-      <NavButton func={() => {navigate('/messages')}} text={'Messages'} image={messages} selected={location.pathname === '/messages'} />
-      <NavButton func={() => {navigate('/people')}} text={'People'} image={people} selected={location.pathname === '/people'} />
+      <NavButton disabled={disabled} func={() => {navigate('/')}} text={'Home'} image={house} selected={location.pathname === '/'} />
+      <NavButton disabled={disabled} func={() => {navigate(`/profiles/${ctx.currUser?.uid}`)}} text={'Profile'} image={profile} selected={location.pathname === `/profiles/${ctx.currUser?.uid}`} />
+      <NavButton disabled={disabled} func={() => {navigate('/messages')}} text={'Messages'} image={messages} selected={location.pathname === '/messages'} />
+      <NavButton disabled={disabled} func={() => {navigate('/people')}} text={'People'} image={people} selected={location.pathname === '/people'} />
       <div style={{width: '80%', margin: '0 auto'}}>
         <Line />
       </div>
