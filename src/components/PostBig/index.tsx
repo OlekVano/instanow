@@ -34,9 +34,11 @@ export default function PostBig({ post }: Props) {
         <Link to={post.authorId}>
           <ProfileMedium profile={post.author} timestamp={timestampToStr(post.createdAt)} />
         </Link>
-        <div className={styles.text}>{post.text}</div>
         {
-          post.picture ? <img src={post.picture} className={styles.image} /> : null
+          post.text ? <div className={styles.text}>{post.text}</div> : null
+        }
+        {
+          post.picture ? <Link to={`/posts/${post.id}`}><img src={post.picture} className={styles.image} /></Link> : null
         }
         <div className={styles.postButtonsContainer}>
           <LikeButton postId={post.id} likes={post.likes} query={[]} />
