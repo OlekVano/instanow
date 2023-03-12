@@ -49,9 +49,7 @@ export default function SignUpMenu() {
 
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      // Signed in 
-      var user = userCredential.user;
-      // ...
+      navigate('/')
     })
     .catch((error) => {
       const errorCode = error.code;

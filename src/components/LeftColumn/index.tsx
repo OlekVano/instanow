@@ -13,16 +13,18 @@ export default function LeftColumn() {
   return (
     <div className={styles.main}>
       {
-        !ctx?.currProfile ? null : 
+        !ctx?.currProfile ? null :
+        <>
         <Link to={`/profiles/${ctx.currUser?.uid}`}>
           <CardWrapper>
             <ProfileMedium profile={ctx.currProfile} />
           </CardWrapper>
         </Link>
+        <div className={styles.navbarContainer}>
+          <NavBar />
+        </div>
+        </>
       }
-      <div className={styles.navbarContainer}>
-        <NavBar />
-      </div>
     </div>
   )
 }

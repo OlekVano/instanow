@@ -38,5 +38,6 @@ export default function NavBar() {
     signOut(auth).then(function afterSignOut() {
       navigate('/login')
     })
+    ctx.setCurrProfile(undefined)
   }
 }
