@@ -31,7 +31,7 @@ export default function PostBig({ post }: Props) {
         <CommentModal onComment={onComment} postId={post.id} onExit={closeCommentModal} query={[]} />
       }
       <div className={styles.container}>
-        <Link to={post.authorId}>
+        <Link to={`/profiles/${post.authorId}`}>
           <ProfileMedium profile={post.author} timestamp={timestampToStr(post.createdAt)} />
         </Link>
         {
