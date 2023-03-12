@@ -1,7 +1,7 @@
 @import '../../consts.scss';
 
 .main {
-  width: 42px;
+  height: 42px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -9,7 +9,11 @@
 }
 
 .image {
-  width: 100%;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
+  aspect-ratio: 1/1;
   filter: $filter-image-tertiary;
   pointer-events: none;
   user-select: none;

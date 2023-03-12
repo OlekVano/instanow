@@ -10,3 +10,8 @@
   font-size: $text-lg;
   padding-bottom: $padding-2xl;
 }
+
+.commentsWrapper {
+  overflow-x: auto;
+  max-width: 100%;
+}
