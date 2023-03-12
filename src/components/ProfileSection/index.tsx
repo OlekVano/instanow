@@ -20,7 +20,7 @@ export default function ProfileSection() {
     getProfileById(profileId!, ctx.currUser).then(function updateProfile(p) {
       if (p) setProfile(p)
     })
-  }, [ctx.currUser])
+  }, [ctx.currUser, profileId])
 
   if (!profile) return null
   return (
