@@ -97,10 +97,10 @@ export function addAuthorToComment(comment: CommentWithoutAuthor, author: Profil
   return commentWithAuthor
 }
 
-export function sortByRecent(array: ({createdAt: number} & {[key: string]: any})[]) {
-  let sortedArray = [...array]
-  sortedArray.sort(function sort(elem) {
-    return elem.createdAt
+export function sortByRecent<T extends ({createdAt: number})[]>(array: T): T {
+  let sortedArray: T = [...array] as T
+  sortedArray.sort(function sort(elem1, elem2) {
+    return elem1.createdAt - elem2.createdAt
   }).reverse()
   return sortedArray
 }
