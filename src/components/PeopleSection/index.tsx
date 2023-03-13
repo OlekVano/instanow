@@ -25,12 +25,9 @@ export default function PeopleSection() {
         {
           profiles.map(function renderProfile(profile: ProfileWithoutPosts, i: number) {
             return (
-              <div className={styles.profileWrapper}>
-                <Link key={i} to={`/profiles/${profile.id}`}>
-                  <ProfileMedium profile={profile} />
-                </Link>
-              </div>
-
+              <Link className={styles.profileWrapper} key={i} to={`/profiles/${profile.id}`}>
+                <ProfileMedium profile={profile} />
+              </Link>
             )
 
           })
