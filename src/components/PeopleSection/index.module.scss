@@ -1,5 +1,11 @@
 @import '../../consts.scss';
 
+.main {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .profileWrapper {
   padding: $padding-lg;
+  width: 50%;
 }
