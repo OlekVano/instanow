@@ -18,7 +18,6 @@ export default function ProfileSection() {
   useEffect(function fetchProfile() {
     if (!ctx.currUser) return
     getProfileById(profileId!, ctx.currUser).then(function updateProfile(p) {
-      console.log(p)
       if (p) setProfile(p)
     })
   }, [ctx.currUser, profileId])
