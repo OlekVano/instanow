@@ -1,10 +1,10 @@
 @import '../../consts.scss';
 
 .main {
-  padding: $padding-10xl;
   display: grid;
   place-items: center;
   height: 100%;
+  width: auto;
 }
 
 .container {

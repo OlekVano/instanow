@@ -26,7 +26,9 @@ export default function Header({ rightSideEmpty=false, showMenu, openMenu, close
   return (
     <header className={styles.main}>
       <div className={`container-xl ${styles.container}`}>
-        <LogoWithBrand />
+        <Link to='/'>
+          <LogoWithBrand />
+        </Link>
         {
           rightSideEmpty || !userCtx.currProfile ? null
           : <>
@@ -44,7 +46,7 @@ export default function Header({ rightSideEmpty=false, showMenu, openMenu, close
                 <ButtonSmall type={2} image={menu} func={openMenu} />
               </div>
             }
-            <div className='d-none d-md-block'><SearchBar /></div>
+            {/* <div className='d-none d-md-block'><SearchBar /></div> */}
             <div className='d-none d-md-block'><Button type={1} text='Create' func={openCreatePostModal} /></div>
             <div className='d-none d-md-block'>
               <Link to={`/profiles/${userCtx.currUser?.uid}`}>

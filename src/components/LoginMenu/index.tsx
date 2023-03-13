@@ -15,8 +15,14 @@ export default function LoginMenu() {
 
   return (
     <div className={styles.main}>
-      <Input placeholder='Email Address' value={email} func={manageEmailInput} />
-      <Input type='password' placeholder='Password' value={password} func={managePasswordInput} />
+      <div className={styles.inputWrapper}>
+        <Input placeholder='Email Address' value={email} func={manageEmailInput} />
+      </div>
+      <div className={styles.inputWrapper}>
+        <Input type='password' placeholder='Password' value={password} func={managePasswordInput} />
+      </div>
+      
+      
       <div className={styles.buttonsContainer}>
         <Button text='Login' func={loginWithEmail} />
         <div>or</div>

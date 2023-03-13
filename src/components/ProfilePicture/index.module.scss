@@ -33,3 +33,29 @@
   height: 280px;
   border-radius: $border-radius-xl;
 }
+
+@media (max-width: 500px) {
+  .md {
+    width: 55px;
+    height: 55px;
+    border-radius: $border-radius-md;
+  }
+  
+  .lg {
+    width: 90px;
+    height: 90px;
+    border-radius: $border-radius-lg;
+  }
+  
+  .xl {
+    width: 150px;
+    height: 150px;
+    border-radius: $border-radius-lg;
+  }
+  
+  .xxl {
+    width: 210px;
+    height: 210px;
+    border-radius: $border-radius-xl;
+  }
+}

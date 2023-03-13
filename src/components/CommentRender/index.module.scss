@@ -41,4 +41,15 @@
 
 .commentsWrapper {
   padding-left: $padding-3xl;
+  position: relative;
+}
+
+.commentsWrapper::before {
+  position: absolute;
+  left: 0;
+  content: "";
+  width: 3px;
+  height: 100%;
+  background-color: $background-secondary;
+  border-radius: 2px;
 }

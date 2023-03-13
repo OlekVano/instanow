@@ -1,4 +1,4 @@
-import { ChangeEvent, ChangeEventHandler, TextareaHTMLAttributes, useContext, useState } from 'react';
+import { ChangeEvent, ChangeEventHandler, RefObject, TextareaHTMLAttributes, useContext, useEffect, useRef, useState } from 'react';
 import { UserContext } from '../../user-context';
 import Button from '../Button';
 import CardWrapper from '../CardWrapper';
@@ -21,6 +21,12 @@ export default function CreatePostModal() {
 
   const navigate = useNavigate()
 
+  const inputRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    inputRef.current?.focus()
+  }, [inputRef.current])
+
   return (
     <Modal onExit={closeModal}>
       <CardWrapper>
@@ -29,7 +35,7 @@ export default function CreatePostModal() {
             <ProfilePicture size='md' src={userCtx.currProfile?.profilePicture} />
             {/* <textarea value={text} placeholder="What's happening?" className={styles.input} onChange={manageTextChange} /> */}
             <div className={styles.inputWrapper}>
-              <MultilineInput onInput={manageTextChange} />
+              <MultilineInput reference={inputRef} onInput={manageTextChange} />
             </div>
           </div>
           {
@@ -41,7 +47,7 @@ export default function CreatePostModal() {
               <div className={styles.buttonsContainer}>
                 <Button text='Upload picture' width='150px' func={triggerImageUpload} />
                 <input id={pictureInputId} onChange={manageImageUpload} type='file' accept='image/*' style={{display: 'none'}} /> 
-                <Button text='Take picture' width='150px' />
+                {/* <Button text='Take picture' width='150px' /> */}
               </div>
             </div>
           }

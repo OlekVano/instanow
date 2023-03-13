@@ -65,4 +65,19 @@
 .inputWrapper {
   flex-grow: 1;
   overflow-x: auto;
+  font-size: $text-2xl;
+}
+
+@media (max-width: 700px) {
+  .main {
+    padding: 0;
+  }
+
+  .container {
+    gap: $gap-2xs;
+  }
+
+  .inputWrapper {
+    font-size: $text-lg;
+  }
 }

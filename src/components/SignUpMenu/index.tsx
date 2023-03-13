@@ -16,9 +16,15 @@ export default function SignUpMenu() {
 
   return (
     <div className={styles.main}>
-      <Input placeholder='Email Address' value={email} func={manageEmailInput} />
-      <Input type='password' placeholder='Password' value={password} func={managePasswordInput} />
-      <Input type='password' placeholder='Repeat password' value={password2} func={managePasswordInput2} />
+      <div className={styles.inputWrapper}>
+        <Input placeholder='Email Address' value={email} func={manageEmailInput} />
+      </div>
+      <div className={styles.inputWrapper}>
+        <Input type='password' placeholder='Password' value={password} func={managePasswordInput} />
+      </div>
+      <div className={styles.inputWrapper}>
+        <Input type='password' placeholder='Repeat password' value={password2} func={managePasswordInput2} />
+      </div>
       <div className={styles.buttonsContainer}>
         <Button text='Sign up' func={createEmailAccount} />
         <div>or</div>
@@ -49,9 +55,7 @@ export default function SignUpMenu() {
 
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      // Signed in 
-      var user = userCredential.user;
-      // ...
+      navigate('/')
     })
     .catch((error) => {
       const errorCode = error.code;

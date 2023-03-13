@@ -36,6 +36,12 @@
   color: $text-color-secondary;
 }
 
+@media (max-width: 500px) {
+  .input {
+    font-size: $text-md;
+  }
+}
+
 .postButtonsContainer {
   display: flex;
   gap: $gap-xl;

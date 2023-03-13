@@ -14,3 +14,9 @@
   align-items: center;
   gap: $gap-md;
 }
+
+.inputWrapper {
+  border-bottom: solid 2px $text-color-secondary;
+  padding-bottom: $gap-2xs;
+  width: 100%;
+}

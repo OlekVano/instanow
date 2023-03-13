@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Comment, Post, Profile, WithComments } from '../../types'
 import { UserContext } from '../../user-context'
 import { timestampToStr } from '../../utils'
@@ -21,7 +22,11 @@ export default function PostBig({ post }: Props) {
   
   const [showCommentModal, setShowCommentModal] = useState(false)
 
-  const [comments, setComments] = useState(post.comments)
+  const [comments, setComments] = useState<Comment[]>([])
+
+  useEffect(function updateComments() {
+    setComments(post.comments)
+  }, [post.comments])
 
   return (
     <div className={styles.main}>
@@ -30,10 +35,14 @@ export default function PostBig({ post }: Props) {
         <CommentModal onComment={onComment} postId={post.id} onExit={closeCommentModal} query={[]} />
       }
       <div className={styles.container}>
-        <ProfileMedium profile={post.author} timestamp={timestampToStr(post.createdAt)} />
-        <div className={styles.text}>{post.text}</div>
+        <Link to={`/profiles/${post.authorId}`}>
+          <ProfileMedium profile={post.author} timestamp={timestampToStr(post.createdAt)} />
+        </Link>
         {
-          post.picture ? <img src={post.picture} className={styles.image} /> : null
+          post.text ? <div className={styles.text}>{post.text}</div> : null
+        }
+        {
+          post.picture ? <Link to={`/posts/${post.id}`}><img src={post.picture} className={styles.image} /></Link> : null
         }
         <div className={styles.postButtonsContainer}>
           <LikeButton postId={post.id} likes={post.likes} query={[]} />

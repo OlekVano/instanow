@@ -1,23 +1,24 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { UserContext } from '../../user-context'
+import { CurrentProfile, Profile } from '../../types'
 import Circle from '../Circle'
-import ProfileMessage from '../ProfileMessage'
 import ProfileSmall from '../ProfileSmall'
 import styles from './index.module.scss'
 
-export default function Following() {
-  const userCtx = useContext(UserContext)
+type Props = {
+  profile: CurrentProfile
+}
 
+export default function Following({ profile }: Props) {
   return (
     <div className={styles.main}>
       <div className={styles.headingContainer}>
         <div className={styles.heading}>Following</div>
-        <Circle text={userCtx.currProfile!.followingIds.length.toString()} type={2} />
+        <Circle text={profile.followingIds.length.toString()} type={2} />
       </div>
       <div className={styles.container}>
-        {userCtx.currProfile?.following.length !== 0 ? 
-        userCtx.currProfile?.following.map(function renderFollowedProfile(p, i) {
+        {profile.following.length !== 0 ? 
+        profile.following.map(function renderFollowedProfile(p, i) {
           return <ProfileSmall key={i} profile={p} />
         })
         : <div className={styles.text}>You can find someone interesting <Link to='/people' className={styles.link}>here</Link></div>

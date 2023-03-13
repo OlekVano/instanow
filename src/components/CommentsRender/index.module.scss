@@ -1,8 +1,7 @@
 @import '../../consts.scss';
 
 .main {
-  padding: $padding-2xl 0;
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   gap: $gap-2xl;
 }

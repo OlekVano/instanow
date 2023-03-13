@@ -13,7 +13,9 @@ export default function CommentsSection({ comments, postId, updateComments }: Pr
   return (
     <div className={styles.main}>
       <div className={styles.heading}>Comments</div>
-      <CommentsRender postId={postId} comments={comments} updateComments={updateComments} />
+      <div className={styles.commentsWrapper}>
+        <CommentsRender postId={postId} comments={comments} updateComments={updateComments} />
+      </div>
     </div>
   )
 }

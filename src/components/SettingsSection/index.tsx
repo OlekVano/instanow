@@ -3,17 +3,21 @@ import Button from '../Button'
 import ProfilePicture from '../ProfilePicture'
 import styles from './index.module.scss'
 import Textarea from '../Textarea'
-import { useContext, useEffect, useState } from 'react'
-import { generateUniqueId } from '../../utils'
-import { Profile } from '../../types'
+import { useContext, useEffect, useRef, useState } from 'react'
+import { generateUniqueId, getProfileById } from '../../utils'
+import { CurrentProfile, Profile } from '../../types'
 import { UserContext } from '../../user-context'
 import { useNavigate } from 'react-router-dom'
 import CardWrapper from '../CardWrapper'
+import MultilineInput from '../MultilineInput'
 
 export default function SettingsSection() {
-  const [profilePictureInputId] = useState(generateUniqueId())
+  const navigate = useNavigate()
 
-  const defaultProfile: Profile = {
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const bioInputRef = useRef<HTMLInputElement>(null)
+
+  const defaultProfile: CurrentProfile = {
     id: '',
     username: '',
     profilePicture: '',
@@ -21,7 +25,8 @@ export default function SettingsSection() {
     bio: '',
     followersIds: [],
     followingIds: [],
-    posts: []
+    posts: [],
+    following: []
   }
 
   const ctx = useContext(UserContext)
@@ -37,20 +42,27 @@ export default function SettingsSection() {
         <ProfilePicture size='xxl' src={profile.profilePicture} />
         <div className={styles.buttonsContainer}>
           <Button width='150px' text='Upload picture' func={triggerImageUpload} />
-          <input id={profilePictureInputId} onChange={manageImageUpload} type='file' accept='image/*' style={{display: 'none'}} /> 
-          <Button width='150px' text='Take picture' />
+          <input ref={fileInputRef} onChange={manageImageUpload} type='file' accept='image/*' style={{display: 'none'}} /> 
+          {/* <Button width='150px' text='Take picture' /> */}
         </div>
         <div className={styles.inputContainer}>
           <div className={styles.inputLabel}>Username</div>
-          <Input value={profile.username} func={manageUsernameInputChange} />
+          <div className={styles.inputWrapper}>
+            <Input value={profile.username} func={manageUsernameInputChange} />
+          </div>
+
         </div>
         <div className={styles.inputContainer}>
           <div className={styles.inputLabel}>Tag</div>
-          <Input value={profile.tag} func={manageTagInputChange} />
+          <div className={styles.inputWrapper}>
+            <Input value={profile.tag} func={manageTagInputChange} />
+          </div>
         </div>
         <div className={styles.inputContainer}>
           <div className={styles.inputLabel}>Bio</div>
-          <Textarea value={profile.bio} func={manageBioInputChange} />
+          <div className={styles.inputWrapper}>
+            <MultilineInput style={{padding: '0'}} reference={bioInputRef} defaultValue={profile.bio} />
+          </div>
         </div>
         <div className={styles.buttonsContainer}>
           <Button text='Undo' type={2} func={undoChanges} />
@@ -90,7 +102,26 @@ export default function SettingsSection() {
       return
     }
 
-    const json = JSON.stringify(Object.fromEntries(Object.entries(profile).filter(entry => requiredProfileKeys.includes(entry[0]))))
+    if (profile.tag.trim()[0] !== '@') {
+      alert('Tag must start with "@"')
+      return
+    }
+
+    
+    if (profile.tag.trim().split('').filter(function filterAtSign(c: string) {return c === '@'}).length !== 1) {
+      alert('Tag must contain exactly one "@" at the start')
+      return
+    }
+
+    if (profile.tag.trim().split('').some(function findSpace(c: string) {return c === ' '})) {
+      alert('Tag cannot contain spaces')
+      return
+    }
+
+    let profileToPost = Object.fromEntries(Object.entries(profile).filter(entry => requiredProfileKeys.includes(entry[0])))
+    profileToPost.bio = bioInputRef.current!.innerText
+
+    const json = JSON.stringify(profileToPost)
 
     const res = await fetch(`${import.meta.env.VITE_API_URL}/profiles/${ctx.currUser?.uid}`, {
       method: 'POST',
@@ -98,21 +129,23 @@ export default function SettingsSection() {
       body: json,
     })
 
-    // if (res.status === 200) navigate(`/profile/${ctx.currUser?.uid}`)
-    // else alert(`Error: ${res.statusText}`)
-
     if (res.status !== 200) alert(`Error: ${res.statusText}`)
     else {
-      ctx.setCurrProfile(profile)
-      alert('Saved')
+      const newProfile = await getProfileById(ctx.currUser!.uid, ctx.currUser!)
+      ctx.setCurrProfile(Object.assign(profile, newProfile))
+      navigate('/')
     }
   }
 
   function triggerImageUpload() {
-    document.getElementById(profilePictureInputId)?.click()
+    // document.getElementById(profilePictureInputId)?.click()
+    fileInputRef.current?.click()
   }
 
   function manageImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const maxWidth = 2000
+    const maxHeight = 2000
+
     if (!e.target.files) return
     const file = e.target.files[0]
     const fileReader = new FileReader()
@@ -120,7 +153,11 @@ export default function SettingsSection() {
     fileReader.onload = () => {
       const image = new Image()
       image.onload = () => {
-        setProfilePicture(fileReader.result as string)
+        if (image.width > maxWidth || image.height > maxHeight) {
+          alert(`Maximum image resolution allowed is ${maxWidth}x${maxHeight}px.\nYour image resolution is ${image.width}x${image.height}px.`)
+          fileInputRef.current!.value = ''
+        }
+        else setProfilePicture(fileReader.result as string)
       }
       // The line below calls image.onload
       image.src = fileReader.result as string

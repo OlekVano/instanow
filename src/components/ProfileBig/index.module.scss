@@ -16,6 +16,14 @@
   flex-direction: column;
   flex: 1;
   justify-content: space-between;
+  overflow-x: hidden;
+}
+
+.username,
+.tag {
+  text-overflow: ellipsis;
+  overflow-x: hidden; 
+  white-space: nowrap;
 }
 
 .username {

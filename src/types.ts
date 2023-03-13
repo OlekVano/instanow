@@ -26,7 +26,7 @@ export type Post = {
   createdAt: number
 }
 
-export type PostWithoutAuthor = Omit<Post, 'author' | 'comments'> & {comments: CommentWithoutAuthor[]}
+export type PostWithoutAuthor = Omit<Post, 'author'> & {comments: CommentWithoutAuthor[]}
 
 export type Comment = {
   text: string,

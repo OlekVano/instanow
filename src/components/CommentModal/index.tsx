@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useEffect, useState } from 'react'
+import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react'
 import { Comment, Profile, WithComments } from '../../types'
 import { UserContext } from '../../user-context'
 import { generateUniqueId } from '../../utils'
@@ -19,11 +19,11 @@ type Props = {
 export default function CommentModal({ onExit=function(){}, onComment, postId, query }: Props) {
   const userCtx = useContext(UserContext)
   const [text, setText] = useState('')
-  const [inputId] = generateUniqueId()
+  const inputRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    document.getElementById(inputId)?.focus()
-  })
+    inputRef.current?.focus()
+  }, [inputRef])
 
   return (
     <Modal onExit={onExit}>
@@ -32,7 +32,7 @@ export default function CommentModal({ onExit=function(){}, onComment, postId, q
           <div className={styles.container}>
             <ProfilePicture size='md' src={userCtx.currProfile?.profilePicture} />
             <div className={styles.inputContainer}>
-              <MultilineInput onInput={manageTextChange} />
+              <MultilineInput reference={inputRef} onInput={manageTextChange} />
             </div>
           </div>
           <div className={styles.buttonsContainer2}>

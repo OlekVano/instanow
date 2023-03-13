@@ -20,7 +20,7 @@ export default function ProfileSection() {
     getProfileById(profileId!, ctx.currUser).then(function updateProfile(p) {
       if (p) setProfile(p)
     })
-  }, [ctx.currUser])
+  }, [ctx.currUser, profileId])
 
   if (!profile) return null
   return (
@@ -29,17 +29,8 @@ export default function ProfileSection() {
         <ProfileBig profile={profile} buttons={ctx.currUser?.uid !== profileId} />
       </CardWrapper>
       {
-        ctx.currUser?.uid !== profileId ? null :
-        <CardWrapper>
-          <Share />
-        </CardWrapper>
-      }
-      {
         (sortByRecent(profile.posts) as PostWithoutAuthor[]).map(function renderPost(post: PostWithoutAuthor, i: number) {
-          let postWithAuthor: Post = Object.assign({}, post, {
-            author: profile,
-            comments: addAuthorsToComments(post.comments, profile)
-          })
+          let postWithAuthor: Post = Object.assign({author: profile}, post)
 
           return (
             <CardWrapper key={i} style={{padding: 0}}>
