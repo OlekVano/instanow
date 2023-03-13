@@ -9,3 +9,9 @@
   padding: $padding-lg;
   width: 50%;
 }
+
+@media (max-width: 600px) {
+  .profileWrapper {
+    width: 100%;
+  }
+}
