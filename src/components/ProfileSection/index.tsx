@@ -18,6 +18,7 @@ export default function ProfileSection() {
   useEffect(function fetchProfile() {
     if (!ctx.currUser) return
     getProfileById(profileId!, ctx.currUser).then(function updateProfile(p) {
+      console.log(p)
       if (p) setProfile(p)
     })
   }, [ctx.currUser, profileId])
@@ -36,10 +37,7 @@ export default function ProfileSection() {
       }
       {
         (sortByRecent(profile.posts) as PostWithoutAuthor[]).map(function renderPost(post: PostWithoutAuthor, i: number) {
-          let postWithAuthor: Post = Object.assign({}, post, {
-            author: profile,
-            comments: addAuthorsToComments(post.comments, profile)
-          })
+          let postWithAuthor: Post = Object.assign({author: profile}, post)
 
           return (
             <CardWrapper key={i} style={{padding: 0}}>
