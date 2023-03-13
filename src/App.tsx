@@ -17,6 +17,7 @@ import { ModalContext } from './modal-context'
 import PostSection from './components/PostSection'
 import HomeSection from './components/HomeSection'
 import MobileMenu from './components/MobileMenu'
+import MessagesSection from './components/MessagesSection'
 
 function App() {
   const [currProfile, setCurrProfile] = useState<CurrentProfile | undefined>()
@@ -60,6 +61,7 @@ function App() {
             <Route path='/settings' element={<SettingsSection />} />
             <Route path='/profiles/:profileId' element={<ProfileSection />} />
             <Route path='/posts/:postId' element={<PostSection />} />
+            <Route path='/messages' element={<MessagesSection />} />
           </Route>
           <Route path='/' element={<LoginSignUpWrapper />}>
             <Route path='/login' element={<LoginMenu />} />
