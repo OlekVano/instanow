@@ -16,3 +16,10 @@
   display: flex;
   align-items: center;
 }
+
+@media (max-width: 700px) {
+  .main {
+    height: 75px;
+    padding: $padding-lg;
+  }
+}

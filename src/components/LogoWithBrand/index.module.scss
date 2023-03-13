@@ -10,3 +10,9 @@
   line-height: 50px;
   font-weight: $weight-lg;
 }
+
+@media (max-width: 400px) {
+  .brand {
+    display: none;
+  }
+}
