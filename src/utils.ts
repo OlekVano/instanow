@@ -45,6 +45,13 @@ export async function getPosts(currUser: User): Promise<Post[] | undefined> {
   return await res.json()
 }
 
+export async function getProfiles(currUser: User): Promise<ProfileWithoutPosts[] | undefined> {
+  const token = await currUser.getIdToken()
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/profiles`, {headers: new Headers({'Authorization': `Bearer ${token}`})})
+  if (res.status !== 200) return undefined
+  return await res.json()
+}
+
 export function timestampToStr(ms: number) {
   const intervals = {
     year: 31536000,

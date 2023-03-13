@@ -18,6 +18,7 @@ import PostSection from './components/PostSection'
 import HomeSection from './components/HomeSection'
 import MobileMenu from './components/MobileMenu'
 import MessagesSection from './components/MessagesSection'
+import PeopleSection from './components/PeopleSection'
 
 function App() {
   const [currProfile, setCurrProfile] = useState<CurrentProfile | undefined>()
@@ -62,6 +63,7 @@ function App() {
             <Route path='/profiles/:profileId' element={<ProfileSection />} />
             <Route path='/posts/:postId' element={<PostSection />} />
             <Route path='/messages' element={<MessagesSection />} />
+            <Route path='/people' element={<PeopleSection />} />
           </Route>
           <Route path='/' element={<LoginSignUpWrapper />}>
             <Route path='/login' element={<LoginMenu />} />
