@@ -29,12 +29,6 @@ export default function ProfileSection() {
         <ProfileBig profile={profile} buttons={ctx.currUser?.uid !== profileId} />
       </CardWrapper>
       {
-        ctx.currUser?.uid !== profileId ? null :
-        <CardWrapper>
-          <Share />
-        </CardWrapper>
-      }
-      {
         (sortByRecent(profile.posts) as PostWithoutAuthor[]).map(function renderPost(post: PostWithoutAuthor, i: number) {
           let postWithAuthor: Post = Object.assign({author: profile}, post)
 
