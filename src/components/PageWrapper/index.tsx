@@ -22,10 +22,12 @@ export default function PageWrapper() {
   return (
     <div className={`container-xl`}>
       <div className={`row gx-5 ${styles.row}`}>
-        <div className={`d-none d-md-block col-4 col-lg-3`}> 
-          <div className={`sticky-top ${styles.stickyCol} ${styles.paddingTop}`} >
-            <LeftColumn />
-          </div>
+        <div className={`d-none d-md-block col-4 col-lg-3`}>
+          {
+            userCtx.currProfile ? <div className={`sticky-top ${styles.stickyCol} ${styles.paddingTop}`} >
+              <LeftColumn />
+            </div>
+          }
         </div>
         <div className={`${styles.paddingTop} ${/*location.pathname === 'messages' ? 'col-9' :*/ 'col-12 col-md-8 col-lg-9 col-xl-6'}`}>
           <Outlet />
