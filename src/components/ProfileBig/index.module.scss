@@ -17,6 +17,7 @@
   flex: 1;
   justify-content: space-between;
   overflow-x: hidden;
+  gap: $padding-2xl;
 }
 
 .username,
@@ -64,5 +65,7 @@
 
 .buttonsContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  gap: $padding-2xl;
+  flex-wrap: wrap;
 }

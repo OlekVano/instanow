@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { UserContext } from '../../user-context'
-import { getProfileById, getFollowedProfiles } from '../../utils'
+import { getProfileById, getFollowedProfiles, getChats } from '../../utils'
 import LeftColumn from '../LeftColumn'
 import NotLoggedInSection from '../NotLoggedInSection'
 import RightColumn from '../RightColumn'
@@ -53,6 +53,9 @@ export default function PageWrapper() {
       else userCtx.setCurrProfile(Object.assign({
         following: await getFollowedProfiles(userCtx.currUser!) || []
       }, profile))
+    })
+    getChats(userCtx.currUser).then(async function afterGotChats(chats) {
+      userCtx.setChats(chats || [])
     })
   }
 }

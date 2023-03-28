@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Profile } from '../../types'
 import { UserContext } from '../../user-context'
 import Button from '../Button'
@@ -12,6 +13,7 @@ type Props = {
 
 export default function ProfileBig({ profile, buttons }: Props) {
   const ctx = useContext(UserContext)
+  const navigate = useNavigate()
 
   return (
     <div className={styles.main}>
@@ -22,20 +24,20 @@ export default function ProfileBig({ profile, buttons }: Props) {
             <div className={styles.username}>{profile.username}</div>
             <div className={styles.tag}>{profile.tag}</div>
           </div>
-          {
-            !buttons ? null :
-            <div className={styles.buttonsContainer}>
-              {
-                ctx.currProfile?.followingIds.includes(profile.id) ?
-                <Button text='Unfollow' func={unfollow} width='150px' type={2}  /> :
-                <Button text='Follow' func={follow} width='150px' />
-              }
-              
-              {/* <Button text='Message' width='150px'  /> */}
-            </div>
-          }
         </div>
       </div>
+      {
+        !buttons ? null :
+        <div className={styles.buttonsContainer}>
+          {
+            ctx.currProfile?.followingIds.includes(profile.id) ?
+            <Button text='Unfollow' func={unfollow} width='150px' type={2}  /> :
+            <Button text='Follow' func={follow} width='150px' />
+          }
+          
+          <Button text='Message' width='150px' func={message}  />
+        </div>
+      }
       <div className={styles.stats}>
         <div className={styles.stat}>
           <div className={styles.statTitle}>Posts</div>
@@ -86,5 +88,9 @@ export default function ProfileBig({ profile, buttons }: Props) {
     newCurrProfile.followingIds = newCurrProfile.followingIds.filter(function filterFollowedIds(followedId) {return followedId !== profile.id})
 
     ctx.setCurrProfile(newCurrProfile)
+  }
+
+  function message() {
+    navigate(`/messages/${profile.id}`)
   }
 }

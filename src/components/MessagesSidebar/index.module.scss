@@ -1,0 +1,26 @@
+@import '../../consts.scss';
+
+.main {
+  height: 100%;
+  border-right: solid 2px $background-secondary;
+}
+
+.button {
+  padding: $padding-2xl;
+  position: relative;
+  display: block;
+}
+
+.button.selected {
+  background-color: $background-secondary;
+}
+
+.button.selected::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+  height: 100%;
+  width: 8px;
+  background-color: $color-primary;
+}

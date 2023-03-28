@@ -1,0 +1,24 @@
+@import '../../consts.scss';
+
+.main {
+  height: 100%;
+  display: flex;
+  width: 100%;
+}
+
+.wrapper {
+  flex: 1;
+}
+
+.text {
+  font-size: $text-md;
+  font-weight: $weight-md;
+  width: 100%;
+  text-align: center;
+  margin: auto 0;
+}
+
+.link {
+  text-decoration: underline;
+  color: $color-primary;
+}
