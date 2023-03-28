@@ -2,6 +2,14 @@
 
 .main {
   display: flex;
-  padding: $padding-md $padding-2xl;
-  align-items: center;
+  padding: $padding-md $padding-2xl $padding-2xl $padding-2xl;
+  position: relative;
+  align-items: flex-end;
+}
+
+.inputWrapper {
+  max-height: 200px;
+  overflow-y: auto;
+  max-height: 200px;
+  flex-grow: 1;
 }

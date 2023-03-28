@@ -5,8 +5,8 @@
   height: $icon-size-md;
   padding: $padding-lg;
   border-radius: $border-radius-s;
-  text-align: center;
-  font-weight: $weight-md;
+  display: grid;
+  place-items: center;
   user-select: none;
   transition: filter 0.2s;
 }
