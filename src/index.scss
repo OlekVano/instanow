@@ -28,3 +28,22 @@ a {
 img {
   max-width: 100%;
 }
+
+body::-webkit-scrollbar {
+  z-index: 9999;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $text-color-secondary;
+  border-radius: 5px;
+}
