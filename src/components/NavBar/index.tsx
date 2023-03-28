@@ -26,7 +26,7 @@ export default function NavBar({ disabled=false }: Props) {
     <div>
       <NavButton disabled={disabled} func={() => {navigate('/')}} text={'Home'} image={house} selected={location.pathname === '/'} />
       <NavButton disabled={disabled} func={() => {navigate(`/profiles/${ctx.currUser?.uid}`)}} text={'Profile'} image={profile} selected={location.pathname === `/profiles/${ctx.currUser?.uid}`} />
-      <NavButton disabled={disabled} func={() => {navigate('/messages')}} text={'Messages'} image={messages} selected={location.pathname === '/messages'} />
+      <NavButton disabled={disabled} func={() => {navigate('/messages')}} text={'Messages'} image={messages} selected={location.pathname.startsWith('/messages')} />
       <NavButton disabled={disabled} func={() => {navigate('/people')}} text={'People'} image={people} selected={location.pathname === '/people'} />
       <div style={{width: '80%', margin: '0 auto'}}>
         <Line />
