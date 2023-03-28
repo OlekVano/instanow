@@ -2,9 +2,10 @@
 
 .main {
   display: flex;
-  padding: $padding-md $padding-2xl $padding-2xl $padding-2xl;
+  padding: $padding-lg;
   position: relative;
   align-items: flex-end;
+  border-top: solid $background-secondary 2px;
 }
 
 .inputWrapper {
