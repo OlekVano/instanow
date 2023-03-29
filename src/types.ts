@@ -66,5 +66,6 @@ export type Message = {
   authorId: string,
   read: boolean,
   text: string,
-  image: string
+  image: string,
+  sentAt: number
 }

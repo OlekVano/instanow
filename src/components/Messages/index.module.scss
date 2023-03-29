@@ -1,0 +1,25 @@
+@import '../../consts.scss';
+
+.main {
+  flex-grow: 1;
+  padding: $padding-2xl;
+  overflow-y: auto;
+}
+
+.messageContainer {
+  padding: $padding-lg 0;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: $gap-xs;
+}
+
+.right {
+  margin-left: auto;
+  align-items: end;
+}
+
+.text {
+  font-size: $text-lg;
+  width: fit-content;
+}

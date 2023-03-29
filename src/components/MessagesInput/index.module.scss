@@ -6,6 +6,7 @@
   position: relative;
   align-items: flex-end;
   border-top: solid $background-secondary 2px;
+  gap: $gap-s;
 }
 
 .inputWrapper {
