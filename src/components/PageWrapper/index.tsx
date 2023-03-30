@@ -1,5 +1,6 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { Chat, Message } from '../../types'
 import { UserContext } from '../../user-context'
 import { getProfileById, getFollowedProfiles, getChats } from '../../utils'
 import LeftColumn from '../LeftColumn'
@@ -9,9 +10,10 @@ import styles from './index.module.scss'
 
 export default function PageWrapper() {
   const userCtx = useContext(UserContext)
-
   const navigate = useNavigate()
   const location = useLocation()
+
+  const [socket, setSocket] = useState<WebSocket>()
 
   useEffect(manageAccountChange, [userCtx.currUser])
 
@@ -57,5 +59,29 @@ export default function PageWrapper() {
     getChats(userCtx.currUser).then(async function afterGotChats(chats) {
       userCtx.setChats(chats || [])
     })
+
+    initWebSocket()
+  }
+
+  function initWebSocket() {
+    const socket = new WebSocket(import.meta.env.VITE_WS_URL)
+
+    socket.addEventListener('open', async function onSocketOpen() {
+      socket.send(await userCtx.currUser!.getIdToken())
+      setSocket(socket)
+    })
+
+    socket.addEventListener('message', onSocketMessage)
+  }
+
+  function onSocketMessage(event: any) {
+    const message: Message = JSON.parse(event.data)
+    let newChats = [...userCtx.chats]
+    newChats.find(findChat)?.messages.push(message)
+    userCtx.setChats(newChats)
+
+    function findChat(chat: Chat) {
+      return chat.userIds.includes(message.authorId)
+    }
   }
 }
