@@ -13,3 +13,16 @@
   height: 100vh;
   overflow: hidden;
 }
+
+@media (max-width: 767px) {
+  .messagesPage {
+    padding: 0 $padding-lg;
+    padding-top: 100px;
+  }
+}
+
+@media (max-width: 700px) {
+  .messagesPage {
+    padding-top: 75px;
+  }
+}

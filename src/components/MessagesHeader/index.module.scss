@@ -9,9 +9,21 @@
 }
 
 $arrow-size: 42px;
+$arrow-size-small: 34px;
 
 .arrow {
   transform: scale(-1);
   width: $arrow-size;
   height: $arrow-size;
+}
+
+@media (max-width: 767px) {
+  .main {
+    padding: $padding-lg;
+  }
+
+  .arrow {
+    width: $arrow-size-small;
+    height: $arrow-size-small;
+  }
 }
