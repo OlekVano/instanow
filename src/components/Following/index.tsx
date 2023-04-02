@@ -19,7 +19,11 @@ export default function Following({ profile }: Props) {
       <div className={styles.container}>
         {profile.following.length !== 0 ? 
         profile.following.map(function renderFollowedProfile(p, i) {
-          return <ProfileSmall key={i} profile={p} />
+          return (
+            <Link to={`/profiles/${p.id}`}>
+              <ProfileSmall key={i} profile={p} />
+            </Link>
+          )
         })
         : <div className={styles.text}>You can find someone interesting <Link to='/people' className={styles.link}>here</Link></div>
         }

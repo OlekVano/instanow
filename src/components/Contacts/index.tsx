@@ -19,7 +19,11 @@ export default function Following({ chats }: Props) {
       <div className={styles.container}>
         {chats.length !== 0 ? 
         chats.map(function renderFollowedProfile(chat, i) {
-          return <ProfileSmall key={i} profile={chat.user} />
+          return (
+            <Link to={`/messages/${chat.user.id}`}>
+              <ProfileSmall key={i} profile={chat.user} />
+            </Link> 
+          ) 
         })
         : <div className={styles.text}>You can find someone to chat with <Link to='/people' className={styles.link}>here</Link></div>
         }
