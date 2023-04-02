@@ -9,6 +9,7 @@
 .messageContainer {
   padding: $padding-lg 0;
   width: fit-content;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   gap: $gap-xs;
@@ -22,4 +23,8 @@
 .text {
   font-size: $text-lg;
   width: fit-content;
+  max-width: calc(80%);
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  overflow: hidden;
 }

@@ -12,11 +12,12 @@ export default function MessagesSidebar() {
 
   if (userCtx.chats.length === 0) return null
 
+  console.log(location.pathname)
+
   return (
-    <div className={styles.main}>
+    <div className={`${styles.main} ${location.pathname !== '/messages' ? 'd-none d-lg-block' : styles.full}`}>
       {
         userCtx.chats.map(function mapChat(chat: Chat, i: number) {
-          console.log(chat)
           return (
             <Link to={`/messages/${chat.user.id}`} key={i} className={`${styles.button} ${chat.user.id === userId ? styles.selected : ''}`}>
               <ProfileSmall profile={chat.user} />

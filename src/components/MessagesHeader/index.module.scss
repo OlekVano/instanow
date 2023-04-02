@@ -3,4 +3,15 @@
 .main {
   padding: $padding-2xl;
   border-bottom: solid 2px $background-secondary;
+  display: flex;
+  align-items: center;
+  gap: $gap-lg;
+}
+
+$arrow-size: 42px;
+
+.arrow {
+  transform: scale(-1);
+  width: $arrow-size;
+  height: $arrow-size;
 }

@@ -24,3 +24,10 @@
   width: 8px;
   background-color: $color-primary;
 }
+
+@media (max-width: 990px) {
+  .full {
+    border: none;
+    flex-grow: 1;
+  }
+}
