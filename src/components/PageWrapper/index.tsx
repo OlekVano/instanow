@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { Chat, Message } from '../../types'
 import { UserContext } from '../../user-context'
@@ -15,7 +15,10 @@ export default function PageWrapper() {
 
   const [socket, setSocket] = useState<WebSocket>()
 
+  const chatsRef = useRef<Chat[]>(userCtx.chats)
+
   useEffect(manageAccountChange, [userCtx.currUser])
+  useEffect(manageChatsChange, [userCtx.chats])
 
   if (!userCtx.currUser) {
     return <NotLoggedInSection />
@@ -48,6 +51,10 @@ export default function PageWrapper() {
 
   // **************************************
 
+  function manageChatsChange() {
+    chatsRef.current = userCtx.chats
+  }
+
   function manageAccountChange() {
     if (!userCtx.currUser) return
     getProfileById(userCtx.currUser.uid, userCtx.currUser).then(async function afterGotProfile(profile) {
@@ -76,8 +83,8 @@ export default function PageWrapper() {
 
   function onSocketMessage(event: any) {
     const message: Message = JSON.parse(event.data)
-    let newChats = [...userCtx.chats]
-    newChats.find(findChat)?.messages.push(message)
+    let newChats = [...chatsRef.current]
+    newChats.find(findChat)!.messages.push(message)
     userCtx.setChats(newChats)
 
     function findChat(chat: Chat) {

@@ -29,9 +29,9 @@ export default function UnreadMessages({ chats }: Props) {
           {
             unreadChats.map(function renderFollowedProfile(chat, i) {
               return (
-                <div className={styles.container}>
+                <div className={styles.container} key={i}>
                   <div className={styles.wrapper2}>
-                    <ProfileSmall key={i} profile={chat[0].user} />
+                    <ProfileSmall profile={chat[0].user} />
                   </div>
                   <Circle text={chat[1].toString()} type={1} />
                 </div>

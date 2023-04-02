@@ -155,3 +155,15 @@ export async function sendMessage(text: string, image: string = '', chatId: stri
   )
   return res.status
 }
+
+export async function readMessages(chatId: string, currUser: User): Promise<number> {
+  const token = await currUser.getIdToken()
+  const res = await fetch(
+    `${import.meta.env.VITE_API_URL}/messages/${chatId}/read`,
+    {
+      method: 'POST',
+      headers: new Headers({'Authorization': `Bearer ${token}`}),
+    },
+  )
+  return res.status
+}

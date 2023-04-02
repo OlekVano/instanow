@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import { Chat } from '../../types'
 import { UserContext } from '../../user-context'
-import { getChatById } from '../../utils'
+import { getChatById, readMessages } from '../../utils'
 import Messages from '../Messages'
 import MessagesHeader from '../MessagesHeader'
 import MessagesInput from '../MessagesInput'
@@ -18,6 +18,7 @@ export default function MessagesRoom() {
   const [chat, setChat] = useState<Chat>()
 
   useEffect(manageRoomFetch, [userCtx.currUser, userCtx.currProfile, [location.pathname]])
+  useEffect(manageRead, [chat])
 
   return (
     <div className={styles.main}>
@@ -36,6 +37,24 @@ export default function MessagesRoom() {
   )
 
   // *************************
+
+  function manageRead() {
+    if (!chat) return
+    let newChats = userCtx.chats
+    let newChat = newChats.find(findChat) as Chat
+    for (let i = newChat.messages.length - 1; i >= 0; i--) {
+      if (newChat.messages[i].authorId === userCtx.currUser!.uid || newChat.messages[i].read) break
+      else newChat.messages[i].read = true
+    }
+    userCtx.setChats(newChats)
+    readMessages(chat.id, userCtx.currUser!).then()
+
+    // ********************************
+
+    function findChat(chat: Chat) {
+      return chat.userIds.includes(userId!)
+    }
+  }
 
   function manageRoomFetch() {
     if (!(userCtx.currUser && userCtx.currProfile)) return
