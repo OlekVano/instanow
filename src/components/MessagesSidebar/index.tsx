@@ -12,8 +12,6 @@ export default function MessagesSidebar() {
 
   if (userCtx.chats.length === 0) return null
 
-  console.log(location.pathname)
-
   return (
     <div className={`${styles.main} ${location.pathname !== '/messages' ? 'd-none d-lg-block' : styles.full}`}>
       {
