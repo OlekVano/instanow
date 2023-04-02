@@ -21,7 +21,7 @@ export default function Messages({ messages, profile }: Props) {
             <div className={`${styles.messageContainer} ${message.authorId === ctx.currUser?.uid ? styles.right : ''}`} key={i}>
               <ProfileSmall profile={message.authorId === profile.id ? profile : ctx.currProfile!} timestamp={timestampToStr(message.sentAt)} />
               <div className={styles.text}>
-                {message.text}
+                {message.text.trim()}
               </div>
               <div className={styles.timestamp}>{timestampToStr(message.sentAt)}</div>
             </div>

@@ -4,6 +4,7 @@ import { Chat, CurrentProfile, Profile } from '../../types'
 import Circle from '../Circle'
 import ProfileSmall from '../ProfileSmall'
 import styles from './index.module.scss'
+import { getNumUnreadMessages } from '../../utils'
 
 type Props = {
   chats: Chat[]
@@ -61,20 +62,5 @@ export default function UnreadMessages({ chats }: Props) {
     }
 
     return [unreadChats, totalUnreadMessages]
-
-    // *****************************
-
-    function getNumUnreadMessages(chat: Chat): number {
-      let nUnreadMessages = 0
-      for (let i = chat.messages.length - 1; i >= 0; i--) {
-        if (chat.messages[i].authorId !== chat.user.id || chat.messages[i].read === true) {
-          break
-        }
-        else {
-          nUnreadMessages++
-        }
-      }
-      return nUnreadMessages
-    }
   }
 }
