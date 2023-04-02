@@ -9,7 +9,7 @@ type Props = {
   chats: Chat[]
 }
 
-export default function Following({ chats }: Props) {
+export default function Contacts({ chats }: Props) {
   return (
     <div className={styles.main}>
       <div className={styles.headingContainer}>
@@ -20,8 +20,8 @@ export default function Following({ chats }: Props) {
         {chats.length !== 0 ? 
         chats.map(function renderFollowedProfile(chat, i) {
           return (
-            <Link to={`/messages/${chat.user.id}`}>
-              <ProfileSmall key={i} profile={chat.user} />
+            <Link to={`/messages/${chat.user.id}`} key={i}>
+              <ProfileSmall profile={chat.user} />
             </Link> 
           ) 
         })

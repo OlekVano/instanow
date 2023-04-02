@@ -20,8 +20,8 @@ export default function Following({ profile }: Props) {
         {profile.following.length !== 0 ? 
         profile.following.map(function renderFollowedProfile(p, i) {
           return (
-            <Link to={`/profiles/${p.id}`}>
-              <ProfileSmall key={i} profile={p} />
+            <Link to={`/profiles/${p.id}`} key={i}>
+              <ProfileSmall profile={p} />
             </Link>
           )
         })
