@@ -35,8 +35,6 @@ export default function MessagesInput({ chatId }: Props) {
     const status = await sendMessage(inputRef.current!.innerText, '', chatId, userCtx.currUser!)
     if (status !== 200) return
     let newChats = [...userCtx.chats]
-    console.log('newChats', newChats)
-    console.log('find', newChats.find(findChat))
     newChats.find(findChat)?.messages.push({
       text: inputRef.current!.innerText,
       image: '',

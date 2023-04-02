@@ -47,17 +47,6 @@ export default function UnreadMessages({ chats }: Props) {
   // ***********************************
 
   function getUnreadChats(chats: Chat[]): [[Chat, number][], number] {
-    // let unreadChats = chats.map(mapChat)
-    // unreadChats = unreadChats.filter(function filterChat(chat) {return chat}) as Chat[]
-    // console.log('unreadChats', unreadChats)
-    // return unreadChats as Chat[]
-
-    // // **************************
-
-    // function mapChat(chat: Chat) {
-    //   return (chat.messages[0].authorId === chat.user.id && !chat.messages[0].read) ? chat : null
-    // }
-
     let unreadChats: [Chat, number][] = []
     let totalUnreadMessages = 0
 

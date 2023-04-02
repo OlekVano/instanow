@@ -137,14 +137,12 @@ export async function getChatById (currUser: User, userId: string): Promise<Chat
 }
 
 export async function sendMessage(text: string, image: string = '', chatId: string, currUser: User): Promise<number> {
-  console.log('text', text)
   const token = await currUser.getIdToken()
   const json = JSON.stringify({
     text: text,
     image: image
   })
 
-  console.log(json)
   const res = await fetch(
     `${import.meta.env.VITE_API_URL}/messages/${chatId}`,
     {
