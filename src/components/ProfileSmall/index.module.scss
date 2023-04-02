@@ -4,12 +4,15 @@
   display: flex;
   gap: $gap-xs;
   align-items: center;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 .nameAndTagContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow-x: hidden;
 }
 
 .name {
@@ -21,4 +24,11 @@
   font-size: $text-md;
   font-weight: $weight-lg;
   color: $text-color-secondary;
+}
+
+.name,
+.tag {
+  text-overflow: ellipsis;
+  overflow-x: hidden; 
+  white-space: nowrap;
 }
