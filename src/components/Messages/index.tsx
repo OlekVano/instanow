@@ -23,6 +23,7 @@ export default function Messages({ messages, profile }: Props) {
               <div className={styles.text}>
                 {message.text}
               </div>
+              <div className={styles.timestamp}>{timestampToStr(message.sentAt)}</div>
             </div>
           )
         })
