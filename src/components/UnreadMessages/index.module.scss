@@ -1,0 +1,33 @@
+@import '../../consts.scss';
+
+.headingContainer {
+  display: flex;
+  justify-content: space-between;
+  padding-right: $padding-2xl;
+}
+
+.heading {
+  font-size: $text-lg;
+  font-weight: $weight-lg;
+  color: $text-color-secondary;
+}
+
+.wrapper {
+  margin-top: $gap-xl;
+  background-color: $background-content;
+  padding: $padding-2xl;
+  border-radius: $border-radius-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $gap-xl;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: $gap-s;
+}
+
+.wrapper2 {
+  flex-grow: 1;
+}
