@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { ChangeEvent, ChangeEventHandler, useContext, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ProfileWithoutPosts } from '../../types'
 import { UserContext } from '../../user-context'
@@ -6,11 +6,16 @@ import { getProfiles } from '../../utils'
 import CardWrapper from '../CardWrapper'
 import ProfileMedium from '../ProfileMedium'
 import styles from './index.module.scss'
+import Input from '../Input'
+import Fuse from 'fuse.js'
 
 export default function PeopleSection() {
   const [profiles, setProfiles] = useState<ProfileWithoutPosts[]>([])
-  
+  const [searchResults, setSearchResults] = useState<ProfileWithoutPosts[]>([])
+
   const userCtx = useContext(UserContext)
+
+  const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(function fetchProfiles() {
     if (!userCtx.currUser) return
@@ -20,19 +25,61 @@ export default function PeopleSection() {
   }, [userCtx.currUser])
 
   return (
-    <CardWrapper>
-      <div className={styles.main}>
-        {
-          profiles.map(function renderProfile(profile: ProfileWithoutPosts, i: number) {
-            return (
-              <Link className={styles.profileWrapper} key={i} to={`/profiles/${profile.id}`}>
-                <ProfileMedium profile={profile} />
-              </Link>
-            )
-
-          })
-        }
-      </div>
-    </CardWrapper>
+    <div className={styles.container}>
+      <CardWrapper>
+        <input type='text' className={styles.search} placeholder='Find someone...' ref={inputRef} onChange={search} />
+      </CardWrapper>
+      <CardWrapper style={{overflowY: 'auto'}}>
+        <div className={styles.main}>
+          {
+            searchResults.length === 0 ?
+            profiles.map(function renderProfile(profile: ProfileWithoutPosts, i: number) {
+              return (
+                <Link className={styles.profileWrapper} key={i} to={`/profiles/${profile.id}`}>
+                  <ProfileMedium profile={profile} />
+                  <div className={styles.text}>
+                    {profile.bio}
+                  </div>
+                </Link>
+              )
+            })
+            :
+            <>
+              <div className={styles.resultsText}>{`${searchResults.length} results`}</div>
+              {
+                searchResults.map(function renderProfile(profile: ProfileWithoutPosts, i: number) {
+                  return (
+                    <Link className={styles.profileWrapper} key={i} to={`/profiles/${profile.id}`}>
+                      <ProfileMedium profile={profile} />
+                      <div className={styles.text}>
+                        {profile.bio}
+                      </div>
+                    </Link>
+                  )
+                })
+              }
+            </>
+          }
+        </div>
+      </CardWrapper>
+    </div>
   )
+
+  // ********************************
+
+  function search(e: ChangeEvent<HTMLInputElement>) {
+    const searchOptions = {
+      keys: [
+        'username',
+        'tag',
+        'bio',
+      ]
+    }
+
+    const fuse = new Fuse(profiles, searchOptions)
+
+    setSearchResults(fuse.search(e.target.value).map(function mapSearchResults(result) {
+      return result.item
+    }) )
+  }
 }
