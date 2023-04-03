@@ -21,18 +21,20 @@ import MessagesSection from './components/MessagesSection'
 import PeopleSection from './components/PeopleSection'
 import MessagesWrapper from './components/MessagesWrapper'
 import MessagesRoom from './components/MessagesRoom'
+import { sleep } from './utils'
 
 function App() {
   const [currProfile, setCurrProfile] = useState<CurrentProfile | undefined>()
   const [currUser] = useAuthState(auth)
   const [modal, setModal] = useState()
   const [showMenu, setShowMenu] = useState(false)
+  const [menuVisible, setMenuVisible] = useState(false)
+
   const [chats, setChats] = useState<Chat[]>([])
 
   const location = useLocation()
 
   useEffect(managePageChange, [location.pathname])
-
   useEffect(manageShowMenuChange, [showMenu])
 
   return (
@@ -55,11 +57,11 @@ function App() {
         {
           ['/login', '/sign-up'].map((path: string, i: number) => <Route path={path} key={i} element={<Header closeMenu={closeMenu} openMenu={openMenu} showMenu={showMenu} rightSideEmpty={true} />} />)
         }
-        <Route path='*' element={<Header closeMenu={closeMenu} openMenu={openMenu} showMenu={showMenu} />} />
+        <Route path='*' element={<Header closeMenu={closeMenu} openMenu={openMenu} showMenu={menuVisible} />} />
       </Routes>
       <div className={styles.contentContainer}>
         {
-          showMenu ? <MobileMenu /> : null
+          showMenu ? <MobileMenu visible={menuVisible} /> : null
         }
         <Routes>
           <Route path='/' element={<PageWrapper />}>
@@ -87,8 +89,13 @@ function App() {
   // ****************************
 
   function manageShowMenuChange() {
-    if (showMenu) document.body.style.overflowY = 'hidden'
-    else document.body.style.overflowY = 'auto'
+    if (showMenu) {
+      document.body.style.overflowY = 'hidden'
+      setMenuVisible(true)
+    }
+    else {
+      document.body.style.overflowY = 'auto'
+    }
   }
 
   function managePageChange() {
@@ -100,7 +107,8 @@ function App() {
   }
 
   function closeMenu() {
-    setShowMenu(false)
+    setMenuVisible(false)
+    sleep(200).then(() => setShowMenu(false))
   }
 }
 

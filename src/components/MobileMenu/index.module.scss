@@ -5,6 +5,11 @@
   position: fixed;
   width: 100%;
   height: 100%;
+  background-color: rgba($color: black, $alpha: 0);
+  transition-duration: 100ms;
+}
+
+.main.visible {
   background-color: rgba($color: black, $alpha: 0.5);
 }
 
@@ -16,6 +21,12 @@
   width: 250px;
   max-width: 100%;
   overflow-y: auto;
+  transform: translateX(100vw);
+  transition-duration: 200ms;
+}
+
+.wrapper.visible {
+  transform: translateX(0);
 }
 
 .container {

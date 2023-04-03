@@ -178,3 +178,7 @@ export function getNumUnreadMessages(chat: Chat): number {
   }
   return nUnreadMessages
 }
+
+export function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
