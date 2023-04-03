@@ -34,7 +34,7 @@ export default function PageWrapper() {
             </div>
           }
         </div>
-        <div className={`${styles.paddingTop} ${location.pathname.startsWith('/messages') ? `${styles.heightScreen} col-12 col-md-8 col-lg-9` : 'col-12 col-md-8 col-lg-9 col-xl-6'} ${location.pathname === '/people' ? styles.heightScreen : ''}`}>
+        <div className={`${styles.paddingTop} ${location.pathname.startsWith('/messages') ? `${styles.messagesPage} col-12 col-md-8 col-lg-9` : 'col-12 col-md-8 col-lg-9 col-xl-6'} ${location.pathname === '/people' ? styles.heightScreen : ''}`}>
           <Outlet />
         </div>
         {
