@@ -3,7 +3,12 @@
   z-index: 10000;
   width: 100%;
   height: 100%;
-  background-color: rgba($color: black, $alpha: 0.5);
+  background-color: rgba($color: black, $alpha: 0);
   display: grid;
   place-items: center;
+  transition-duration: 100ms;
+}
+
+.main.visible {
+  background-color: rgba($color: black, $alpha: 0.5);
 }

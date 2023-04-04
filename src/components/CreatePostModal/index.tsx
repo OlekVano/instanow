@@ -7,13 +7,15 @@ import ProfilePicture from '../ProfilePicture';
 import styles from './index.module.scss'
 import landscapeIcon from '../../assets/picture.png'
 import { ModalContext } from '../../modal-context';
-import { generateUniqueId } from '../../utils';
+import { generateUniqueId, sleep } from '../../utils';
 import { useNavigate } from 'react-router-dom';
 import MultilineInput from '../MultilineInput';
 
 export default function CreatePostModal() {
   const userCtx = useContext(UserContext)
   const modalCtx = useContext(ModalContext)
+
+  const [visible, setVisible] = useState(false)
 
   const [pictureInputId] = useState(generateUniqueId())
   const [picture, setPicture] = useState<string>()
@@ -23,17 +25,18 @@ export default function CreatePostModal() {
 
   const inputRef = useRef<HTMLDivElement>(null)
 
+  useEffect(function makeVisible() {setVisible(true)}, [])
+
   useEffect(() => {
     inputRef.current?.focus()
   }, [inputRef.current])
 
   return (
-    <Modal onExit={closeModal}>
-      <CardWrapper>
+    <Modal onExit={closeModal} visible={visible}>
+      <CardWrapper style={visible ? {transform: 'translateY(0)', transitionDuration: '300ms'} : {transform: 'translateY(-100vh)', transitionDuration: '300ms'}}>
         <div className={styles.main}>
           <div className={styles.container}>
             <ProfilePicture size='md' src={userCtx.currProfile?.profilePicture} />
-            {/* <textarea value={text} placeholder="What's happening?" className={styles.input} onChange={manageTextChange} /> */}
             <div className={styles.inputWrapper}>
               <MultilineInput reference={inputRef} onInput={manageTextChange} />
             </div>
@@ -63,7 +66,11 @@ export default function CreatePostModal() {
   // *************************************
 
   function closeModal() {
-    modalCtx.setModal('')
+    setVisible(false)
+    sleep(200).then(function setModalNone() {
+      modalCtx.setModal('')
+    })
+
   }
 
   async function createPost() {

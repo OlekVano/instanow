@@ -3,10 +3,11 @@ import { EventHandler, MouseEvent, MouseEventHandler, PropsWithChildren, useEffe
 import { createPortal } from 'react-dom'
 
 type Props = {
-  onExit?: Function
+  onExit?: Function,
+  visible?: boolean
 }
 
-export default function Modal({ children, onExit=function(){} }: PropsWithChildren & Props) {
+export default function Modal({ children, onExit=function(){}, visible=true }: PropsWithChildren & Props) {
   const elRef = useRef<HTMLDivElement | null>(null)
   if (!elRef.current) {
     elRef.current = document.createElement('div')
@@ -26,7 +27,7 @@ export default function Modal({ children, onExit=function(){} }: PropsWithChildr
     }
   }, [])
 
-  return createPortal(<div className={styles.main} onClick={onClick}>{children}</div>, elRef.current as HTMLElement)
+  return createPortal(<div className={`${styles.main} ${visible ? styles.visible : ''}`} onClick={onClick}>{children}</div>, elRef.current as HTMLElement)
 
   // ****************************
 
