@@ -33,7 +33,7 @@ export default function CreatePostModal() {
 
   return (
     <Modal onExit={closeModal} visible={visible}>
-      <CardWrapper style={visible ? {transform: 'translateY(0)', transitionDuration: '300ms'} : {transform: 'translateY(-100vh)', transitionDuration: '300ms'}}>
+      <CardWrapper style={visible ? {transform: 'translateY(0)', transitionDuration: '200ms'} : {transform: 'translateY(-100vh)', transitionDuration: '200ms'}}>
         <div className={styles.main}>
           <div className={styles.container}>
             <ProfilePicture size='md' src={userCtx.currProfile?.profilePicture} />
