@@ -1,7 +1,7 @@
 import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react'
 import { Comment, Profile, WithComments } from '../../types'
 import { UserContext } from '../../user-context'
-import { generateUniqueId } from '../../utils'
+import { generateUniqueId, sleep } from '../../utils'
 import Button from '../Button'
 import CardWrapper from '../CardWrapper'
 import Modal from '../Modal'
@@ -21,14 +21,18 @@ export default function CommentModal({ onExit=function(){}, onComment, postId, q
   const [text, setText] = useState('')
   const inputRef = useRef<HTMLDivElement>(null)
 
+  const [visible, setVisible] = useState(false)
+
+  useEffect(function makeVisible() {setVisible(true)}, [])
+
   useEffect(() => {
     inputRef.current?.focus()
   }, [inputRef])
 
   return (
-    <Modal onExit={onExit}>
-      <CardWrapper>
-      <div className={styles.main}>
+    <Modal onExit={closeModal} visible={visible}>
+      <CardWrapper style={visible ? {transform: 'translateY(0)', transitionDuration: '200ms'} : {transform: 'translateY(-100vh)', transitionDuration: '200ms'}}>
+        <div className={styles.main}>
           <div className={styles.container}>
             <ProfilePicture size='md' src={userCtx.currProfile?.profilePicture} />
             <div className={styles.inputContainer}>
@@ -36,7 +40,7 @@ export default function CommentModal({ onExit=function(){}, onComment, postId, q
             </div>
           </div>
           <div className={styles.buttonsContainer2}>
-            <Button text='Close' type={2} func={onExit} />
+            <Button text='Close' type={2} func={closeModal} />
             <Button text='Comment' func={leaveComment} />
           </div>
         </div>
@@ -45,6 +49,13 @@ export default function CommentModal({ onExit=function(){}, onComment, postId, q
   )
 
   // ***********************************
+
+  function closeModal() {
+    setVisible(false)
+    sleep(200).then(function exit() {
+      onExit()
+    })
+  }
 
   function manageTextChange(e: ChangeEvent<HTMLTextAreaElement>) {
     setText(e.target.innerText)
