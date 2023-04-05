@@ -15,6 +15,7 @@ export default function SettingsSection() {
   const navigate = useNavigate()
 
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const imageTakeInputRef = useRef<HTMLInputElement>(null)
   const bioInputRef = useRef<HTMLInputElement>(null)
 
   const defaultProfile: CurrentProfile = {
@@ -42,15 +43,15 @@ export default function SettingsSection() {
         <ProfilePicture size='xxl' src={profile.profilePicture} />
         <div className={styles.buttonsContainer}>
           <Button width='150px' text='Upload picture' func={triggerImageUpload} />
-          <input ref={fileInputRef} onChange={manageImageUpload} type='file' accept='image/*' style={{display: 'none'}} /> 
-          {/* <Button width='150px' text='Take picture' /> */}
+          <input ref={fileInputRef} onChange={manageImageUpload} type='file' accept='image/*' style={{display: 'none'}} />
+          <input ref={imageTakeInputRef} onChange={manageImageUpload} type='file' accept='image/*;capture=camera' style={{display: 'none'}} />
+          <Button width='150px' text='Take picture' func={triggerImageTake} />
         </div>
         <div className={styles.inputContainer}>
           <div className={styles.inputLabel}>Username</div>
           <div className={styles.inputWrapper}>
             <Input value={profile.username} func={manageUsernameInputChange} />
           </div>
-
         </div>
         <div className={styles.inputContainer}>
           <div className={styles.inputLabel}>Tag</div>
@@ -137,9 +138,13 @@ export default function SettingsSection() {
     }
   }
 
+  function triggerImageTake() {
+    imageTakeInputRef.current!.click()
+  }
+
   function triggerImageUpload() {
     // document.getElementById(profilePictureInputId)?.click()
-    fileInputRef.current?.click()
+    fileInputRef.current!.click()
   }
 
   function manageImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
