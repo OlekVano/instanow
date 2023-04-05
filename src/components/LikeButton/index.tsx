@@ -18,7 +18,8 @@ export default function LikeButton({ likes, postId, query }: Props) {
 
   return (
     <div role='button' className={styles.main} onClick={manageButtonClick}>
-      <img className={styles.image} src={liked ? heartFilled : heartOutline} />
+      <div className={styles.image} style={{backgroundImage: liked ? `url(${heartFilled})` : `url(${heartOutline})`}}></div>
+      {/* <img className={styles.image} src={liked ? heartFilled : heartOutline} /> */}
       <div className={styles.nLikes}>{nLikes > 0 ? nLikes : ''}</div>
     </div>
   )

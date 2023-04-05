@@ -15,8 +15,11 @@
   min-height: 42px;
   aspect-ratio: 1/1;
   filter: $filter-image-tertiary;
+  background-size: cover;
   pointer-events: none;
   user-select: none;
+  transition-duration: 150ms;
+  transition-property: background-image;
 }
 
 .nLikes {
