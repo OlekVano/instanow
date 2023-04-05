@@ -33,7 +33,7 @@ export default function CommentRender({ postId, comment, query=[], updateComment
       <div className={styles.text}>{comment.text}</div>
       <div className={styles.container}>
         <LikeButton postId={postId} likes={comment.likes} query={query} />
-        <TextButton text='Reply to this comment' func={openCommentModal} />
+        <TextButton text='Reply' func={openCommentModal} />
       </div>
       {
         comment.comments.length === 0 ? null :
