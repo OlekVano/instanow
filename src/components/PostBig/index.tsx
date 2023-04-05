@@ -12,6 +12,8 @@ import ProfileMedium from '../ProfileMedium'
 import ProfilePicture from '../ProfilePicture'
 import TextButton from '../TextButton'
 import styles from './index.module.scss'
+import comment from '../../assets/comment.png'
+import ButtonSmall from '../ButtonSmall'
 
 type Props = {
   post: Post
@@ -55,9 +57,15 @@ export default function PostBig({ post }: Props) {
       <div role='button' className={styles.commentInputContainer} onClick={openCommentModal}>
         <ProfilePicture src={userCtx.currProfile?.profilePicture} size='s' />
         <div className={styles.input}>
-          Leave your comment...
+          Speak up...
         </div>
-        <Button text='Comment' />
+        <div className='d-md-none d-block'>
+            <ButtonSmall image={comment} />
+        </div>
+        <div className='d-none d-md-block'>
+          <Button text='Comment' />
+        </div>
+
       </div>
     </div>
   )
