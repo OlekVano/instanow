@@ -1,4 +1,4 @@
-import { getAuth, signInWithPopup, GoogleAuthProvider, User } from 'firebase/auth'
+import { getAuth, signInWithPopup, GoogleAuthProvider, User, signInWithEmailAndPassword, UserCredential } from 'firebase/auth'
 import { auth } from '../firebase-setup'
 import { v4 } from 'uuid'
 import { Chat, Comment, CommentWithoutAuthor, Filter, Post, Profile, ProfileWithoutPosts } from './types'
@@ -213,4 +213,8 @@ export function getFilteredImage(filter: Filter, dataURL: string): Promise<strin
   // The line below calls image.onload
   img.src = dataURL
   })
+}
+
+export async function loginMock() {
+  await signInWithEmailAndPassword(auth, 'oleksvano@gmail.com', 'programmingRules')
 }

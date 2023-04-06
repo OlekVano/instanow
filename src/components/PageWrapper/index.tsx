@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { Chat, Message } from '../../types'
 import { UserContext } from '../../user-context'
-import { getProfileById, getFollowedProfiles, getChats } from '../../utils'
+import { getProfileById, getFollowedProfiles, getChats, loginMock } from '../../utils'
 import LeftColumn from '../LeftColumn'
 import NotLoggedInSection from '../NotLoggedInSection'
 import RightColumn from '../RightColumn'
@@ -56,9 +56,18 @@ export default function PageWrapper() {
   }
 
   function manageAccountChange() {
-    if (!userCtx.currUser) return
+    if (!userCtx.currUser && !localStorage.getItem('visited')) {
+      loginMock().then(function afterLogged() {
+        localStorage.setItem('visited', 'true')
+      })
+      return
+    }
+
+    else if (!userCtx.currUser) return
+
     getProfileById(userCtx.currUser.uid, userCtx.currUser).then(async function afterGotProfile(profile) {
       if (!profile) navigate('/settings')
+
       else userCtx.setCurrProfile(Object.assign({
         following: await getFollowedProfiles(userCtx.currUser!) || []
       }, profile))
