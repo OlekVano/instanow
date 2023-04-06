@@ -3,7 +3,7 @@ import Button from '../Button'
 import ProfilePicture from '../ProfilePicture'
 import styles from './index.module.scss'
 import { useContext, useEffect, useRef, useState } from 'react'
-import { getFilteredImage, getProfileById } from '../../utils'
+import { downscaleImage, getFilteredImage, getProfileById } from '../../utils'
 import { CurrentProfile, Filter, Profile } from '../../types'
 import { UserContext } from '../../user-context'
 import { useNavigate } from 'react-router-dom'
@@ -174,8 +174,7 @@ export default function SettingsSection() {
   }
 
   function manageImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const maxWidth = 2000
-    const maxHeight = 2000
+    const maxImageSize = 1600
 
     if (!e.target.files) return
     const file = e.target.files[0]
@@ -184,16 +183,12 @@ export default function SettingsSection() {
     fileReader.onload = () => {
       const image = new Image()
       image.onload = () => {
-        if (image.width > maxWidth || image.height > maxHeight) {
-          alert(`Maximum image resolution allowed is ${maxWidth}x${maxHeight}px.\nYour image resolution is ${image.width}x${image.height}px.`)
-          fileInputRef.current!.value = ''
-        }
-        else {
-          setProfilePicture(fileReader.result as string)
-          setOriginalProfilePicture(fileReader.result as string)
+        downscaleImage(fileReader.result as string, maxImageSize).then(function afterImageDownscale(dataURL: string) {
+          setProfilePicture(dataURL)
+          setOriginalProfilePicture(dataURL)
           setShowFilters(true)
           setFilter(1)
-        } 
+        })
       }
       // The line below calls image.onload
       image.src = fileReader.result as string

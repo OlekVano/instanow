@@ -218,3 +218,32 @@ export function getFilteredImage(filter: Filter, dataURL: string): Promise<strin
 export async function loginMock() {
   await signInWithEmailAndPassword(auth, 'oleksvano@gmail.com', 'programmingRules')
 }
+
+export function downscaleImage(dataURL: string, size: number): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    img.onload = () => {
+      const canvas = document.createElement('canvas')
+      let width = img.width
+      let height = img.height
+      if (width > height) {
+        if (width > size) {
+          height *= size / width
+          width = size
+        }
+      } else {
+        if (height > size) {
+          width *= size / height
+          height = size
+        }
+      }
+      canvas.width = width
+      canvas.height = height
+      const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
+      ctx.drawImage(img, 0, 0, width, height)
+      resolve(canvas.toDataURL())
+    }
+    img.onerror = reject
+    img.src = dataURL
+  })
+}
