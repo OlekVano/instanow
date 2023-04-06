@@ -1,7 +1,8 @@
 import { getAuth, signInWithPopup, GoogleAuthProvider, User } from 'firebase/auth'
 import { auth } from '../firebase-setup'
 import { v4 } from 'uuid'
-import { Chat, Comment, CommentWithoutAuthor, Post, Profile, ProfileWithoutPosts } from './types'
+import { Chat, Comment, CommentWithoutAuthor, Filter, Post, Profile, ProfileWithoutPosts } from './types'
+import { imgFilters } from './consts'
 
 export function signInWithGoogle(callback?: Function) {
   const provider = new GoogleAuthProvider()
@@ -181,4 +182,35 @@ export function getNumUnreadMessages(chat: Chat): number {
 
 export function sleep(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+export function getFilteredImage(filter: Filter, dataURL: string): Promise<string> {
+  return new Promise(function getFilteredImagePromise(resolve, _) {
+    let img = new Image()
+
+    img.onload = function() {
+      let canvas = document.createElement('canvas')
+      canvas.width = img.width
+      canvas.height = img.height
+    
+      let ctx = canvas.getContext('2d') as CanvasRenderingContext2D
+    
+      // draw original image onto canvas
+      ctx.drawImage(img, 0, 0)
+    
+      // apply CSS filters to a new canvas
+      let filteredCanvas = document.createElement('canvas')
+      filteredCanvas.width = img.width
+      filteredCanvas.height = img.height
+      let filteredCtx = filteredCanvas.getContext('2d') as CanvasRenderingContext2D
+      filteredCtx.filter = imgFilters[filter]
+      filteredCtx.drawImage(canvas, 0, 0)
+    
+      const filteredDataURL = filteredCanvas.toDataURL()
+      resolve(filteredDataURL)
+    }
+
+  // The line below calls image.onload
+  img.src = dataURL
+  })
 }

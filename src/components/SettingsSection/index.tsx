@@ -3,7 +3,7 @@ import Button from '../Button'
 import ProfilePicture from '../ProfilePicture'
 import styles from './index.module.scss'
 import { useContext, useEffect, useRef, useState } from 'react'
-import { getProfileById } from '../../utils'
+import { getFilteredImage, getProfileById } from '../../utils'
 import { CurrentProfile, Filter, Profile } from '../../types'
 import { UserContext } from '../../user-context'
 import { useNavigate } from 'react-router-dom'
@@ -84,40 +84,19 @@ export default function SettingsSection() {
 
   // *********************************
 
-  function getFilteredImage(): Promise<string> {
-    return new Promise(function getFilteredImagePromise(resolve, _) {
-      let img = new Image()
-
-      img.onload = function() {
-        let canvas = document.createElement('canvas')
-        canvas.width = img.width
-        canvas.height = img.height
-      
-        let ctx = canvas.getContext('2d') as CanvasRenderingContext2D
-      
-        // draw original image onto canvas
-        ctx.drawImage(img, 0, 0)
-      
-        // apply CSS filters to a new canvas
-        let filteredCanvas = document.createElement('canvas')
-        filteredCanvas.width = img.width
-        filteredCanvas.height = img.height
-        let filteredCtx = filteredCanvas.getContext('2d') as CanvasRenderingContext2D
-        filteredCtx.filter = imgFilters[filter]
-        filteredCtx.drawImage(canvas, 0, 0)
-      
-        const filteredDataURL = filteredCanvas.toDataURL()
-        resolve(filteredDataURL)
-      }
-
-    // The line below calls image.onload
-    img.src = originalProfilePicture
-    })
-  }
-
   function undoChanges() {
-    if (ctx.currProfile) setProfile(ctx.currProfile)
-    else setProfile(defaultProfile)
+    if (ctx.currProfile) {
+      setProfile(ctx.currProfile)
+      setOriginalProfilePicture(ctx.currProfile.profilePicture)
+    } 
+
+    else {
+      setProfile(defaultProfile)
+      setOriginalProfilePicture(defaultProfile.profilePicture)
+    }
+
+    setShowFilters(false)
+    setFilter(1)
   }
 
   function manageContextChange() {
@@ -160,7 +139,7 @@ export default function SettingsSection() {
 
     let profileToPost = Object.fromEntries(Object.entries(profile).filter(entry => requiredProfileKeys.includes(entry[0])))
     profileToPost.bio = bioInputRef.current!.innerText
-    profileToPost.profilePicture = await getFilteredImage()
+    profileToPost.profilePicture = await getFilteredImage(filter, originalProfilePicture)
 
     const json = JSON.stringify(profileToPost)
 
@@ -175,6 +154,7 @@ export default function SettingsSection() {
       const newProfile = await getProfileById(ctx.currUser!.uid, ctx.currUser!)
       ctx.setCurrProfile(Object.assign(profile, newProfile))
       setShowFilters(false)
+      setFilter(1)
       navigate('/')
     }
   }
@@ -203,6 +183,7 @@ export default function SettingsSection() {
           setProfilePicture(fileReader.result as string)
           setOriginalProfilePicture(fileReader.result as string)
           setShowFilters(true)
+          setFilter(1)
         } 
       }
       // The line below calls image.onload
