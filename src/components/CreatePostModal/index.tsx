@@ -7,9 +7,12 @@ import ProfilePicture from '../ProfilePicture';
 import styles from './index.module.scss'
 import landscapeIcon from '../../assets/picture.png'
 import { ModalContext } from '../../modal-context';
-import { generateUniqueId, sleep } from '../../utils';
+import { generateUniqueId, getFilteredImage, sleep } from '../../utils';
 import { useNavigate } from 'react-router-dom';
 import MultilineInput from '../MultilineInput';
+import { imgFilters } from '../../consts';
+import { Filter } from '../../types';
+import Filters from '../Filters';
 
 export default function CreatePostModal() {
   const userCtx = useContext(UserContext)
@@ -20,6 +23,7 @@ export default function CreatePostModal() {
   const [pictureInputId] = useState(generateUniqueId())
   const [picture, setPicture] = useState<string>()
   const [text, setText] = useState('')
+  const [filter, setFilter] = useState<Filter>(1)
 
   const navigate = useNavigate()
 
@@ -42,15 +46,17 @@ export default function CreatePostModal() {
             </div>
           </div>
           {
-            picture ? 
-            <img src={picture} className={styles.picture} />
+            picture ?
+            <>
+              <img src={picture} className={styles.picture} style={{filter: imgFilters[filter]}} />
+              <Filters img={picture} filter={filter} setFilter={setFilter} />
+            </>
             :
             <div className={styles.photoContainer}>
               <img src={landscapeIcon} className={styles.image} />
               <div className={styles.buttonsContainer}>
                 <Button text='Upload picture' width='150px' func={triggerImageUpload} />
                 <input id={pictureInputId} onChange={manageImageUpload} type='file' accept='image/*' style={{display: 'none'}} /> 
-                {/* <Button text='Take picture' width='150px' /> */}
               </div>
             </div>
           }
@@ -81,7 +87,7 @@ export default function CreatePostModal() {
 
     const json = JSON.stringify({
       text: text,
-      picture: picture
+      picture: picture ? await getFilteredImage(filter, picture!) : picture
     })
 
     const res = await fetch(`${import.meta.env.VITE_API_URL}/posts`, {
