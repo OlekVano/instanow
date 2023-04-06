@@ -11,6 +11,8 @@
   width: 100%;
   display: flex;
   justify-content: space-evenly;
+  gap: $gap-3xl;
+  flex-wrap: wrap;
 }
 
 .inputContainer {

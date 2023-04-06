@@ -11,11 +11,13 @@ import CardWrapper from '../CardWrapper'
 import MultilineInput from '../MultilineInput'
 import Filters from '../Filters'
 import { imgFilters } from '../../consts'
+import { isMobile } from 'react-device-detect'
 
 export default function SettingsSection() {
   const navigate = useNavigate()
 
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const takePhotoInputRef = useRef<HTMLInputElement>(null)
   const bioInputRef = useRef<HTMLInputElement>(null)
 
   const defaultProfile: CurrentProfile = {
@@ -47,13 +49,16 @@ export default function SettingsSection() {
         <div style={{filter: imgFilters[filter]}}>
           <ProfilePicture size='xxl' src={profile.profilePicture} />
         </div>
-
         {
           showFilters ? <Filters img={profile.profilePicture} filter={filter} setFilter={setFilter} /> : null
         }
         <div className={styles.buttonsContainer}>
           <Button width='150px' text='Upload picture' func={triggerImageUpload} />
+          {
+            isMobile ? <Button width='150px' text='Take picture' func={triggerTakePhoto} /> : null
+          }
           <input ref={fileInputRef} onChange={manageImageUpload} type='file' accept='image/*' style={{display: 'none'}} />
+          <input ref={takePhotoInputRef} onChange={manageImageUpload} type='file' accept='image/*;capture=camera' style={{display: 'none'}} />
         </div>
         <div className={styles.inputContainer}>
           <div className={styles.inputLabel}>Username</div>
@@ -83,6 +88,10 @@ export default function SettingsSection() {
   )
 
   // *********************************
+
+  function triggerTakePhoto() {
+
+  }
 
   function undoChanges() {
     if (ctx.currProfile) {
