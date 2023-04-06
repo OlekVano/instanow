@@ -41,6 +41,8 @@
 .buttonsContainer {
   display: flex;
   justify-content: space-around;
+  gap: $gap-3xl;
+  flex-wrap: wrap;
 }
 
 .buttonsContainer2 {

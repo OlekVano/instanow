@@ -13,6 +13,7 @@ import MultilineInput from '../MultilineInput';
 import { imgFilters } from '../../consts';
 import { Filter } from '../../types';
 import Filters from '../Filters';
+import { isMobile } from 'react-device-detect';
 
 export default function CreatePostModal() {
   const userCtx = useContext(UserContext)
@@ -27,7 +28,8 @@ export default function CreatePostModal() {
 
   const navigate = useNavigate()
 
-  const inputRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const takePictureInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(function makeVisible() {setVisible(true)}, [])
 
@@ -56,7 +58,12 @@ export default function CreatePostModal() {
               <img src={landscapeIcon} className={styles.image} />
               <div className={styles.buttonsContainer}>
                 <Button text='Upload picture' width='150px' func={triggerImageUpload} />
-                <input id={pictureInputId} onChange={manageImageUpload} type='file' accept='image/*' style={{display: 'none'}} /> 
+                <Button text='Take picture' width='150px' func={triggerTakePicture} />
+                {
+                  isMobile ? <Button text='Take picture' width='150px' func={triggerTakePicture} /> : null
+                }
+                <input id={pictureInputId} onChange={manageImageUpload} type='file' accept='image/*' style={{display: 'none'}} />
+                <input ref={takePictureInputRef} onChange={manageImageUpload} type='file' accept='image/*;capture=camera' style={{display: 'none'}} /> 
               </div>
             </div>
           }
@@ -70,6 +77,10 @@ export default function CreatePostModal() {
   )
 
   // *************************************
+
+  function triggerTakePicture() {
+    takePictureInputRef.current!.click()
+  }
 
   function closeModal() {
     setVisible(false)
