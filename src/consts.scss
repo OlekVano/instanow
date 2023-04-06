@@ -32,6 +32,12 @@ $filter-image-primary: invert(44%) sepia(50%) saturate(5385%) hue-rotate(201deg)
 $filter-image-secondary: invert(68%) sepia(13%) saturate(334%) hue-rotate(176deg) brightness(101%) contrast(87%);
 $filter-image-tertiary: invert(49%) sepia(77%) saturate(4747%) hue-rotate(329deg) brightness(100%) contrast(102%);
 
+$filter-photo-1: brightness(100%) contrast(100%) grayscale(0%) hue-rotate(0deg) invert(0%) opacity(100%) saturate(100%) sepia(0%);
+$filter-photo-2: brightness(104%) contrast(104%) grayscale(0%) hue-rotate(0deg) invert(0%) opacity(100%) saturate(122%) sepia(0%);
+$filter-photo-3: brightness(100%) contrast(107%) grayscale(0%) hue-rotate(0deg) invert(0%) opacity(100%) saturate(165%) sepia(50%);
+$filter-photo-4: brightness(105%) contrast(100%) grayscale(100%) hue-rotate(0deg) invert(0%) opacity(100%) saturate(100%) sepia(50%);
+$filter-photo-5: brightness(110%) contrast(114%) grayscale(0%) hue-rotate(0deg) invert(0%) opacity(100%) saturate(122%) sepia(0%);
+
 $font-primary: 'Raleway', sans-serif;
 
 $padding-md: 5px;

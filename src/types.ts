@@ -69,3 +69,10 @@ export type Message = {
   image: string,
   sentAt: number
 }
+
+export type Filter = 
+  1 |
+  2 |
+  3 |
+  4 |
+  5

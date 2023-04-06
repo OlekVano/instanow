@@ -2,14 +2,15 @@ import Input from '../Input'
 import Button from '../Button'
 import ProfilePicture from '../ProfilePicture'
 import styles from './index.module.scss'
-import Textarea from '../Textarea'
 import { useContext, useEffect, useRef, useState } from 'react'
-import { generateUniqueId, getProfileById } from '../../utils'
-import { CurrentProfile, Profile } from '../../types'
+import { getProfileById } from '../../utils'
+import { CurrentProfile, Filter, Profile } from '../../types'
 import { UserContext } from '../../user-context'
 import { useNavigate } from 'react-router-dom'
 import CardWrapper from '../CardWrapper'
 import MultilineInput from '../MultilineInput'
+import Filters from '../Filters'
+import { imgFilters } from '../../consts'
 
 export default function SettingsSection() {
   const navigate = useNavigate()
@@ -33,13 +34,23 @@ export default function SettingsSection() {
 
   const [profile, setProfile] = useState<Profile>(ctx.currProfile || defaultProfile)
 
+  const [originalProfilePicture, setOriginalProfilePicture] = useState<string>('')
+  const [showFilters, setShowFilters] = useState(false)
+  const [filter, setFilter] = useState<Filter>(1)
+
   useEffect(manageContextChange, [ctx])
 
   return (
     <div className={styles.main}>
     <CardWrapper>
       <div className={styles.container}>
-        <ProfilePicture size='xxl' src={profile.profilePicture} />
+        <div style={{filter: imgFilters[filter]}}>
+          <ProfilePicture size='xxl' src={profile.profilePicture} />
+        </div>
+
+        {
+          showFilters ? <Filters img={profile.profilePicture} filter={filter} setFilter={setFilter} /> : null
+        }
         <div className={styles.buttonsContainer}>
           <Button width='150px' text='Upload picture' func={triggerImageUpload} />
           <input ref={fileInputRef} onChange={manageImageUpload} type='file' accept='image/*' style={{display: 'none'}} />
@@ -72,6 +83,37 @@ export default function SettingsSection() {
   )
 
   // *********************************
+
+  function getFilteredImage(): Promise<string> {
+    return new Promise(function getFilteredImagePromise(resolve, _) {
+      let img = new Image()
+
+      img.onload = function() {
+        let canvas = document.createElement('canvas')
+        canvas.width = img.width
+        canvas.height = img.height
+      
+        let ctx = canvas.getContext('2d') as CanvasRenderingContext2D
+      
+        // draw original image onto canvas
+        ctx.drawImage(img, 0, 0)
+      
+        // apply CSS filters to a new canvas
+        let filteredCanvas = document.createElement('canvas')
+        filteredCanvas.width = img.width
+        filteredCanvas.height = img.height
+        let filteredCtx = filteredCanvas.getContext('2d') as CanvasRenderingContext2D
+        filteredCtx.filter = imgFilters[filter]
+        filteredCtx.drawImage(canvas, 0, 0)
+      
+        const filteredDataURL = filteredCanvas.toDataURL()
+        resolve(filteredDataURL)
+      }
+
+    // The line below calls image.onload
+    img.src = originalProfilePicture
+    })
+  }
 
   function undoChanges() {
     if (ctx.currProfile) setProfile(ctx.currProfile)
@@ -118,6 +160,7 @@ export default function SettingsSection() {
 
     let profileToPost = Object.fromEntries(Object.entries(profile).filter(entry => requiredProfileKeys.includes(entry[0])))
     profileToPost.bio = bioInputRef.current!.innerText
+    profileToPost.profilePicture = await getFilteredImage()
 
     const json = JSON.stringify(profileToPost)
 
@@ -131,6 +174,7 @@ export default function SettingsSection() {
     else {
       const newProfile = await getProfileById(ctx.currUser!.uid, ctx.currUser!)
       ctx.setCurrProfile(Object.assign(profile, newProfile))
+      setShowFilters(false)
       navigate('/')
     }
   }
@@ -155,7 +199,11 @@ export default function SettingsSection() {
           alert(`Maximum image resolution allowed is ${maxWidth}x${maxHeight}px.\nYour image resolution is ${image.width}x${image.height}px.`)
           fileInputRef.current!.value = ''
         }
-        else setProfilePicture(fileReader.result as string)
+        else {
+          setProfilePicture(fileReader.result as string)
+          setOriginalProfilePicture(fileReader.result as string)
+          setShowFilters(true)
+        } 
       }
       // The line below calls image.onload
       image.src = fileReader.result as string

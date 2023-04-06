@@ -1,0 +1,60 @@
+@import '../../consts.scss';
+
+.main {
+  display: flex;
+  overflow: hidden;
+  max-width: 100%;
+  gap: $gap-md;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.imageContainer {
+  width: 64px;
+  height: 64px;
+  aspect-ratio: 1/1;
+  display: block;
+  object-fit: cover;
+  border-radius: $border-radius-md;
+  cursor: pointer;
+  box-sizing: border-box;
+  border: solid transparent 4px;
+  overflow: hidden;
+}
+
+.image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.selected {
+  border: solid $color-primary 4px;
+}
+
+.filter1 {
+  filter: $filter-photo-1;
+}
+.filter2 {
+  filter: $filter-photo-2;
+}
+.filter3 {
+  filter: $filter-photo-3;
+}
+.filter4 {
+  filter: $filter-photo-4;
+}
+.filter5 {
+  filter: $filter-photo-5;
+}
+
+@media (max-width: 500px) {
+  .imageContainer{
+    width: 50px;
+    height: 50px;
+  }
+}

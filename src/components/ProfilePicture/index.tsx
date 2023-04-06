@@ -3,7 +3,7 @@ import defaultProfile from '../../assets/user.png'
 
 type Props = {
   size: 's' | 'md' | 'lg' | 'xl' | 'xxl',
-  src?: string
+  src?: string,
 }
 
 export default function ProfilePicture({ size, src=undefined }: Props) {
