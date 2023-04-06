@@ -7,7 +7,7 @@ import ProfilePicture from '../ProfilePicture';
 import styles from './index.module.scss'
 import landscapeIcon from '../../assets/picture.png'
 import { ModalContext } from '../../modal-context';
-import { generateUniqueId, getFilteredImage, sleep } from '../../utils';
+import { downscaleImage, generateUniqueId, getFilteredImage, sleep } from '../../utils';
 import { useNavigate } from 'react-router-dom';
 import MultilineInput from '../MultilineInput';
 import { imgFilters } from '../../consts';
@@ -122,17 +122,15 @@ export default function CreatePostModal() {
   }
 
   function manageImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const maxImageSize = 1600
     if (!e.target.files) return
     const file = e.target.files[0]
     const fileReader = new FileReader()
     fileReader.readAsDataURL(file)
     fileReader.onload = () => {
-      const image = new Image()
-      image.onload = () => {
-        setPicture(fileReader.result as string)
-      }
-      // The line below calls image.onload
-      image.src = fileReader.result as string
+      downscaleImage(fileReader.result as string, maxImageSize).then(function afterImageDownscale(dataURL) {
+        setPicture(dataURL)
+      })
     }
   }
 }
