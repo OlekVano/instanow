@@ -58,7 +58,6 @@ export default function CreatePostModal() {
               <img src={landscapeIcon} className={styles.image} />
               <div className={styles.buttonsContainer}>
                 <Button text='Upload picture' width='150px' func={triggerImageUpload} />
-                <Button text='Take picture' width='150px' func={triggerTakePicture} />
                 {
                   isMobile ? <Button text='Take picture' width='150px' func={triggerTakePicture} /> : null
                 }
