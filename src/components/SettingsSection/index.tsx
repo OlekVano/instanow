@@ -90,7 +90,7 @@ export default function SettingsSection() {
   // *********************************
 
   function triggerTakePhoto() {
-
+    takePhotoInputRef.current!.click()
   }
 
   function undoChanges() {
