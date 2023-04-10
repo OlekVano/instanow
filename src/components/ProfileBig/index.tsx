@@ -5,9 +5,10 @@ import { UserContext } from '../../user-context'
 import Button from '../Button'
 import ProfilePicture from '../ProfilePicture'
 import styles from './index.module.scss'
+import Skeleton from 'react-loading-skeleton'
 
 type Props = {
-  profile: Profile,
+  profile?: Profile,
   buttons: boolean
 }
 
@@ -18,11 +19,11 @@ export default function ProfileBig({ profile, buttons }: Props) {
   return (
     <div className={styles.main}>
       <div className={styles.container}>
-        <ProfilePicture size='xl' src={profile.profilePicture} />
+        <ProfilePicture size='xl' src={profile && profile.profilePicture} />
         <div className={styles.container2}>
           <div>
-            <div className={styles.username}>{profile.username}</div>
-            <div className={styles.tag}>{profile.tag}</div>
+            <div className={styles.username}>{profile ? profile.username : <Skeleton />}</div>
+            <div className={styles.tag}>{profile ? profile.tag : <Skeleton /> }</div>
           </div>
         </div>
       </div>
@@ -30,7 +31,7 @@ export default function ProfileBig({ profile, buttons }: Props) {
         !buttons ? null :
         <div className={styles.buttonsContainer}>
           {
-            ctx.currProfile?.followingIds.includes(profile.id) ?
+            profile && ctx.currProfile?.followingIds.includes(profile.id) ?
             <Button text='Unfollow' func={unfollow} width='150px' type={2}  /> :
             <Button text='Follow' func={follow} width='150px' />
           }
@@ -41,25 +42,25 @@ export default function ProfileBig({ profile, buttons }: Props) {
       <div className={styles.stats}>
         <div className={styles.stat}>
           <div className={styles.statTitle}>Posts</div>
-          <div className={styles.statValue}>{profile.posts.length}</div>
+          <div className={styles.statValue}>{profile ? profile.posts.length : <Skeleton />}</div>
         </div>
         <div className={styles.stat}>
           <div className={styles.statTitle}>Followers</div>
-          <div className={styles.statValue}>{profile.followersIds.length}</div>
+          <div className={styles.statValue}>{profile ? profile.followersIds.length : <Skeleton />}</div>
         </div>
         <div className={styles.stat}>
           <div className={styles.statTitle}>Following</div>
-          <div className={styles.statValue}>{profile.followingIds.length}</div>
+          <div className={styles.statValue}>{profile ? profile.followingIds.length : <Skeleton />}</div>
         </div>
       </div>
-      <div className={styles.bio}>{profile.bio}</div>
+      <div className={styles.bio}>{profile ? profile.bio : <Skeleton count={5} />}</div>
     </div>
   )
 
   // ***************************
 
   async function follow() {
-    if (!ctx.currUser || !ctx.currProfile) return
+    if (!ctx.currUser || !ctx.currProfile || !profile) return
     const token = await ctx.currUser.getIdToken()
     const res = await fetch(`${import.meta.env.VITE_API_URL}/profiles/${profile.id}/follow`, {headers: new Headers({'Authorization': `Bearer ${token}`}), method: 'POST'})
     if (res.status !== 200) return
@@ -75,7 +76,7 @@ export default function ProfileBig({ profile, buttons }: Props) {
   }
 
   async function unfollow() {
-    if (!ctx.currUser || !ctx.currProfile) return
+    if (!ctx.currUser || !ctx.currProfile || !profile) return
     const token = await ctx.currUser.getIdToken()
     const res = await fetch(`${import.meta.env.VITE_API_URL}/profiles/${profile.id}/unfollow`, {headers: new Headers({'Authorization': `Bearer ${token}`}), method: 'POST'})
     if (res.status !== 200) return
@@ -91,6 +92,7 @@ export default function ProfileBig({ profile, buttons }: Props) {
   }
 
   function message() {
+    if (!profile) return
     navigate(`/messages/${profile.id}`)
   }
 }

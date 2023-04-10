@@ -22,13 +22,14 @@ export default function ProfileSection() {
     })
   }, [ctx.currUser, profileId])
 
-  if (!profile) return null
   return (
     <div className={styles.main}>
       <CardWrapper>
         <ProfileBig profile={profile} buttons={ctx.currUser?.uid !== profileId} />
       </CardWrapper>
       {
+        !profile ? <PostBig />
+        :
         (sortByRecent(profile.posts) as PostWithoutAuthor[]).map(function renderPost(post: PostWithoutAuthor, i: number) {
           let postWithAuthor: Post = Object.assign({author: profile}, post)
 
