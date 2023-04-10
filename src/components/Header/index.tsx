@@ -26,7 +26,9 @@ export default function Header({ rightSideEmpty=false, showMenu, openMenu, close
   return (
     <header className={styles.main}>
       <div className={`container-xl ${styles.container}`}>
-        <LogoWithBrand />
+        <a href='/'>
+          <LogoWithBrand />
+        </a>
         {
           rightSideEmpty || !userCtx.currProfile ? null
           : <>
