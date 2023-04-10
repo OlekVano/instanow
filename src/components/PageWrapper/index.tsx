@@ -66,9 +66,9 @@ export default function PageWrapper() {
     getProfileById(userCtx.currUser.uid, userCtx.currUser).then(async function afterGotProfile(profile) {
       if (!profile) navigate('/settings')
 
-      // else userCtx.setCurrProfile(Object.assign({
-      //   following: await getFollowedProfiles(userCtx.currUser!) || []
-      // }, profile))
+      else userCtx.setCurrProfile(Object.assign({
+        following: await getFollowedProfiles(userCtx.currUser!) || []
+      }, profile))
     })
     getChats(userCtx.currUser).then(async function afterGotChats(chats) {
       userCtx.setChats(chats || [])

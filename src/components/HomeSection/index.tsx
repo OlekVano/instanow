@@ -10,12 +10,12 @@ import styles from './index.module.scss'
 export default function HomeSection() {
   const userCtx = useContext(UserContext)
 
-  const [posts, setPosts] = useState<Post[]>()
+  const [posts, setPosts] = useState<Post[]>([])
 
   useEffect(function fetchPosts() {
     if (!userCtx.currUser) return
     getPosts(userCtx.currUser).then(function updatePosts(posts) {
-      setPosts(posts)
+      if (posts) setPosts(posts)
     })
   }, [userCtx.currUser])
 
@@ -26,7 +26,11 @@ export default function HomeSection() {
       </CardWrapper>
       <>
         {
-          !posts ? null :
+          posts.length === 0 ?
+          <CardWrapper style={{padding: 0}}>
+            <PostBig />
+          </CardWrapper>
+          :
           (sortByRecent(posts) as Post[]).map(function renderPost(post, i) {
             return (
               <CardWrapper key={i} style={{padding: 0}}>

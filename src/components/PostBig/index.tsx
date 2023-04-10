@@ -10,13 +10,13 @@ import LikeButton from '../LikeButton'
 import Line from '../Line'
 import ProfileMedium from '../ProfileMedium'
 import ProfilePicture from '../ProfilePicture'
-import TextButton from '../TextButton'
 import styles from './index.module.scss'
 import comment from '../../assets/comment.png'
 import ButtonSmall from '../ButtonSmall'
+import Skeleton from 'react-loading-skeleton'
 
 type Props = {
-  post: Post
+  post?: Post
 }
 
 export default function PostBig({ post }: Props) {
@@ -26,32 +26,47 @@ export default function PostBig({ post }: Props) {
 
   const [comments, setComments] = useState<Comment[]>([])
 
+  const [imageLoaded, setImageLoaded] = useState(false)
+
   useEffect(function updateComments() {
+    if (!post) return
     setComments(post.comments)
-  }, [post.comments])
+  }, [post?.comments])
 
   return (
     <div className={styles.main}>
       {
-        !showCommentModal ? null :
+        !showCommentModal ? null : post &&
         <CommentModal onComment={onComment} postId={post.id} onExit={closeCommentModal} query={[]} />
       }
       <div className={styles.container}>
-        <Link to={`/profiles/${post.authorId}`}>
-          <ProfileMedium profile={post.author} timestamp={timestampToStr(post.createdAt)} />
-        </Link>
         {
-          post.text ? <div className={styles.text}>{post.text}</div> : null
+          post ?
+          <Link to={`/profiles/${post.authorId}`}>
+            <ProfileMedium profile={post.author} timestamp={timestampToStr(post.createdAt)} />
+          </Link>
+          :
+          <ProfileMedium />
         }
-        {
-          post.picture ? <Link to={`/posts/${post.id}`}><img src={post.picture} className={styles.image} /></Link> : null
-        }
-        <div className={styles.postButtonsContainer}>
-          <LikeButton postId={post.id} likes={post.likes} query={[]} />
+        <div className={styles.text}>
+          {post && post.text ? post.text : <Skeleton count={10} />}
         </div>
+        {
+          !post || (post && post.picture && !imageLoaded) && <Skeleton height='200px' />
+        }
+        {
+          (post && post.picture) && <Link to={`/posts/${post.id}`}><img src={post.picture} className={styles.image} onLoad={function onImageLoad() {setImageLoaded(true)}} /></Link>
+        }
+        {
+          post &&
+          <div className={styles.postButtonsContainer}>
+            <LikeButton postId={post.id} likes={post.likes} query={[]} />
+          </div>
+        }
+
       </div>
       {
-        comments.length === 0 ? null : <CommentsSection updateComments={updateComments} postId={post.id} comments={comments} />
+        comments.length === 0 ? null : post && <CommentsSection updateComments={updateComments} postId={post.id} comments={comments} />
       }
       <Line />
       <div role='button' className={styles.commentInputContainer} onClick={openCommentModal}>
