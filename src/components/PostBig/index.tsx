@@ -49,7 +49,7 @@ export default function PostBig({ post }: Props) {
           <ProfileMedium />
         }
         <div className={styles.text}>
-          {post && post.text ? post.text : <Skeleton count={5} />}
+          {!post ? <Skeleton count={5} /> : (post && post.text) && post.text}
         </div>
         {
           !post || (post && post.picture && !imageLoaded) && <Skeleton height='200px' />
