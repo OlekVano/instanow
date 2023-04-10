@@ -28,11 +28,9 @@ export default function PageWrapper() {
     <div className={`container-xl`}>
       <div className={`row gx-5 ${styles.row}`}>
         <div className={`d-none d-md-block col-4 col-lg-3`}>
-          {
-            !userCtx.currProfile ? null : <div className={`sticky-top ${styles.stickyCol} ${styles.paddingTop}`} >
-              <LeftColumn />
-            </div>
-          }
+          <div className={`sticky-top ${styles.stickyCol} ${styles.paddingTop}`} >
+            <LeftColumn />
+          </div>
         </div>
         <div className={`${styles.paddingTop} ${location.pathname.startsWith('/messages') ? `${styles.messagesPage} col-12 col-md-8 col-lg-9` : 'col-12 col-md-8 col-lg-9 col-xl-6'} ${location.pathname === '/people' ? styles.heightScreen : ''}`}>
           <Outlet />
@@ -68,9 +66,9 @@ export default function PageWrapper() {
     getProfileById(userCtx.currUser.uid, userCtx.currUser).then(async function afterGotProfile(profile) {
       if (!profile) navigate('/settings')
 
-      else userCtx.setCurrProfile(Object.assign({
-        following: await getFollowedProfiles(userCtx.currUser!) || []
-      }, profile))
+      // else userCtx.setCurrProfile(Object.assign({
+      //   following: await getFollowedProfiles(userCtx.currUser!) || []
+      // }, profile))
     })
     getChats(userCtx.currUser).then(async function afterGotChats(chats) {
       userCtx.setChats(chats || [])
