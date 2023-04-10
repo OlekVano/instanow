@@ -100,6 +100,8 @@ function App() {
 
   function managePageChange() {
     closeMenu()
+    console.log('page change')
+    document.getElementById('root')!.scrollTo(0, 0)
   }
 
   function openMenu() {

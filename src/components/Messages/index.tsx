@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import { Message, Profile, ProfileWithoutPosts } from '../../types'
 import { UserContext } from '../../user-context'
 import { timestampToStr } from '../../utils'
@@ -13,8 +13,15 @@ type Props = {
 export default function Messages({ messages, profile }: Props) {
   const ctx = useContext(UserContext)
 
+  const selfRef = useRef<HTMLDivElement>(null)
+
+  useEffect(function manageMessagesChange() {
+    console.log('manage')
+    selfRef.current!.scrollTo({top: selfRef.current!.scrollHeight, behavior: 'smooth'})
+  }, [messages.length])
+
   return (
-    <div className={styles.main}>
+    <div className={styles.main} ref={selfRef}>
       {
         messages.map(function mapMessage(message: Message, i: number) {
           return (
