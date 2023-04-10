@@ -6,7 +6,7 @@ import ProfileSmall from '../ProfileSmall'
 import styles from './index.module.scss'
 
 type Props = {
-  profile: CurrentProfile
+  profile?: CurrentProfile
 }
 
 export default function Following({ profile }: Props) {
@@ -14,10 +14,12 @@ export default function Following({ profile }: Props) {
     <div className={styles.main}>
       <div className={styles.headingContainer}>
         <div className={styles.heading}>Following</div>
-        <Circle text={profile.followingIds.length.toString()} type={2} />
+        <Circle text={profile ? profile.followingIds.length.toString() : ''} type={2} />
       </div>
       <div className={styles.container}>
-        {profile.following.length !== 0 ? 
+        {!profile ? <ProfileSmall />
+        :
+        profile.following.length !== 0 ? 
         profile.following.map(function renderFollowedProfile(p, i) {
           return (
             <Link to={`/profiles/${p.id}`} key={i}>

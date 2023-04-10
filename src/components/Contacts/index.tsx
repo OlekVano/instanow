@@ -4,20 +4,24 @@ import { Chat, CurrentProfile, Profile } from '../../types'
 import Circle from '../Circle'
 import ProfileSmall from '../ProfileSmall'
 import styles from './index.module.scss'
+import { UserContext } from '../../user-context'
 
 type Props = {
   chats: Chat[]
 }
 
 export default function Contacts({ chats }: Props) {
+  const ctx = useContext(UserContext)
+
   return (
     <div className={styles.main}>
       <div className={styles.headingContainer}>
         <div className={styles.heading}>Contacts</div>
-        <Circle text={chats.length.toString()} type={2} />
+        <Circle text={ctx.currProfile ? chats.length.toString() : ''} type={2} />
       </div>
       <div className={styles.container}>
-        {chats.length !== 0 ? 
+        {!ctx.currProfile ? <ProfileSmall />
+        : chats.length !== 0 ? 
         chats.map(function renderFollowedProfile(chat, i) {
           return (
             <Link to={`/messages/${chat.user.id}`} key={i}>

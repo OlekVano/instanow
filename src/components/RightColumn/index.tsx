@@ -12,14 +12,9 @@ export default function RightColumn() {
 
   return (
     <div className={styles.main}>
-      {
-        !ctx?.currProfile ? null :
-        <>
-          <UnreadMessages chats={ctx.chats} />
-          <Following profile={ctx.currProfile} />
-          <Contacts chats={ctx.chats} />
-        </>
-      }
+      <UnreadMessages chats={ctx.chats} />
+      <Following profile={ctx.currProfile} />
+      <Contacts chats={ctx.chats} />
     </div>
   )
 }

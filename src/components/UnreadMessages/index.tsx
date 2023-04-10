@@ -5,6 +5,7 @@ import Circle from '../Circle'
 import ProfileSmall from '../ProfileSmall'
 import styles from './index.module.scss'
 import { getNumUnreadMessages } from '../../utils'
+import { UserContext } from '../../user-context'
 
 type Props = {
   chats: Chat[]
@@ -13,6 +14,8 @@ type Props = {
 export default function UnreadMessages({ chats }: Props) {
   const [[unreadChats, totalUnreadMessages], setUnreadChats] = useState<[[Chat, number][], number]>([[], 0])
 
+  const ctx = useContext(UserContext)
+
   useEffect(function setState() {
     setUnreadChats(getUnreadChats(chats))
   }, [chats])
@@ -20,14 +23,16 @@ export default function UnreadMessages({ chats }: Props) {
   return (
     <>
       {
-      unreadChats.length === 0 ? null :
+      ctx.currProfile && unreadChats.length === 0 ? null :
       <div className={styles.main}>
         <div className={styles.headingContainer}>
           <div className={styles.heading}>Messages</div>
-          <Circle text={totalUnreadMessages.toString()} type={1} />
+          <Circle text={ctx.currProfile ? totalUnreadMessages.toString() : ''} type={1} />
         </div>
         <div className={styles.wrapper}>
           {
+            !ctx.currProfile ? <ProfileSmall />
+            :
             unreadChats.map(function renderFollowedProfile(chat, i) {
               return (
                 <Link to={`/messages/${chat[0].user.id}`}>
