@@ -34,9 +34,9 @@ export default function PeopleSection() {
         <div className={styles.main}>
           {
             profiles.length === 0 ?
-            [...Array(5)].map(function mapEmptyProfiles() {
+            [...Array(5)].map(function mapEmptyProfiles(_, i) {
               return (
-                <div className={styles.profileWrapper}>
+                <div className={styles.profileWrapper} key={i}>
                   <ProfileMedium  />
                   <div className={styles.text}>
                     <Skeleton count={3} />

@@ -29,9 +29,9 @@ export default function HomeSection() {
           posts.length === 0 ?
           <>
             {
-              [...Array(3)].map(function mapEmptyPost() {
+              [...Array(3)].map(function mapEmptyPost(_, i) {
                 return (
-                  <CardWrapper style={{padding: 0}}>
+                  <CardWrapper style={{padding: 0}} key={i}>
                     <PostBig />
                   </CardWrapper>
                 )
