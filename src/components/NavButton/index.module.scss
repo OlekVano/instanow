@@ -26,7 +26,7 @@
 }
   
 .image {
-  width: $icon-size-s;
+  width: 30px;
   filter: $filter-image-secondary;
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -36,6 +36,6 @@
   
 .text {
   color: $text-color-secondary;
-  font-size: $text-lg;
+  font-size: $text-md;
   font-weight: $weight-lg;
 }
