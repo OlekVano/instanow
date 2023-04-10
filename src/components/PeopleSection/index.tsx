@@ -8,6 +8,7 @@ import ProfileMedium from '../ProfileMedium'
 import styles from './index.module.scss'
 import Input from '../Input'
 import Fuse from 'fuse.js'
+import Skeleton from 'react-loading-skeleton'
 
 export default function PeopleSection() {
   const [profiles, setProfiles] = useState<ProfileWithoutPosts[]>([])
@@ -32,6 +33,18 @@ export default function PeopleSection() {
       <CardWrapper style={{overflowY: 'auto'}}>
         <div className={styles.main}>
           {
+            profiles.length === 0 ?
+            [...Array(5)].map(function mapEmptyProfiles() {
+              return (
+                <div className={styles.profileWrapper}>
+                  <ProfileMedium  />
+                  <div className={styles.text}>
+                    <Skeleton count={3} />
+                  </div>
+                </div>
+              )
+            })
+            :
             searchResults.length === 0 ?
             profiles.map(function renderProfile(profile: ProfileWithoutPosts, i: number) {
               return (
