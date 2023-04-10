@@ -27,9 +27,17 @@ export default function HomeSection() {
       <>
         {
           posts.length === 0 ?
-          <CardWrapper style={{padding: 0}}>
-            <PostBig />
-          </CardWrapper>
+          <>
+            {
+              [...Array(3)].map(function mapEmptyPost() {
+                return (
+                  <CardWrapper style={{padding: 0}}>
+                    <PostBig />
+                  </CardWrapper>
+                )
+              })
+            }
+          </>
           :
           (sortByRecent(posts) as Post[]).map(function renderPost(post, i) {
             return (
