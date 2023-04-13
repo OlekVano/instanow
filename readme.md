@@ -6,6 +6,9 @@ This social media project is designed to allow users to connect and share with o
 * Front end - https://github.com/OlekVano/instanow
 * Back end - https://github.com/OlekVano/instanow-server
 
+## Live demo
+* https://instanow-client.netlify.app
+
 ## Features
 
 * User authentication using Firebase Authentication
